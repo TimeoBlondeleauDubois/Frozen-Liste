@@ -6,11 +6,10 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(8192)
 
-#Création de la base de données
+# Création de la base de données
 def init_db():
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    # Création de la table Niveau
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS Niveau (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,7 +17,7 @@ def init_db():
         createurs TEXT NOT NULL,
         id_niveau INTEGER UNIQUE,
         points INTEGER NOT NULL,
-        classement INTEGER,  -- Ajout de la colonne de classement
+        classement INTEGER,
         victoires INTEGER DEFAULT 0,
         mot_de_passe TEXT
     )
@@ -27,7 +26,6 @@ def init_db():
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_niveau_nom ON Niveau(nom)')
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_niveau_classement ON Niveau(classement)')
 
-    # Création de la table Joueur
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS Joueur (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,7 +36,6 @@ def init_db():
 
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_joueur_nom ON Joueur(nom)')
 
-    # Création de la table JoueurNiveau pour enregistrer les niveaux réussis par les joueurs
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS JoueurNiveau (
         joueur_id INTEGER,
@@ -49,7 +46,6 @@ def init_db():
     )
     ''')
 
-    # Création de la table Utilisateur
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS Utilisateur (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,22 +55,12 @@ def init_db():
     ''')
     connection.commit()
     connection.close()
+
 init_db()
 
-#home page
 @app.route('/')
 def index():
     return render_template('Home.html')
-
-
-
-
-
-
-
-
-
-
 
 @app.route('/creer_compte', methods=['GET', 'POST'])
 def creer_compte():
@@ -101,7 +87,6 @@ def connexion():
         username = request.form['username']
         password = request.form['password']
 
-        # Valider les entrées utilisateur
         if not validate_user_input(username, password):
             return 'Nom d\'utilisateur et mot de passe requis', 400
 
@@ -115,20 +100,17 @@ def connexion():
             hashed_password = result[0]
             if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
                 session['username'] = username
-                return redirect(url_for('index'))
-        
+                return redirect(url_for('Admin'))
+
         return 'Nom d\'utilisateur ou mot de passe incorrect.'
     else:
-        return render_template('Admin.html')
+        return render_template('connexion.html')
 
 def validate_user_input(username, password):
-    if not username or not password:
-        return False
-    return True
+    return bool(username and password)
 
-#Partie Admin : Ajouter un joueur, ajouter un niveau, modifier l'ordre des niveaux, ajouter une victoire à un joueur
+# Page d'administration : Ajouter un joueur, ajouter un niveau, modifier l'ordre des niveaux, ajouter une victoire à un joueur
 
-#Amin page
 @app.route('/Admin')
 def Admin():
     if 'username' in session:
@@ -139,9 +121,7 @@ def Admin():
         connection.close()
         return render_template('Admin.html', niveaux=niveaux)
     else:
-        # Redirigez l'utilisateur vers la page de connexion s'il n'est pas connecté
         return redirect(url_for('connexion'))
-
 
 @app.route('/ajouter_joueur', methods=['POST'])
 def ajouter_joueur():
@@ -174,7 +154,6 @@ def ajouter_niveau():
         cursor.execute('SELECT COUNT(*) FROM Niveau')
         total_niveaux = cursor.fetchone()[0]
 
-        # Ajuster le classement pour qu'il n'y ait pas de trous
         if classement > total_niveaux + 1:
             classement = total_niveaux + 1
 
@@ -218,7 +197,6 @@ def reussir_niveau():
     
     niveau_id, points = result
 
-    # S'assurer que le joueur n'a pas déja réussi le niveau
     cursor.execute('SELECT * FROM JoueurNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
     result = cursor.fetchone()
     if result:
@@ -271,7 +249,6 @@ def modifier_ordre_niveaux():
         cursor.execute('SELECT COUNT(*) FROM Niveau')
         total_niveaux = cursor.fetchone()[0]
 
-        # Gérer le cas où il y a un trou dans le classement
         if new_classement > total_niveaux:
             new_classement = total_niveaux
 
@@ -291,7 +268,6 @@ def modifier_ordre_niveaux():
         return redirect(url_for('Admin'))
     except sqlite3.Error as e:
         return f"Erreur : {str(e)}"
-
 
 def calculer_points(classement):
     return int(5000 / classement)
@@ -332,7 +308,6 @@ def mettre_a_jour_points_utilisateurs():
 
     connection.commit()
     connection.close()
-
 
 if __name__ == '__main__':
     app.run(debug=True)
