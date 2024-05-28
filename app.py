@@ -1,5 +1,6 @@
 import sqlite3
-from flask import Flask, redirect, render_template, request, url_for
+import bcrypt
+from flask import Flask, redirect, render_template, request, session, url_for
 import os
 
 app = Flask(__name__)
@@ -9,7 +10,6 @@ app.secret_key = os.urandom(8192)
 def init_db():
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-
     # Création de la table Niveau
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS Niveau (
@@ -24,6 +24,9 @@ def init_db():
     )
     ''')
 
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_niveau_nom ON Niveau(nom)')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_niveau_classement ON Niveau(classement)')
+
     # Création de la table Joueur
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS Joueur (
@@ -33,6 +36,8 @@ def init_db():
     )
     ''')
 
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_joueur_nom ON Joueur(nom)')
+
     # Création de la table JoueurNiveau pour enregistrer les niveaux réussis par les joueurs
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS JoueurNiveau (
@@ -41,6 +46,15 @@ def init_db():
         FOREIGN KEY (joueur_id) REFERENCES Joueur(id),
         FOREIGN KEY (niveau_id) REFERENCES Niveau(id),
         PRIMARY KEY (joueur_id, niveau_id)
+    )
+    ''')
+
+    # Création de la table Utilisateur
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS Utilisateur (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL UNIQUE,
+        password BLOB NOT NULL
     )
     ''')
     connection.commit()
@@ -58,17 +72,75 @@ def index():
 
 
 
+
+
+
+
+@app.route('/creer_compte', methods=['GET', 'POST'])
+def creer_compte():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+        try:
+            connection = sqlite3.connect('DataBase.db')
+            cursor = connection.cursor()
+            cursor.execute('INSERT INTO Utilisateur (username, password) VALUES (?, ?)', (username, hashed_password))
+            connection.commit()
+            connection.close()
+            return 'Compte créé avec succès !'
+        except sqlite3.IntegrityError:
+            return 'Erreur : Nom d\'utilisateur déjà utilisé.'
+    else:
+        return render_template('creer_compte.html')
+
+@app.route('/connexion', methods=['GET', 'POST'])
+def connexion():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Valider les entrées utilisateur
+        if not validate_user_input(username, password):
+            return 'Nom d\'utilisateur et mot de passe requis', 400
+
+        connection = sqlite3.connect('DataBase.db')
+        cursor = connection.cursor()
+        cursor.execute('SELECT password FROM Utilisateur WHERE username = ?', (username,))
+        result = cursor.fetchone()
+        connection.close()
+
+        if result:
+            hashed_password = result[0]
+            if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
+                session['username'] = username
+                return redirect(url_for('index'))
+        
+        return 'Nom d\'utilisateur ou mot de passe incorrect.'
+    else:
+        return render_template('Admin.html')
+
+def validate_user_input(username, password):
+    if not username or not password:
+        return False
+    return True
+
 #Partie Admin : Ajouter un joueur, ajouter un niveau, modifier l'ordre des niveaux, ajouter une victoire à un joueur
 
 #Amin page
 @app.route('/Admin')
 def Admin():
-    connection = sqlite3.connect('DataBase.db')
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM Niveau ORDER BY classement')
-    niveaux = cursor.fetchall()
-    connection.close()
-    return render_template('Admin.html', niveaux=niveaux)
+    if 'username' in session:
+        connection = sqlite3.connect('DataBase.db')
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM Niveau ORDER BY classement')
+        niveaux = cursor.fetchall()
+        connection.close()
+        return render_template('Admin.html', niveaux=niveaux)
+    else:
+        # Redirigez l'utilisateur vers la page de connexion s'il n'est pas connecté
+        return redirect(url_for('connexion'))
 
 
 @app.route('/ajouter_joueur', methods=['POST'])
