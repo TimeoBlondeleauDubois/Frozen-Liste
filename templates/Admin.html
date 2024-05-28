@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Gestion des Joueurs et des Niveaux</title>
+</head>
+<body>
+    <h1>Créer un Joueur</h1>
+    <form action="/ajouter_joueur" method="post">
+        <label for="nom_joueur">Nom du joueur:</label><br>
+        <input type="text" id="nom_joueur" name="nom_joueur"><br><br>
+        <input type="submit" value="Créer Joueur">
+    </form>
+
+    <h1>Créer un Niveau</h1>
+    <form action="/ajouter_niveau" method="post">
+        <label for="id_niveau">ID du niveau:</label><br>
+        <input type="number" id="id_niveau" name="id_niveau" min="1"><br>
+        <label for="nom_niveau">Nom du niveau:</label><br>
+        <input type="text" id="nom_niveau" name="nom_niveau"><br>
+        <label for="createurs">Créateurs:</label><br>
+        <input type="text" id="createurs" name="createurs"><br>
+        <label for="classement">Classement:</label><br>
+        <input type="number" id="classement" name="classement" min="1"><br>
+        <label for="mot_de_passe">Mot de passe:</label><br>
+        <input type="text" id="mot_de_passe" name="mot_de_passe"><br><br>
+        <input type="submit" value="Créer Niveau">
+    </form>
+
+    <h1>Ajouter une Réussite de Niveau</h1>
+    <form action="/reussir_niveau" method="post">
+        <label for="nom_joueur">Nom du joueur:</label><br>
+        <input type="text" id="nom_joueur" name="nom_joueur"><br>
+        <label for="nom_niveau">Nom du niveau:</label><br>
+        <input type="text" id="nom_niveau" name="nom_niveau"><br><br>
+        <input type="submit" value="Ajouter Réussite">
+    </form>
+
+    <h1>Modifier l'ordre des Niveaux</h1>
+    <form action="/modifier_ordre_niveaux" method="post">
+        <label for="nom_niveau">Nom du niveau:</label><br>
+        <input type="text" id="nom_niveau" name="nom_niveau"><br>
+        <label for="new_classement">Nouveau classement:</label><br>
+        <input type="number" id="new_classement" name="new_classement" min="1"><br><br>
+        <input type="submit" value="Mettre à jour le classement">
+    </form>
+
+    <h1>Liste des Niveaux</h1>
+    <ul>
+        {% for niveau in niveaux %}
+            <li>{{ niveau[1] }} - Classement actuel : {{ niveau[5] }} - nombre points : {{ niveau[4] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
