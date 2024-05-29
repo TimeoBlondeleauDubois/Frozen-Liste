@@ -2,6 +2,7 @@ import sqlite3
 import bcrypt
 from flask import Flask, redirect, render_template, request, session, url_for
 import os
+import math
 
 app = Flask(__name__)
 app.secret_key = os.urandom(8192)
@@ -346,8 +347,8 @@ def supprimer_reussite():
     return f'Réussite du joueur {nom_joueur} pour le niveau {nom_niveau} supprimée avec succès !'
 
 
-def calculer_points(classement):
-    return int(5000 / classement)
+def calculer_points(classement, base=2):
+    return max(1, int(5000 / math.log(classement + base, base)))
 
 def mettre_a_jour_points():
     connection = sqlite3.connect('DataBase.db')
@@ -379,7 +380,7 @@ def mettre_a_jour_points_utilisateurs():
         INNER JOIN JoueurNiveau ON Niveau.id = JoueurNiveau.niveau_id 
         WHERE JoueurNiveau.joueur_id = ?
         ''', (joueur_id,))
-        total_points = cursor.fetchone()[0]
+        total_points = cursor.fetchone()[0] or 0
 
         cursor.execute('UPDATE Joueur SET points = ? WHERE id = ?', (total_points, joueur_id))
 
