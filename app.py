@@ -40,6 +40,7 @@ def init_db():
     CREATE TABLE IF NOT EXISTS JoueurNiveau (
         joueur_id INTEGER,
         niveau_id INTEGER,
+        video_url TEXT,
         FOREIGN KEY (joueur_id) REFERENCES Joueur(id),
         FOREIGN KEY (niveau_id) REFERENCES Niveau(id),
         PRIMARY KEY (joueur_id, niveau_id)
@@ -180,6 +181,7 @@ def ajouter_niveau():
 def reussir_niveau():
     nom_joueur = request.form['nom_joueur']
     nom_niveau = request.form['nom_niveau']
+    video_url = request.form['video_url']
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
 
@@ -203,9 +205,9 @@ def reussir_niveau():
         return f'Erreur : Le joueur {nom_joueur} a déjà réussi le niveau {nom_niveau}'
     
     cursor.execute('''
-    INSERT INTO JoueurNiveau (joueur_id, niveau_id) 
-    VALUES (?, ?)
-    ''', (joueur_id, niveau_id))
+    INSERT INTO JoueurNiveau (joueur_id, niveau_id, video_url) 
+    VALUES (?, ?, ?)
+    ''', (joueur_id, niveau_id, video_url))
 
     cursor.execute('''
     UPDATE Niveau 
@@ -225,7 +227,7 @@ def reussir_niveau():
 
     print(f'Points ajoutés au joueur {nom_joueur}: {points}')
 
-    return f'Joueur {nom_joueur} a réussi le niveau {nom_niveau} et a gagné {points} points !'
+    return f'Joueur {nom_joueur} a réussi le niveau {nom_niveau} et a gagné {points} points avec la vidéo : {video_url}'
 
 @app.route('/modifier_ordre_niveaux', methods=['POST'])
 def modifier_ordre_niveaux():
@@ -268,6 +270,64 @@ def modifier_ordre_niveaux():
         return redirect(url_for('Admin'))
     except sqlite3.Error as e:
         return f"Erreur : {str(e)}"
+    
+@app.route('/supprimer_niveau', methods=['POST'])
+def supprimer_niveau():
+    nom_niveau = request.form['nom_niveau']
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    
+    cursor.execute('SELECT id, classement FROM Niveau WHERE nom = ?', (nom_niveau,))
+    result = cursor.fetchone()
+    if result is None:
+        return f'Erreur : Aucun niveau trouvé avec le nom {nom_niveau}'
+    
+    niveau_id, classement_supprime = result
+
+    cursor.execute('DELETE FROM JoueurNiveau WHERE niveau_id = ?', (niveau_id,))
+    cursor.execute('DELETE FROM Niveau WHERE id = ?', (niveau_id,))
+    
+    # Mettre à jour les classements des niveaux inférieurs
+    cursor.execute('UPDATE Niveau SET classement = classement - 1 WHERE classement > ?', (classement_supprime,))
+    
+    connection.commit()
+    connection.close()
+    
+    mettre_a_jour_points()
+    mettre_a_jour_points_utilisateurs()
+
+    return f'Niveau {nom_niveau} supprimé avec succès !'
+
+
+@app.route('/supprimer_reussite', methods=['POST'])
+def supprimer_reussite():
+    nom_joueur = request.form['nom_joueur']
+    nom_niveau = request.form['nom_niveau']
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT id FROM Joueur WHERE nom = ?', (nom_joueur,))
+    result = cursor.fetchone()
+    if result is None:
+        return f'Erreur : Aucun joueur trouvé avec le nom {nom_joueur}'
+    
+    joueur_id = result[0]
+
+    cursor.execute('SELECT id FROM Niveau WHERE nom = ?', (nom_niveau,))
+    result = cursor.fetchone()
+    if result is None:
+        return f'Erreur : Aucun niveau trouvé avec le nom {nom_niveau}'
+    
+    niveau_id = result[0]
+
+    cursor.execute('DELETE FROM JoueurNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
+    connection.commit()
+    connection.close()
+    mettre_a_jour_points_utilisateurs()
+    mettre_a_jour_points()
+
+    return f'Réussite du joueur {nom_joueur} pour le niveau {nom_niveau} supprimée avec succès !'
+
 
 def calculer_points(classement):
     return int(5000 / classement)

@@ -32,8 +32,26 @@
         <label for="nom_joueur">Nom du joueur:</label><br>
         <input type="text" id="nom_joueur" name="nom_joueur"><br>
         <label for="nom_niveau">Nom du niveau:</label><br>
-        <input type="text" id="nom_niveau" name="nom_niveau"><br><br>
+        <input type="text" id="nom_niveau" name="nom_niveau"><br>
+        <label for="video_url">Lien de la vidéo:</label><br>
+        <input type="text" id="video_url" name="video_url"><br><br>
         <input type="submit" value="Ajouter Réussite">
+    </form>
+    
+    <h1>Supprimer un Niveau</h1>
+    <form action="/supprimer_niveau" method="post">
+        <label for="nom_niveau">Nom du niveau:</label><br>
+        <input type="text" id="nom_niveau" name="nom_niveau"><br><br>
+        <input type="submit" value="Supprimer Niveau">
+    </form>
+
+    <h1>Supprimer une Réussite de Niveau</h1>
+    <form action="/supprimer_reussite" method="post">
+        <label for="nom_joueur">Nom du joueur:</label><br>
+        <input type="text" id="nom_joueur" name="nom_joueur"><br>
+        <label for="nom_niveau">Nom du niveau:</label><br>
+        <input type="text" id="nom_niveau" name="nom_niveau"><br><br>
+        <input type="submit" value="Supprimer Réussite">
     </form>
 
     <h1>Modifier l'ordre des Niveaux</h1>
