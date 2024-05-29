@@ -121,7 +121,6 @@ def validate_user_input(username, password):
 
 
 # Page d'administration : Ajouter un joueur, ajouter un niveau, modifier l'ordre des niveaux, ajouter une victoire à un joueur
-
 @app.route('/admin')
 def admin():
     if 'username' in session:
