@@ -66,7 +66,7 @@ init_db()
 #Home page
 @app.route('/')
 def index():
-    return render_template('Home.html')
+    return render_template('home.html')
 
 
 
@@ -109,7 +109,7 @@ def connexion():
             hashed_password = result[0]
             if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
                 session['username'] = username
-                return redirect(url_for('Admin'))
+                return redirect(url_for('admin'))
 
         return 'Nom d\'utilisateur ou mot de passe incorrect.'
     else:
@@ -122,15 +122,15 @@ def validate_user_input(username, password):
 
 # Page d'administration : Ajouter un joueur, ajouter un niveau, modifier l'ordre des niveaux, ajouter une victoire à un joueur
 
-@app.route('/Admin')
-def Admin():
+@app.route('/admin')
+def admin():
     if 'username' in session:
         connection = sqlite3.connect('DataBase.db')
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM Niveau ORDER BY classement')
         niveaux = cursor.fetchall()
         connection.close()
-        return render_template('Admin.html', niveaux=niveaux)
+        return render_template('admin.html', niveaux=niveaux)
     else:
         return redirect(url_for('connexion'))
 
@@ -277,7 +277,7 @@ def modifier_ordre_niveaux():
         connection.close()
         mettre_a_jour_points_utilisateurs()
 
-        return redirect(url_for('Admin'))
+        return redirect(url_for('admin'))
     except sqlite3.Error as e:
         return f"Erreur : {str(e)}"
     
