@@ -9,9 +9,9 @@ Ce projet est une application web qui permet de voir tous les niveaux Extreme De
 - Accès aux vidéos des personnes ayant réussi un niveau.
 
 ### Technologies Utilisées
-- Backend : Python avec le framework Flask
+- Backend : Python avec le framework Flask 🐍
 - Frontend : HTML, SCSS
-- Base de Données : SQLite
+- Base de Données : SQLite 
 - Maquette: Figma: [Lien vers la maquette](https://www.figma.com/design/cseyRjhPMFU0BGbJ8WOYV8/Projet-perso?node-id=0-1&t=gBsQClwTqmNX6tgH-1)
 
 ### Fonctionnalités Admin
@@ -23,4 +23,4 @@ Ce projet est une application web qui permet de voir tous les niveaux Extreme De
 - Changer le placement des niveaux
 
 ### Remerciements
-Merci à tous les membres de la Frozen Team de m'avoir fait appel pour réaliser ce projet.
+Merci à tous les membres de la Frozen Team de m'avoir intégré et de m'avoir donné l'idée de réaliser ce projet🙂👍.
