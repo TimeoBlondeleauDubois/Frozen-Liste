@@ -1,4 +1,4 @@
-# Lien Du projet : [https://timeoblondeleau.pythonanywhere.com/](https://timeoblondeleau.pythonanywhere.com/)
+# Lien Du projet : [Frozen Liste](https://timeoblondeleau.pythonanywhere.com/)
 
 ## Projet: Classement des Niveaux Extreme Demon de la Team Frozen
 Ce projet est une application web qui permet de voir tous les niveaux Extreme Demon réussis par les joueurs de la Frozen Team. L'application propose un système de classement des joueurs basé sur leurs performances et est conçue pour être responsive.
