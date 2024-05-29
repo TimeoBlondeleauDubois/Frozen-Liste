@@ -1,7 +1,3 @@
-D'accord, voici la version modifiée avec le lien du projet en évidence en haut :
-
----
-
 # Lien Du projet : [https://timeoblondeleau.pythonanywhere.com/](https://timeoblondeleau.pythonanywhere.com/)
 
 ## Projet: Classement des Niveaux Extreme Demon de la Team Frozen
