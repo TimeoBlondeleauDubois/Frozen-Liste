@@ -63,10 +63,19 @@ init_db()
 
 
 
-#Home page
+#pages
 @app.route('/')
 def index():
-    return render_template('home.html')
+    active_page = 'home'
+    return render_template('home.html', active_page=active_page)
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return redirect('/error404')
+
+@app.route('/error404')
+def error404():
+    return render_template('404.html')
 
 
 

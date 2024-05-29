@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Gestion des Joueurs et des Niveaux</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block styles %}
+    <link href="../static/admin/admin.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
     <h1>Créer un Joueur</h1>
     <form action="/ajouter_joueur" method="post">
         <label for="nom_joueur">Nom du joueur:</label><br>
@@ -69,5 +71,4 @@
             <li>{{ niveau[1] }} - Classement actuel : {{ niveau[5] }} - nombre points : {{ niveau[4] }}</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

@@ -1,1 +1,8 @@
-/*# sourceMappingURL=Global.css.map */
+@font-face {
+  font-family: RobotoRegular;
+  src: url(/static/Font/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url(/static/Font/Roboto-Bold.ttf);
+}/*# sourceMappingURL=Global.css.map */

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="../static/reset.css" rel="stylesheet">
+    <link href="../static/layout/layout.css" rel="stylesheet" />
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header>
+        <ul>
+            <p {% if active_page == 'home' %}class="test"{% endif %}>classe test ajoutée si mon active page = a home</p>
+        </ul>
+    </header>
+    {% block content %}{% endblock %}
+    <footer>footer</footer>
+</body>
+</html>
