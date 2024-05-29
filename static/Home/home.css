@@ -5,4 +5,11 @@
 @font-face {
   font-family: RobotoBold;
   src: url(/static/Font/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: Beligerent;
+  src: url(/static/Font/belligerent.ttf);
+}
+h1 {
+  font-family: Beligerent;
 }/*# sourceMappingURL=home.css.map */
