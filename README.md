@@ -23,4 +23,4 @@ Ce projet est une application web qui permet de voir tous les niveaux Extreme De
 - Changer le placement des niveaux
 
 ### Remerciements
-Merci à tous les membres de la Frozen Team de m'avoir intégré et de m'avoir donné l'idée de réaliser ce projet🙂👍.
+Merci à tous les membres de la Frozen Team de m'avoir intégré en tant que joueur et de m'avoir donné l'idée de réaliser ce projet🙂👍.
