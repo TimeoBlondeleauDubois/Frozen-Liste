@@ -22,7 +22,8 @@ def init_db():
         points INTEGER NOT NULL,
         classement INTEGER,
         victoires INTEGER DEFAULT 0,
-        mot_de_passe TEXT
+        mot_de_passe TEXT,
+        video_url TEXT
     )
     ''')
 
@@ -163,6 +164,7 @@ def ajouter_niveau():
     createurs = request.form['createurs']
     classement = int(request.form['classement'])
     mot_de_passe = request.form['mot_de_passe']
+    video_url = request.form['video_url']
 
     if classement <= 0:
         return f'Erreur : Le classement doit être un entier positif'
@@ -182,9 +184,9 @@ def ajouter_niveau():
         points = calculer_points(classement)
 
         cursor.execute('''
-        INSERT INTO Niveau (id_niveau, nom, createurs, points, classement, mot_de_passe) 
-        VALUES (?, ?, ?, ?, ?, ?)
-        ''', (id_niveau, nom_niveau, createurs, points, classement, mot_de_passe))
+        INSERT INTO Niveau (id_niveau, nom, createurs, points, classement, mot_de_passe, video_url) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (id_niveau, nom_niveau, createurs, points, classement, mot_de_passe, video_url))
 
         connection.commit()
         connection.close()
