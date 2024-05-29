@@ -6,6 +6,8 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(8192)
 
+
+
 # Création de la base de données
 def init_db():
     connection = sqlite3.connect('DataBase.db')
@@ -59,10 +61,16 @@ def init_db():
 
 init_db()
 
+
+
+#Home page
 @app.route('/')
 def index():
     return render_template('Home.html')
 
+
+
+#Accéder à la page Admin
 @app.route('/creer_compte', methods=['GET', 'POST'])
 def creer_compte():
     if request.method == 'POST':
@@ -109,6 +117,8 @@ def connexion():
 
 def validate_user_input(username, password):
     return bool(username and password)
+
+
 
 # Page d'administration : Ajouter un joueur, ajouter un niveau, modifier l'ordre des niveaux, ajouter une victoire à un joueur
 
@@ -287,7 +297,6 @@ def supprimer_niveau():
     cursor.execute('DELETE FROM JoueurNiveau WHERE niveau_id = ?', (niveau_id,))
     cursor.execute('DELETE FROM Niveau WHERE id = ?', (niveau_id,))
     
-    # Mettre à jour les classements des niveaux inférieurs
     cursor.execute('UPDATE Niveau SET classement = classement - 1 WHERE classement > ?', (classement_supprime,))
     
     connection.commit()
