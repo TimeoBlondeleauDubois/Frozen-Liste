@@ -72,17 +72,19 @@
         <tbody>
             {% for submission in submissions %}
             <tr>
-                <td>{{ submission[0] }}</td>
-                <td>{{ submission[1] }}</td>
-                <td>{{ submission[2] }}</td>
-                <td>{{ submission[3] }}</td>
-                <td><a href="{{ submission[4] }}" target="_blank">Voir la vidéo</a></td>
-                <td>
-                    <form method="POST" action="{{ url_for('valider_record') }}" style="display:inline;">
+                <form method="POST" action="{{ url_for('valider_record') }}">
+                    <td>{{ submission[0] }}</td>
+                    <td><input type="text" name="joueur_nom" value="{{ submission[1] }}" required></td>
+                    <td><input type="text" name="niveau_nom" value="{{ submission[2] }}" required></td>
+                    <td>{{ submission[3] }}</td>
+                    <td><a href="{{ submission[4] }}" target="_blank">Voir la vidéo</a></td>
+                    <td>
                         <input type="hidden" name="submission_id" value="{{ submission[0] }}">
                         <button type="submit">Valider</button>
-                    </form>
-                    <form method="POST" action="{{ url_for('refuser_record') }}" style="display:inline;">
+                    </td>
+                </form>
+                <td>
+                    <form method="POST" action="{{ url_for('refuser_record') }}">
                         <input type="hidden" name="submission_id" value="{{ submission[0] }}">
                         <button type="submit">Refuser</button>
                     </form>

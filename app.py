@@ -292,7 +292,6 @@ def supprimer_niveau():
 
     return f'Niveau {nom_niveau} supprimé avec succès !'
 
-
 @app.route('/supprimer_reussite', methods=['POST'])
 def supprimer_reussite():
     nom_joueur = request.form['nom_joueur']
@@ -363,19 +362,23 @@ def mettre_a_jour_points_utilisateurs():
     connection.commit()
     connection.close()
 
+
     
-# Valider ou refuser un record soumis
+# Valider ou refuser un record soumis et pouvoir modifier le nom du joueur et du niveau en cas d'erreur
 @app.route('/valider_record', methods=['POST'])
 def valider_record():
     submission_id = request.form['submission_id']
+    joueur_nom = request.form['joueur_nom']
+    niveau_nom = request.form['niveau_nom']
+    
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
 
-    cursor.execute('SELECT joueur_nom, niveau_nom, createur, video_url FROM SubmitRecord WHERE id = ?', (submission_id,))
+    cursor.execute('SELECT createur, video_url FROM SubmitRecord WHERE id = ?', (submission_id,))
     submission = cursor.fetchone()
     
     if submission:
-        joueur_nom, niveau_nom, createur, video_url = submission
+        createur, video_url = submission
         
         cursor.execute('SELECT id FROM Joueur WHERE nom = ?', (joueur_nom,))
         result = cursor.fetchone()
@@ -391,7 +394,7 @@ def valider_record():
         result = cursor.fetchone()
         if result is None:
             connection.close()
-            return f'Erreur : Aucun niveau de trouver avec le nom {niveau_nom}'
+            return f'Erreur : Aucun niveau trouvé avec le nom {niveau_nom}'
         
         niveau_id, points = result
         
@@ -418,7 +421,7 @@ def valider_record():
         WHERE id = ?
         ''', (points, joueur_id))
         
-        cursor.execute('UPDATE SubmitRecord SET status = "accepted" WHERE id = ?', (submission_id,))
+        cursor.execute('UPDATE SubmitRecord SET status = "accepted", joueur_nom = ?, niveau_nom = ? WHERE id = ?', (joueur_nom, niveau_nom, submission_id))
         
         connection.commit()
         connection.close()
