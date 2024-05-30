@@ -9,4 +9,91 @@
 @font-face {
   font-family: Beligerent;
   src: url(/static/Font/belligerent.ttf);
+}
+/*
+$h1-size-pc: px;
+$h1-size-mb: px;
+$h2-size-pc: px;
+$h2-size-mb: px;
+$p-size-pc: px;
+$p-size-mb: px;*/
+/*
+$big-margin-top-pc: px;
+$big-margin-bottom-pc: px;
+$big-margin-top-mb: px;
+$big-margin-bottom-mb: px;
+$small-margin-top-pc: px;
+$small-margin-bottom-pc: px;
+$small-margin-top-mb: px;
+$small-margin-bottom-mb: px;
+*/
+/*
+$big-margin-left-mb: px;
+$big-margin-right-mb: px;*/
+.page-content {
+  height: calc(100vh - 75px);
+  background-color: #23252B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.h1-404 {
+  font-family: Beligerent;
+  font-size: 500px;
+  color: white;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.p-404 {
+  font-family: RobotoRegular;
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  max-width: 1000px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+@media screen and (max-width: 870px) {
+  .h1-404 {
+    font-size: 400px;
+  }
+  .p-404 {
+    font-size: 40px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .h1-404 {
+    font-size: 300px;
+  }
+  .p-404 {
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .h1-404 {
+    font-size: 200px;
+  }
+  .p-404 {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .h1-404 {
+    font-size: 150px;
+  }
+  .p-404 {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 300px) {
+  .h1-404 {
+    font-size: 100px;
+  }
+  .p-404 {
+    font-size: 10px;
+  }
 }/*# sourceMappingURL=404.css.map */

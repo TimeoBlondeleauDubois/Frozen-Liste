@@ -1,1 +1,78 @@
 @import '../Global/Global.scss';
+
+.page-content {
+    height: calc(100vh - 75px);
+    background-color: $primary-color-black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.h1-404 {
+    font-family: $Beligerent;
+    font-size: 500px;
+    color: white;
+    margin-left: $big-margin-left-pc;
+    margin-right: $big-margin-right-pc;
+}
+
+.p-404 {
+    font-family: $RobotoRegular;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    max-width: 1000px;
+    margin-left: $big-margin-left-pc;
+    margin-right: $big-margin-right-pc;
+}
+
+@media screen and (max-width: 870px) {
+    .h1-404 {
+        font-size: 400px;
+    }
+
+    .p-404 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .h1-404 {
+        font-size: 300px;
+    }
+
+    .p-404 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .h1-404 {
+        font-size: 200px;
+    }
+
+    .p-404 {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .h1-404 {
+        font-size: 150px;
+    }
+
+    .p-404 {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .h1-404 {
+        font-size: 100px;
+    }
+
+    .p-404 {
+        font-size: 10px;
+    }
+}
