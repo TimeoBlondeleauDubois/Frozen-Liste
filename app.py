@@ -59,6 +59,17 @@ def init_db():
         password BLOB NOT NULL
     )
     ''')
+
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS SubmitRecord (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        joueur_nom TEXT NOT NULL,
+        niveau_nom TEXT NOT NULL,
+        createur TEXT NOT NULL,
+        video_url TEXT NOT NULL,
+        status TEXT DEFAULT 'pending'
+    )
+    ''')
     connection.commit()
     connection.close()
 
@@ -79,6 +90,29 @@ def not_found_error(error):
 @app.route('/error404')
 def error404():
     return render_template('404.html')
+
+
+#SubmitRecord
+@app.route('/submit_record', methods=['GET', 'POST'])
+def submit_record():
+    if request.method == 'POST':
+        joueur_nom = request.form['joueur_nom']
+        niveau_nom = request.form['niveau_nom']
+        createur = request.form['createur']
+        video_url = request.form['video_url']
+
+        connection = sqlite3.connect('DataBase.db')
+        cursor = connection.cursor()
+        cursor.execute('''
+        INSERT INTO SubmitRecord (joueur_nom, niveau_nom, createur, video_url) 
+        VALUES (?, ?, ?, ?)
+        ''', (joueur_nom, niveau_nom, createur, video_url))
+        connection.commit()
+        connection.close()
+        
+        return 'Record soumis avec succès !'
+
+    return render_template('submit_record.html')
 
 
 
@@ -140,8 +174,12 @@ def admin():
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM Niveau ORDER BY classement')
         niveaux = cursor.fetchall()
+        
+        cursor.execute('SELECT * FROM SubmitRecord WHERE status = "pending"')
+        submissions = cursor.fetchall()
+        
         connection.close()
-        return render_template('admin.html', niveaux=niveaux)
+        return render_template('admin.html', niveaux=niveaux, submissions=submissions)
     else:
         return redirect(url_for('connexion'))
 
@@ -185,64 +223,6 @@ def ajouter_niveau():
     
     except sqlite3.IntegrityError:
         return f'Erreur : Le niveau {nom_niveau} ou l\'ID {id_niveau} existe déjà.'
-
-@app.route('/reussir_niveau', methods=['POST'])
-def reussir_niveau():
-    nom_joueur = request.form['nom_joueur']
-    nom_niveau = request.form['nom_niveau']
-    video_url = request.form['video_url']
-    createurs = request.form['createurs']
-    connection = sqlite3.connect('DataBase.db')
-    cursor = connection.cursor()
-
-    cursor.execute('SELECT id FROM Joueur WHERE nom = ?', (nom_joueur,))
-    result = cursor.fetchone()
-    if result is None:
-        cursor.execute('INSERT INTO Joueur (nom) VALUES (?)', (nom_joueur,))
-        connection.commit()
-        cursor.execute('SELECT id FROM Joueur WHERE nom = ?', (nom_joueur,))
-        result = cursor.fetchone()
-
-    joueur_id = result[0]
-
-    cursor.execute('SELECT id, points FROM Niveau WHERE nom = ?', (nom_niveau,))
-    result = cursor.fetchone()
-    if result is None:
-        connection.close()
-        return f'Erreur : Aucun niveau trouvé avec le nom {nom_niveau}'
-    
-    niveau_id, points = result
-
-    cursor.execute('SELECT * FROM JoueurNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
-    result = cursor.fetchone()
-    if result:
-        connection.close()
-        return f'Erreur : Le joueur {nom_joueur} a déjà réussi le niveau {nom_niveau}'
-    
-    cursor.execute('''
-    INSERT INTO JoueurNiveau (joueur_id, niveau_id, video_url, createurs) 
-    VALUES (?, ?, ?, ?)
-    ''', (joueur_id, niveau_id, video_url, createurs))
-
-    cursor.execute('''
-    UPDATE Niveau 
-    SET victoires = victoires + 1 
-    WHERE id = ?
-    ''', (niveau_id,))
-
-    cursor.execute('''
-    UPDATE Joueur 
-    SET points = points + ? 
-    WHERE id = ?
-    ''', (points, joueur_id))
-
-    connection.commit()
-    connection.close()
-    mettre_a_jour_points_utilisateurs()
-
-    print(f'Points ajoutés au joueur {nom_joueur}: {points}')
-
-    return f'Joueur {nom_joueur} a réussi le niveau {nom_niveau} by {createurs} et a gagné {points} points avec la vidéo : {video_url}'
 
 @app.route('/modifier_ordre_niveaux', methods=['POST'])
 def modifier_ordre_niveaux():
@@ -382,6 +362,83 @@ def mettre_a_jour_points_utilisateurs():
 
     connection.commit()
     connection.close()
+
+    
+# Valider ou refuser un record soumis
+@app.route('/valider_record', methods=['POST'])
+def valider_record():
+    submission_id = request.form['submission_id']
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT joueur_nom, niveau_nom, createur, video_url FROM SubmitRecord WHERE id = ?', (submission_id,))
+    submission = cursor.fetchone()
+    
+    if submission:
+        joueur_nom, niveau_nom, createur, video_url = submission
+        
+        cursor.execute('SELECT id FROM Joueur WHERE nom = ?', (joueur_nom,))
+        result = cursor.fetchone()
+        if result is None:
+            cursor.execute('INSERT INTO Joueur (nom) VALUES (?)', (joueur_nom,))
+            connection.commit()
+            cursor.execute('SELECT id FROM Joueur WHERE nom = ?', (joueur_nom,))
+            result = cursor.fetchone()
+        
+        joueur_id = result[0]
+        
+        cursor.execute('SELECT id, points FROM Niveau WHERE nom = ?', (niveau_nom,))
+        result = cursor.fetchone()
+        if result is None:
+            connection.close()
+            return f'Erreur : Aucun niveau de trouver avec le nom {niveau_nom}'
+        
+        niveau_id, points = result
+        
+        cursor.execute('SELECT * FROM JoueurNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
+        result = cursor.fetchone()
+        if result:
+            connection.close()
+            return f'Erreur : Le joueur {joueur_nom} a déjà une réussite sur ce niveau {niveau_nom}'
+        
+        cursor.execute('''
+        INSERT INTO JoueurNiveau (joueur_id, niveau_id, video_url, createurs) 
+        VALUES (?, ?, ?, ?)
+        ''', (joueur_id, niveau_id, video_url, createur))
+        
+        cursor.execute('''
+        UPDATE Niveau 
+        SET victoires = victoires + 1 
+        WHERE id = ?
+        ''', (niveau_id,))
+        
+        cursor.execute('''
+        UPDATE Joueur 
+        SET points = points + ? 
+        WHERE id = ?
+        ''', (points, joueur_id))
+        
+        cursor.execute('UPDATE SubmitRecord SET status = "accepted" WHERE id = ?', (submission_id,))
+        
+        connection.commit()
+        connection.close()
+        mettre_a_jour_points_utilisateurs()
+        mettre_a_jour_points()
+
+    return redirect(url_for('admin'))
+
+@app.route('/refuser_record', methods=['POST'])
+def refuser_record():
+    submission_id = request.form['submission_id']
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    
+    cursor.execute('UPDATE SubmitRecord SET status = "rejected" WHERE id = ?', (submission_id,))
+    
+    connection.commit()
+    connection.close()
+
+    return redirect(url_for('admin'))
 
 if __name__ == '__main__':
     app.run(debug=True)

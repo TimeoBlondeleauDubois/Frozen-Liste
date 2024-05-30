@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}Soumettre un Record{% endblock %}
+
+{% block styles %}
+    <link href="../static/submit_record/submit_record.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <h1>Soumettre un record</h1>
+    <form method="POST">
+        <label for="joueur_nom">Nom du Joueur:</label>
+        <input type="text" id="joueur_nom" name="joueur_nom" required><br><br>
+        
+        <label for="niveau_nom">Nom du Niveau:</label>
+        <input type="text" id="niveau_nom" name="niveau_nom" required><br><br>
+        
+        <label for="createur">Créateur du Niveau:</label>
+        <input type="text" id="createur" name="createur" required><br><br>
+        
+        <label for="video_url">URL de la Vidéo:</label>
+        <input type="url" id="video_url" name="video_url" required><br><br>
+        
+        <button type="submit">Soumettre</button>
+    </form>
+{% endblock %}

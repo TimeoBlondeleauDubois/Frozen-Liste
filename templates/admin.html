@@ -10,55 +10,42 @@
     <h1>Créer un Niveau</h1>
     <form action="/ajouter_niveau" method="post">
         <label for="id_niveau">ID du niveau:</label><br>
-        <input type="number" id="id_niveau" name="id_niveau" min="1"><br>
+        <input type="number" id="id_niveau" name="id_niveau" min="1" required><br>
         <label for="nom_niveau">Nom du niveau:</label><br>
-        <input type="text" id="nom_niveau" name="nom_niveau"><br>
+        <input type="text" id="nom_niveau" name="nom_niveau" required><br>
         <label for="createurs">Créateurs:</label><br>
-        <input type="text" id="createurs" name="createurs"><br>
+        <input type="text" id="createurs" name="createurs" required><br>
         <label for="classement">Classement:</label><br>
-        <input type="number" id="classement" name="classement" min="1"><br>
+        <input type="number" id="classement" name="classement" min="1" required><br>
         <label for="mot_de_passe">Mot de passe:</label><br>
-        <input type="text" id="mot_de_passe" name="mot_de_passe"><br>
+        <input type="url" id="mot_de_passe" name="mot_de_passe" required><br>
         <label for="video_url">Url de la vidéo de vérification:</label><br>
-        <input type="text" id="video_url" name="video_url"><br><br>
+        <input type="text" id="video_url" name="video_url" required><br><br>
         <input type="submit" value="Créer Niveau">
     </form>
     
     <h1>Supprimer un Niveau</h1>
     <form action="/supprimer_niveau" method="post">
         <label for="nom_niveau">Nom du niveau:</label><br>
-        <input type="text" id="nom_niveau" name="nom_niveau"><br><br>
+        <input type="text" id="nom_niveau" name="nom_niveau" required><br><br>
         <input type="submit" value="Supprimer Niveau">
-    </form>
-
-    <h1>Ajouter une Réussite de Niveau</h1>
-    <form action="/reussir_niveau" method="post">
-        <label for="nom_joueur">Nom du joueur:</label><br>
-        <input type="text" id="nom_joueur" name="nom_joueur"><br>
-        <label for="nom_niveau">Nom du niveau:</label><br>
-        <input type="text" id="nom_niveau" name="nom_niveau"><br>
-        <label for="createurs">Nom du créateur du niveau:</label><br>
-        <input type="text" id="createurs" name="createurs"><br>
-        <label for="video_url">Lien de la vidéo:</label><br>
-        <input type="text" id="video_url" name="video_url"><br><br>
-        <input type="submit" value="Ajouter Réussite">
     </form>
     
     <h1>Supprimer une Réussite de Niveau</h1>
     <form action="/supprimer_reussite" method="post">
         <label for="nom_joueur">Nom du joueur:</label><br>
-        <input type="text" id="nom_joueur" name="nom_joueur"><br>
+        <input type="text" id="nom_joueur" name="nom_joueur" required><br>
         <label for="nom_niveau">Nom du niveau:</label><br>
-        <input type="text" id="nom_niveau" name="nom_niveau"><br><br>
+        <input type="text" id="nom_niveau" name="nom_niveau" required><br><br>
         <input type="submit" value="Supprimer Réussite">
     </form>
 
     <h1>Modifier l'ordre des Niveaux</h1>
     <form action="/modifier_ordre_niveaux" method="post">
         <label for="nom_niveau">Nom du niveau:</label><br>
-        <input type="text" id="nom_niveau" name="nom_niveau"><br>
+        <input type="text" id="nom_niveau" name="nom_niveau" required><br>
         <label for="new_classement">Nouveau classement:</label><br>
-        <input type="number" id="new_classement" name="new_classement" min="1"><br><br>
+        <input type="number" id="new_classement" name="new_classement" min="1" required><br><br>
         <input type="submit" value="Mettre à jour le classement">
     </form>
 
@@ -68,4 +55,40 @@
             <li>{{ niveau[1] }} - Classement actuel : {{ niveau[5] }} - nombre points : {{ niveau[4] }}</li>
         {% endfor %}
     </ul>
+    <br>
+    <br>
+    <h2>Soumissions en Attente</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Joueur</th>
+                <th>Niveau</th>
+                <th>Créateur</th>
+                <th>Vidéo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+            <tr>
+                <td>{{ submission[0] }}</td>
+                <td>{{ submission[1] }}</td>
+                <td>{{ submission[2] }}</td>
+                <td>{{ submission[3] }}</td>
+                <td><a href="{{ submission[4] }}" target="_blank">Voir la vidéo</a></td>
+                <td>
+                    <form method="POST" action="{{ url_for('valider_record') }}" style="display:inline;">
+                        <input type="hidden" name="submission_id" value="{{ submission[0] }}">
+                        <button type="submit">Valider</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('refuser_record') }}" style="display:inline;">
+                        <input type="hidden" name="submission_id" value="{{ submission[0] }}">
+                        <button type="submit">Refuser</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
