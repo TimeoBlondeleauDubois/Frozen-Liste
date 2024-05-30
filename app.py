@@ -41,7 +41,7 @@ def init_db():
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_joueur_nom ON Joueur(nom)')
 
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS JoueurNiveau (
+    CREATE TABLE IF NOT EXISTS ReussiteNiveau (
         joueur_id INTEGER,
         niveau_id INTEGER,
         video_url TEXT,
@@ -279,7 +279,7 @@ def supprimer_niveau():
     
     niveau_id, classement_supprime = result
 
-    cursor.execute('DELETE FROM JoueurNiveau WHERE niveau_id = ?', (niveau_id,))
+    cursor.execute('DELETE FROM ReussiteNiveau WHERE niveau_id = ?', (niveau_id,))
     cursor.execute('DELETE FROM Niveau WHERE id = ?', (niveau_id,))
     
     cursor.execute('UPDATE Niveau SET classement = classement - 1 WHERE classement > ?', (classement_supprime,))
@@ -313,7 +313,7 @@ def supprimer_reussite():
     
     niveau_id = result[0]
 
-    cursor.execute('DELETE FROM JoueurNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
+    cursor.execute('DELETE FROM ReussiteNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
     connection.commit()
     connection.close()
     mettre_a_jour_points_utilisateurs()
@@ -352,8 +352,8 @@ def mettre_a_jour_points_utilisateurs():
     for joueur_id, in joueurs:
         cursor.execute('''
         SELECT SUM(points) FROM Niveau 
-        INNER JOIN JoueurNiveau ON Niveau.id = JoueurNiveau.niveau_id 
-        WHERE JoueurNiveau.joueur_id = ?
+        INNER JOIN ReussiteNiveau ON Niveau.id = ReussiteNiveau.niveau_id 
+        WHERE ReussiteNiveau.joueur_id = ?
         ''', (joueur_id,))
         total_points = cursor.fetchone()[0] or 0
 
@@ -398,14 +398,14 @@ def valider_record():
         
         niveau_id, points = result
         
-        cursor.execute('SELECT * FROM JoueurNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
+        cursor.execute('SELECT * FROM ReussiteNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
         result = cursor.fetchone()
         if result:
             connection.close()
             return f'Erreur : Le joueur {joueur_nom} a déjà une réussite sur ce niveau {niveau_nom}'
         
         cursor.execute('''
-        INSERT INTO JoueurNiveau (joueur_id, niveau_id, video_url, createurs) 
+        INSERT INTO ReussiteNiveau (joueur_id, niveau_id, video_url, createurs) 
         VALUES (?, ?, ?, ?)
         ''', (joueur_id, niveau_id, video_url, createur))
         
