@@ -1,4 +1,12 @@
 @font-face {
-  font-family: roboto;
-  src: url(/static/Font/Roboto-Black.ttf);
+  font-family: RobotoRegular;
+  src: url(/static/Font/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url(/static/Font/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: Beligerent;
+  src: url(/static/Font/belligerent.ttf);
 }/*# sourceMappingURL=connexion.css.map */

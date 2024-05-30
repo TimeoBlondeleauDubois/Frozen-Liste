@@ -2,6 +2,7 @@ import sqlite3
 import bcrypt
 from flask import Flask, redirect, render_template, request, session, url_for
 import os
+import math
 
 app = Flask(__name__)
 app.secret_key = os.urandom(8192)
@@ -21,7 +22,8 @@ def init_db():
         points INTEGER NOT NULL,
         classement INTEGER,
         victoires INTEGER DEFAULT 0,
-        mot_de_passe TEXT
+        mot_de_passe TEXT,
+        video_url TEXT
     )
     ''')
 
@@ -149,6 +151,7 @@ def ajouter_niveau():
     createurs = request.form['createurs']
     classement = int(request.form['classement'])
     mot_de_passe = request.form['mot_de_passe']
+    video_url = request.form['video_url']
 
     if classement <= 0:
         return f'Erreur : Le classement doit être un entier positif'
@@ -168,9 +171,9 @@ def ajouter_niveau():
         points = calculer_points(classement)
 
         cursor.execute('''
-        INSERT INTO Niveau (id_niveau, nom, createurs, points, classement, mot_de_passe) 
-        VALUES (?, ?, ?, ?, ?, ?)
-        ''', (id_niveau, nom_niveau, createurs, points, classement, mot_de_passe))
+        INSERT INTO Niveau (id_niveau, nom, createurs, points, classement, mot_de_passe, video_url) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (id_niveau, nom_niveau, createurs, points, classement, mot_de_passe, video_url))
 
         connection.commit()
         connection.close()
@@ -338,8 +341,8 @@ def supprimer_reussite():
     return f'Réussite du joueur {nom_joueur} pour le niveau {nom_niveau} supprimée avec succès !'
 
 
-def calculer_points(classement):
-    return int(5000 / classement)
+def calculer_points(classement, base=2):
+    return max(1, int(5000 / math.log(classement + base, base)))
 
 def mettre_a_jour_points():
     connection = sqlite3.connect('DataBase.db')
@@ -371,7 +374,7 @@ def mettre_a_jour_points_utilisateurs():
         INNER JOIN JoueurNiveau ON Niveau.id = JoueurNiveau.niveau_id 
         WHERE JoueurNiveau.joueur_id = ?
         ''', (joueur_id,))
-        total_points = cursor.fetchone()[0]
+        total_points = cursor.fetchone()[0] or 0
 
         cursor.execute('UPDATE Joueur SET points = ? WHERE id = ?', (total_points, joueur_id))
 
