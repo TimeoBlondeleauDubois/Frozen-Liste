@@ -14,7 +14,9 @@
             <p {% if active_page == 'home' %}class="test"{% endif %}>classe test ajoutée si mon active page = a home</p>
         </ul>
     </header>
-    {% block content %}{% endblock %}
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
     <footer></footer>
     {% block scripts %}{% endblock %}
 </body>

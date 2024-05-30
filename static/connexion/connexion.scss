@@ -1,1 +1,100 @@
 @import '../Global/Global.scss';
+
+.page-content {
+    background-color: $primary-color-black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.glow {
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(0, 55, 110, 0.253);
+    border-radius: 50%;
+    filter: blur(80px);
+    transition: top 3s, left 3s;
+    pointer-events: none;
+}
+
+.h1-connexion, .p-identifiant-connexion, .input-identifiant-connexion, .p-mdp-connexion, .input-mdp-connexion, .input-submit-connexion {
+    z-index: 1;
+}
+
+.h1-connexion {
+    font-family: $RobotoBold;
+    font-size: $h1-size-pc;
+    color: white;
+    margin-left: $big-margin-left-pc;
+    margin-right: $big-margin-right-pc;
+    max-width: 1000px;
+}
+
+.p-identifiant-connexion, .p-mdp-connexion {
+    font-family: $RobotoBold;
+    font-size: $p-size-pc;
+    color: white;
+    max-width: 1000px;
+    margin-left: $big-margin-left-pc;
+    margin-right: $big-margin-right-pc;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper {
+    background-color: $secondary-color-grey;
+    border-radius: 40px;
+}
+
+.input-identifiant-connexion, .input-mdp-connexion {
+    font-family: $RobotoRegular;
+    font-size: 20px;
+    color: white;
+    background-color: $primary-color-black;
+    border: 1px solid white;
+    border-radius: 300px;
+    margin-left: $big-margin-left-pc;
+    margin-right: $big-margin-right-pc;
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    transition: all 300ms ease-in-out;
+}
+
+.input-identifiant-connexion:hover, .input-mdp-connexion:hover {
+    background-color: $secondary-color-grey;
+}   
+
+.input-submit-connexion {
+    font-family: $RobotoBold;
+    font-size: $p-size-pc;
+    background-color: $primary-color-black;
+    border: 1px solid white;
+    border-radius: 15px;
+    margin-left: $big-margin-left-pc;
+    margin-right: $big-margin-right-pc;
+    width: 160px;
+    height: 60px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+    color:  white;
+}
+
+.input-submit-connexion:hover {
+    background-color: $secondary-color-white;
+    color: $primary-color-black;
+}
+
+@media screen and (max-width: 0px) {
+}

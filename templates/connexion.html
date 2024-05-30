@@ -3,16 +3,61 @@
 {% block title %}Page de connexion pour les administrateur{% endblock %}
 
 {% block styles %}
-    <link href="../static/connexion/connexion.scss" rel="stylesheet">
+    <link href="../static/connexion/connexion.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-    <h2>Connexion</h2>
-    <form action="/connexion" method="POST">
-        <label for="username">Nom d'utilisateur :</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Mot de passe :</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-        <input type="submit" value="Se connecter">
-    </form>
+    <div class="page-content">
+        <div class="wrapper">
+            <h1 class="h1-connexion">Page de connexion pour les administrateur.</h1>
+            <form class="form" action="/connexion" method="POST">
+                <p class="p-identifiant-connexion">Identifiant:</p>
+                <input class="input-identifiant-connexion" type="text" id="username" name="username" required>
+                <p class="p-mdp-connexion">Mot de passe:</p>
+                <input class="input-mdp-connexion" type="password" id="password" name="password" required>
+                <input class="input-submit-connexion" type="submit" value="Connexion">
+            </form>
+        </div>
+        <div class="glow"></div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const circle = document.querySelector('.glow');
+        const pageContent = document.querySelector('.page-content');
+
+        function getRandomPosition() {
+            const x = Math.random() * (pageContent.clientWidth - circle.clientWidth);
+            const y = Math.random() * (pageContent.clientHeight - circle.clientHeight);
+            return { x, y };
+        }
+
+        function moveCircle() {
+            const { x, y } = getRandomPosition();
+            circle.style.top = `${y}px`;
+            circle.style.left = `${x}px`;
+        }
+
+        function continuousMove() {
+            moveCircle();
+            setTimeout(continuousMove, 3000);
+        }
+
+        moveCircle();
+        continuousMove();
+
+        //faire en sorte que le content-page prenne toute la hauteur de la page avec le header et footer
+        function adjustHeight() {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const footerHeight = document.querySelector('footer').offsetHeight;
+            const mainContent = document.querySelector('.page-content');
+            mainContent.style.minHeight = `calc(100vh - ${headerHeight + footerHeight}px)`;
+        }
+
+        window.addEventListener('DOMContentLoaded', adjustHeight);
+        window.addEventListener('resize', adjustHeight);
+    });
+</script>
 {% endblock %}

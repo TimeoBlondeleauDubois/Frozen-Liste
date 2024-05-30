@@ -31,15 +31,24 @@ $small-margin-bottom-mb: px;
 $big-margin-left-mb: px;
 $big-margin-right-mb: px;*/
 .page-content {
-  height: calc(100vh - 75px);
   background-color: #23252B;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   position: relative;
-  z-index: -1;
   overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1/1;
+  background-color: rgba(0, 55, 110, 0.253);
+  border-radius: 50%;
+  filter: blur(80px);
+  transition: top 3s, left 3s;
 }
 
 .h1-404 {
@@ -60,18 +69,6 @@ $big-margin-right-mb: px;*/
   margin-left: 8px;
   margin-right: 8px;
   z-index: 1;
-}
-
-.glow {
-  position: absolute;
-  z-index: 0;
-  width: 100%;
-  max-width: 500px;
-  aspect-ratio: 1/1;
-  background-color: rgba(0, 55, 110, 0.253);
-  border-radius: 50%;
-  filter: blur(80px);
-  transition: top 3s, left 3s;
 }
 
 @media screen and (max-width: 870px) {

@@ -39,6 +39,17 @@
 
         moveCircle();
         continuousMove();
+
+        //faire en sorte que le content-page prenne toute la hauteur de la page avec le header et footer
+        function adjustHeight() {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const footerHeight = document.querySelector('footer').offsetHeight;
+            const mainContent = document.querySelector('.page-content');
+            mainContent.style.minHeight = `calc(100vh - ${headerHeight + footerHeight}px)`;
+        }
+
+        window.addEventListener('DOMContentLoaded', adjustHeight);
+        window.addEventListener('resize', adjustHeight);
     });
 </script>
 {% endblock %}

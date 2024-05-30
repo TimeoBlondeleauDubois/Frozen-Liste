@@ -1,15 +1,24 @@
 @import '../Global/Global.scss';
 
 .page-content {
-    height: calc(100vh - 75px);
     background-color: $primary-color-black;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     position: relative;
-    z-index: -1;
     overflow: hidden;
+}
+
+.glow {
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(0, 55, 110, 0.253);
+    border-radius: 50%;
+    filter: blur(80px);
+    transition: top 3s, left 3s;
 }
 
 .h1-404 {
@@ -30,18 +39,6 @@
     margin-left: $big-margin-left-pc;
     margin-right: $big-margin-right-pc;
     z-index: 1;
-}
-
-.glow {
-    position: absolute;
-    z-index: 0;
-    width: 100%;
-    max-width: 500px;
-    aspect-ratio: 1 / 1;
-    background-color: rgba(0, 55, 110, 0.253);
-    border-radius: 50%;
-    filter: blur(80px);
-    transition: top 3s, left 3s;
 }
 
 @media screen and (max-width: 870px) {
