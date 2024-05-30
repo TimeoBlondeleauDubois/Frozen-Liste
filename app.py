@@ -45,6 +45,7 @@ def init_db():
         joueur_id INTEGER,
         niveau_id INTEGER,
         video_url TEXT,
+        createurs TEXT,
         FOREIGN KEY (joueur_id) REFERENCES Joueur(id),
         FOREIGN KEY (niveau_id) REFERENCES Niveau(id),
         PRIMARY KEY (joueur_id, niveau_id)
@@ -190,6 +191,7 @@ def reussir_niveau():
     nom_joueur = request.form['nom_joueur']
     nom_niveau = request.form['nom_niveau']
     video_url = request.form['video_url']
+    createurs = request.form['createurs']
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
 
@@ -218,9 +220,9 @@ def reussir_niveau():
         return f'Erreur : Le joueur {nom_joueur} a déjà réussi le niveau {nom_niveau}'
     
     cursor.execute('''
-    INSERT INTO JoueurNiveau (joueur_id, niveau_id, video_url) 
-    VALUES (?, ?, ?)
-    ''', (joueur_id, niveau_id, video_url))
+    INSERT INTO JoueurNiveau (joueur_id, niveau_id, video_url, createurs) 
+    VALUES (?, ?, ?, ?)
+    ''', (joueur_id, niveau_id, video_url, createurs))
 
     cursor.execute('''
     UPDATE Niveau 
@@ -240,7 +242,7 @@ def reussir_niveau():
 
     print(f'Points ajoutés au joueur {nom_joueur}: {points}')
 
-    return f'Joueur {nom_joueur} a réussi le niveau {nom_niveau} et a gagné {points} points avec la vidéo : {video_url}'
+    return f'Joueur {nom_joueur} a réussi le niveau {nom_niveau} by {createurs} et a gagné {points} points avec la vidéo : {video_url}'
 
 @app.route('/modifier_ordre_niveaux', methods=['POST'])
 def modifier_ordre_niveaux():
