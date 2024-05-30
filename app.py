@@ -142,19 +142,6 @@ def admin():
     else:
         return redirect(url_for('connexion'))
 
-@app.route('/ajouter_joueur', methods=['POST'])
-def ajouter_joueur():
-    nom_joueur = request.form['nom_joueur']
-    try:
-        connection = sqlite3.connect('DataBase.db')
-        cursor = connection.cursor()
-        cursor.execute('INSERT INTO Joueur (nom) VALUES (?)', (nom_joueur,))
-        connection.commit()
-        connection.close()
-        return f'Joueur {nom_joueur} ajouté avec succès !'
-    except sqlite3.IntegrityError:
-        return f'Erreur : Le joueur {nom_joueur} existe déjà.'
-
 @app.route('/ajouter_niveau', methods=['POST'])
 def ajouter_niveau():
     id_niveau = int(request.form['id_niveau'])
@@ -206,13 +193,17 @@ def reussir_niveau():
     cursor.execute('SELECT id FROM Joueur WHERE nom = ?', (nom_joueur,))
     result = cursor.fetchone()
     if result is None:
-        return f'Erreur : Aucun joueur trouvé avec le nom {nom_joueur}'
-    
+        cursor.execute('INSERT INTO Joueur (nom) VALUES (?)', (nom_joueur,))
+        connection.commit()
+        cursor.execute('SELECT id FROM Joueur WHERE nom = ?', (nom_joueur,))
+        result = cursor.fetchone()
+
     joueur_id = result[0]
 
     cursor.execute('SELECT id, points FROM Niveau WHERE nom = ?', (nom_niveau,))
     result = cursor.fetchone()
     if result is None:
+        connection.close()
         return f'Erreur : Aucun niveau trouvé avec le nom {nom_niveau}'
     
     niveau_id, points = result
@@ -220,6 +211,7 @@ def reussir_niveau():
     cursor.execute('SELECT * FROM JoueurNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
     result = cursor.fetchone()
     if result:
+        connection.close()
         return f'Erreur : Le joueur {nom_joueur} a déjà réussi le niveau {nom_niveau}'
     
     cursor.execute('''
