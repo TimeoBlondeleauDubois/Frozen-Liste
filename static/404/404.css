@@ -37,6 +37,9 @@ $big-margin-right-mb: px;*/
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+  z-index: -1;
+  overflow: hidden;
 }
 
 .h1-404 {
@@ -45,6 +48,7 @@ $big-margin-right-mb: px;*/
   color: white;
   margin-left: 8px;
   margin-right: 8px;
+  z-index: 1;
 }
 
 .p-404 {
@@ -55,6 +59,19 @@ $big-margin-right-mb: px;*/
   max-width: 1000px;
   margin-left: 8px;
   margin-right: 8px;
+  z-index: 1;
+}
+
+.glow {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1/1;
+  background-color: rgba(0, 55, 110, 0.253);
+  border-radius: 50%;
+  filter: blur(80px);
+  transition: top 3s, left 3s;
 }
 
 @media screen and (max-width: 870px) {
@@ -63,6 +80,9 @@ $big-margin-right-mb: px;*/
   }
   .p-404 {
     font-size: 40px;
+  }
+  .glow {
+    max-width: 250px;
   }
 }
 @media screen and (max-width: 700px) {
