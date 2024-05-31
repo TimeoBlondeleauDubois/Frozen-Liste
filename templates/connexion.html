@@ -27,41 +27,4 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const circle = document.querySelector('.glow');
-        const pageContent = document.querySelector('.page-content');
-
-        function getRandomPosition() {
-            const x = Math.random() * (pageContent.clientWidth - circle.clientWidth);
-            const y = Math.random() * (pageContent.clientHeight - circle.clientHeight);
-            return { x, y };
-        }
-
-        function moveCircle() {
-            const { x, y } = getRandomPosition();
-            circle.style.top = `${y}px`;
-            circle.style.left = `${x}px`;
-        }
-
-        function continuousMove() {
-            moveCircle();
-            setTimeout(continuousMove, 3000);
-        }
-
-        moveCircle();
-        continuousMove();
-
-        //faire en sorte que le content-page prenne toute la hauteur de la page avec le header et footer
-        function adjustHeight() {
-            const headerHeight = document.querySelector('header').offsetHeight;
-            const footerHeight = document.querySelector('footer').offsetHeight;
-            const mainContent = document.querySelector('.page-content');
-            mainContent.style.minHeight = `calc(100vh - ${headerHeight + footerHeight}px)`;
-        }
-
-        window.addEventListener('DOMContentLoaded', adjustHeight);
-        window.addEventListener('resize', adjustHeight);
-    });
-</script>
 {% endblock %}

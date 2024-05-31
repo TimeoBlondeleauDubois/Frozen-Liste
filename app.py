@@ -110,7 +110,7 @@ def submit_record():
         connection.commit()
         connection.close()
         
-        return 'Record soumis avec succès !'
+        return render_template('submit_record_correctement_envoyer.html')
 
     return render_template('submit_record.html')
 

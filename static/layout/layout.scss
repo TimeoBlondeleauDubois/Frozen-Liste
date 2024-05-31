@@ -4,3 +4,30 @@ header {
     height: 75px;
     background-color: $secondary-color-purple;
 }
+
+/* Pour les navigateurs WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #aaaaaa; /* Couleur de fond de la piste */
+    transition: all 300ms ease-in-out;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5c5c5c; /* Couleur de la thumb */
+    border-radius: 300px;
+    transition: all 300ms ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6e6e6e; /* Couleur de la thumb au survol */
+}
+
+/* Pour Firefox */
+body {
+    scrollbar-width: thin; 
+    scrollbar-color: #5c5c5c #aaaaaa;
+}

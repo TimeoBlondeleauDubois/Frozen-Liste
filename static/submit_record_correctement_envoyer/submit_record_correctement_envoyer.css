@@ -1,0 +1,26 @@
+@font-face {
+  font-family: RobotoRegular;
+  src: url(/static/Font/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url(/static/Font/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: Beligerent;
+  src: url(/static/Font/belligerent.ttf);
+}
+/*
+$h2-size-pc: px;
+$h2-size-mb: px;
+*/
+/*
+$big-margin-top-mb: px;
+$big-margin-bottom-mb: px;
+*/
+/*
+$big-margin-left-mb: px;
+$big-margin-right-mb: px;*/
+.page-content {
+  background-color: #23252B;
+}/*# sourceMappingURL=submit_record_correctement_envoyer.css.map */

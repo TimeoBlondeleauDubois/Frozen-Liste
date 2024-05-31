@@ -8,7 +8,10 @@
       {
         "ignore": [
           "backdrop-filter",
-          "scale"
+          "scale",
+          "scrollbar-width",
+          "scrollbar-color",
+          "min-height: auto"
         ]
       }
     ]

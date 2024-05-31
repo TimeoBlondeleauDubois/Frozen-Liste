@@ -35,44 +35,4 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const circle = document.querySelector('.glow');
-        const pageContent = document.querySelector('.page-content');
-
-        setTimeout(() => {
-            circle.classList.add('visible');
-        }, 2000);
-
-        function getRandomPosition() {
-            const x = Math.random() * (pageContent.clientWidth - circle.clientWidth);
-            const y = Math.random() * (pageContent.clientHeight - circle.clientHeight);
-            return { x, y };
-        }
-
-        function moveCircle() {
-            const { x, y } = getRandomPosition();
-            circle.style.top = `${y}px`;
-            circle.style.left = `${x}px`;
-        }
-
-        function continuousMove() {
-            moveCircle();
-            setTimeout(continuousMove, 3000);
-        }
-
-        moveCircle();
-        continuousMove();
-
-        function adjustHeight() {
-            const headerHeight = document.querySelector('header').offsetHeight;
-            const footerHeight = document.querySelector('footer').offsetHeight;
-            const mainContent = document.querySelector('.page-content');
-            mainContent.style.minHeight = `calc(100vh - ${headerHeight + footerHeight}px)`;
-        }
-
-        window.addEventListener('DOMContentLoaded', adjustHeight);
-        window.addEventListener('resize', adjustHeight);
-    });
-</script>
 {% endblock %}
