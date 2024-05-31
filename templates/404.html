@@ -20,6 +20,10 @@
         const circle = document.querySelector('.glow');
         const pageContent = document.querySelector('.page-content');
 
+        setTimeout(() => {
+            circle.classList.add('visible');
+        }, 2000);
+
         function getRandomPosition() {
             const x = Math.random() * (pageContent.clientWidth - circle.clientWidth);
             const y = Math.random() * (pageContent.clientHeight - circle.clientHeight);
@@ -40,7 +44,6 @@
         moveCircle();
         continuousMove();
 
-        //faire en sorte que le content-page prenne toute la hauteur de la page avec le header et footer
         function adjustHeight() {
             const headerHeight = document.querySelector('header').offsetHeight;
             const footerHeight = document.querySelector('footer').offsetHeight;
@@ -53,3 +56,4 @@
     });
 </script>
 {% endblock %}
+
