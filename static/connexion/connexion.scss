@@ -32,9 +32,9 @@
 .glow {
     position: absolute;
     width: 100%;
-    max-width: 500px;
+    max-width: 300px;
     aspect-ratio: 1 / 1;
-    background-color: rgba(5, 11, 94, 0.226);
+    background-color: rgba(255, 255, 255, 0.1);
     filter: blur(125px);
     transition: top 3s, left 3s;
     pointer-events: none;
@@ -66,10 +66,10 @@
 }
 
 .wrapper {
-    background-color: #7979794f;
+    background-color: #4747477e;
     border-radius: 40px;
     z-index: 1;
-    backdrop-filter: blur(60px);
+    backdrop-filter: blur(200px);
     margin-left: $border-margin-left-pc;
     margin-right: $border-margin-right-pc;
     
