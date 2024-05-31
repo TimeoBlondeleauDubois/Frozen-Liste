@@ -38,6 +38,7 @@
     filter: blur(125px);
     transition: top 3s, left 3s;
     pointer-events: none;
+    border-radius: 100%;
 }
 
 .h1-connexion, .p-identifiant-connexion, .input-identifiant-connexion, .p-mdp-connexion, .input-mdp-connexion, .input-submit-connexion {
@@ -65,12 +66,13 @@
 }
 
 .wrapper {
-    background-color: #79797934;
+    background-color: #7979794f;
     border-radius: 40px;
     z-index: 1;
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(60px);
     margin-left: $border-margin-left-pc;
     margin-right: $border-margin-right-pc;
+    
 } 
 
 .input-submit-connexion {
