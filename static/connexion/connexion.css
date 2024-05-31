@@ -243,14 +243,14 @@ $big-margin-right-mb: px;*/
   }
   .h1-connexion {
     margin-bottom: 60px;
-    margin-top: 80px;
+    margin-top: 60px;
   }
   .question {
     margin-bottom: 30px;
   }
   .input-submit-connexion {
     margin-top: 30px;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
 }
 @media screen and (max-width: 400px) {
