@@ -1,5 +1,21 @@
 @import '../Global/Global.scss';
 
+@mixin transition($properties) {
+    transition: $properties;
+}
+
+@mixin translate($x, $y) {
+    transform: translate($x, $y);
+}
+
+@mixin transform($transform) {
+    transform: $transform;
+}
+
+.transition {
+  @include transition(all 0.25s ease-in-out)
+}
+
 .page-content {
     background-color: $primary-color-black;
     display: flex;
@@ -9,6 +25,8 @@
     position: relative;
     overflow: hidden;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .glow {
@@ -33,52 +51,30 @@
     color: white;
     margin-left: $big-margin-left-pc;
     margin-right: $big-margin-right-pc;
-    max-width: 1000px;
-}
-
-.p-identifiant-connexion, .p-mdp-connexion {
-    font-family: $RobotoBold;
-    font-size: $p-size-pc;
-    color: white;
-    max-width: 1000px;
-    margin-left: $big-margin-left-pc;
-    margin-right: $big-margin-right-pc;
+    margin-top: $big-margin-top-pc;
+    margin-bottom: 60px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .form {
-    display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    justify-content: center;
+    display: flex;
+    box-sizing: border-box;
 }
 
 .wrapper {
     background-color: $secondary-color-grey;
     border-radius: 40px;
-}
-
-.input-identifiant-connexion, .input-mdp-connexion {
-    font-family: $RobotoRegular;
-    font-size: 20px;
-    color: white;
-    background-color: $primary-color-black;
-    border: 1px solid white;
-    border-radius: 300px;
-    margin-left: $big-margin-left-pc;
-    margin-right: $big-margin-right-pc;
-    width: 300px;
-    height: 40px;
-    text-align: center;
-    transition: all 300ms ease-in-out;
-}
-
-.input-identifiant-connexion:hover, .input-mdp-connexion:hover {
-    background-color: $secondary-color-grey;
-}   
+} 
 
 .input-submit-connexion {
     font-family: $RobotoBold;
     font-size: $p-size-pc;
-    background-color: $primary-color-black;
+    background-color: $secondary-color-grey;
     border: 1px solid white;
     border-radius: 15px;
     margin-left: $big-margin-left-pc;
@@ -89,11 +85,79 @@
     cursor: pointer;
     transition: all 300ms ease-in-out;
     color:  white;
+    margin-bottom: $big-margin-bottom-pc;
+    margin-top: 30px;
 }
 
 .input-submit-connexion:hover {
     background-color: $secondary-color-white;
-    color: $primary-color-black;
+    color: $secondary-color-grey;
+}
+
+.question {
+    position: relative;
+    margin-bottom: $small-margin-bottom-pc;
+    
+    &:first-of-type {
+      padding-top: 0;
+    }
+      
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+      
+    label {
+      @extend .transition;
+      transform-origin: left center;
+      color: white;
+      box-sizing: border-box;
+      padding: 5px 40px;
+      display: block;
+      position: absolute;
+      margin-top: -52px;
+      z-index: 2;
+      pointer-events: none;
+      font-family: $RobotoRegular;
+      font-size: $p-size-pc;
+    }
+      
+    input {
+      @extend .transition;
+      appearance: none;
+      background-color: $secondary-color-grey;
+      border: 1px solid white;
+      line-height: 0;
+      display: block;
+      box-sizing: border-box;
+      padding: 15px 40px;
+      border-radius: 300px;
+      color: white;
+      position: relative;
+      z-index: 1;
+      font-size: $p-size-pc;
+      font-family: $RobotoRegular;
+      
+      &:focus {
+        outline: none;
+        background: $primary-color-black;
+        color: white;
+        margin-top: 30px;
+      }
+        
+      &:valid {
+        margin-top: 30px;
+      }
+          
+      &:focus ~ label {
+        @include translate( 0 , -50px );
+      }
+      
+      &:valid ~ label {
+        font-family: $RobotoBold;
+        text-transform: uppercase;
+        @include transform( translate( 5px , -50px ) scale(0.6));
+      }
+    }
 }
 
 @media screen and (max-width: 0px) {

@@ -9,12 +9,16 @@
 {% block content %}
     <div class="page-content">
         <div class="wrapper">
-            <h1 class="h1-connexion">Page de connexion pour les administrateur.</h1>
             <form class="form" action="/connexion" method="POST">
-                <p class="p-identifiant-connexion">Identifiant:</p>
-                <input class="input-identifiant-connexion" type="text" id="username" name="username" required>
-                <p class="p-mdp-connexion">Mot de passe:</p>
-                <input class="input-mdp-connexion" type="password" id="password" name="password" required>
+                <h1 class="h1-connexion">Page de connexion pour les <br> administrateurs:</h1>
+                <div class="question">
+                    <input class="input-identifiant-connexion" type="text" id="username" name="username" required>
+                    <label class="p-identifiant-connexion">Identifiant:</label>
+                </div>
+                <div class="question">
+                    <input class="input-mdp-connexion" type="password" id="password" name="password" required>
+                    <label class="p-mdp-connexion">Mot de passe:</label>
+                </div>
                 <input class="input-submit-connexion" type="submit" value="Connexion">
             </form>
         </div>
