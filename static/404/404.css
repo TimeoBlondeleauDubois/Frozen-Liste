@@ -16,12 +16,11 @@ $h2-size-pc: px;
 $h2-size-mb: px;
 $p-size-mb: px;*/
 /*
-$big-margin-top-pc: px;
-$big-margin-bottom-pc: px;
 $big-margin-top-mb: px;
 $big-margin-bottom-mb: px;
-$small-margin-top-pc: px;
-$small-margin-bottom-pc: px;
+$medium-margin-bottom-mb: px;
+$medium-margin-top-mb: px;
+
 $small-margin-top-mb: px;
 $small-margin-bottom-mb: px;
 */
@@ -43,10 +42,10 @@ $big-margin-right-mb: px;*/
   width: 100%;
   max-width: 500px;
   aspect-ratio: 1/1;
-  background-color: rgba(0, 55, 110, 0.253);
-  border-radius: 50%;
-  filter: blur(80px);
+  background-color: rgba(5, 11, 94, 0.226);
+  filter: blur(125px);
   transition: top 3s, left 3s;
+  pointer-events: none;
 }
 
 .h1-404 {

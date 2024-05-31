@@ -15,10 +15,10 @@
     width: 100%;
     max-width: 500px;
     aspect-ratio: 1 / 1;
-    background-color: rgba(0, 55, 110, 0.253);
-    border-radius: 50%;
-    filter: blur(80px);
+    background-color: rgba(5, 11, 94, 0.226);
+    filter: blur(125px);
     transition: top 3s, left 3s;
+    pointer-events: none;
 }
 
 .h1-404 {
