@@ -1,6 +1,6 @@
 # Projet en cours de création❗(Back done)
 
-# Lien Du projet : [Frozen Liste](https://timeoblondeleau.pythonanywhere.com/)
+# Lien du site : [Frozen Liste](https://timeoblondeleau.pythonanywhere.com/)
 
 ## Projet: Classement des Niveaux Extreme Demon de la Team Frozen
 
