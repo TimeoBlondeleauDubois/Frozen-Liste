@@ -1,1 +1,309 @@
-/*# sourceMappingURL=submit_record.css.map */
+@font-face {
+  font-family: RobotoRegular;
+  src: url(/static/Font/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url(/static/Font/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: Beligerent;
+  src: url(/static/Font/belligerent.ttf);
+}
+/*
+$h2-size-pc: px;
+$h2-size-mb: px;
+*/
+/*
+$big-margin-top-mb: px;
+$big-margin-bottom-mb: px;
+*/
+/*
+$big-margin-left-mb: px;
+$big-margin-right-mb: px;*/
+.transition, .question input, .question label {
+  transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+}
+
+.page-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  animation: gradient 10s ease infinite;
+  background: linear-gradient(-45deg, #23252B, #36383B);
+  background-size: 400% 400%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.glow {
+  position: absolute;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1/1;
+  background-color: rgba(255, 255, 255, 0.1);
+  filter: blur(125px);
+  transition: top 3s, left 3s;
+  pointer-events: none;
+  border-radius: 100%;
+}
+
+.h1-submit, .input-nom-joueur-submit, .p-nom-joueur-submit, .input-nom-niveau-submit, .p-nom-niveau-submit, .input-nom-createur-submit, .p-nom-createur-submit, .input-url-submit, .p-url-submit {
+  z-index: 1;
+}
+
+.h1-submit {
+  font-family: RobotoBold;
+  font-size: 60px;
+  color: white;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-left: 50px;
+  margin-right: 50px;
+  max-width: 655px;
+}
+
+.form {
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  background-color: rgba(71, 71, 71, 0.4941176471);
+  border-radius: 40px;
+  z-index: 1;
+  -webkit-backdrop-filter: blur(200px);
+          backdrop-filter: blur(200px);
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.input-submit-submit {
+  font-family: RobotoBold;
+  font-size: 27px;
+  position: relative;
+  width: 165px;
+  height: 55px;
+  background-color: #36383B;
+  display: flex;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+  justify-content: center;
+  border: none;
+  padding: 12px;
+  gap: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.input-submit-submit:hover {
+  background-color: #23252B;
+}
+
+.input-submit-submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: -3.5px;
+  top: 0.5px;
+  margin: auto;
+  width: 172.5px;
+  height: 62.5px;
+  border-radius: 12px;
+  animation: gradient 20s ease infinite;
+  background: linear-gradient(-45deg, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff);
+  background-size: 900% 900%;
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.input-submit-submit::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  animation: gradient 20s ease infinite;
+  background: linear-gradient(-45deg, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff);
+  background-size: 900% 900%;
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(15px);
+}
+
+.input-submit-submit:hover::after {
+  filter: blur(30px);
+}
+
+.input-submit-submit:hover::before {
+  transform: rotate(-180deg);
+}
+
+.input-submit-submit:active::before {
+  scale: 0.7;
+}
+
+.question {
+  position: relative;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.question:first-of-type {
+  padding-top: 0;
+}
+.question:last-of-type {
+  padding-bottom: 0;
+}
+.question label {
+  transform-origin: left center;
+  color: white;
+  box-sizing: border-box;
+  padding: 5px 40px;
+  display: block;
+  position: absolute;
+  margin-top: -83px;
+  z-index: 2;
+  pointer-events: none;
+  font-family: RobotoRegular;
+}
+.question input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #36383B;
+  border: 1px solid white;
+  line-height: 0;
+  display: block;
+  box-sizing: border-box;
+  padding: 15px 40px;
+  border-radius: 300px;
+  color: white;
+  position: relative;
+  z-index: 1;
+  font-family: RobotoRegular;
+}
+.question input:focus {
+  outline: none;
+  background: #23252B;
+  color: white;
+  margin-top: 30px;
+}
+.question input:valid {
+  margin-top: 30px;
+}
+.question input:focus ~ label {
+  transform: translate(0, -50px);
+}
+.question input:valid ~ label {
+  font-family: RobotoBold;
+  text-transform: uppercase;
+  transform: translate(5px, -50px) scale(0.6);
+  color: rgb(42, 255, 34);
+}
+
+@media screen and (max-width: 700px) and (min-width: 400px) {
+  label, input {
+    font-size: 20px;
+  }
+  input:not(.input-submit-submit) {
+    padding: 15px 20px;
+  }
+  label {
+    margin-top: -76px !important;
+    padding: 5px 20px !important;
+  }
+  .wrapper {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .h1-submit {
+    font-size: 40px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 65px;
+    margin-bottom: 47px;
+  }
+  .question {
+    margin-bottom: 0px;
+  }
+  .input-submit-submit {
+    margin-top: 22px;
+    margin-bottom: 65px;
+  }
+}
+@media screen and (min-width: 700px) {
+  label, input {
+    font-size: 27px;
+  }
+  .wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+  .h1-submit {
+    margin-bottom: 60px;
+    margin-top: 60px;
+  }
+  .question {
+    margin-bottom: 0px;
+  }
+  .input-submit-submit {
+    margin-top: 30px;
+    margin-bottom: 60px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .h1-submit {
+    font-size: 35px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 50px;
+    margin-bottom: 35px;
+  }
+  label, input {
+    font-size: 17px;
+  }
+  input:not(.input-submit-submit) {
+    padding: 15px 18px;
+  }
+  label {
+    margin-top: -72px !important;
+    padding: 5px 18px !important;
+  }
+  .question {
+    margin-bottom: 0px;
+  }
+  .input-submit-submit {
+    margin-top: 15px;
+    margin-bottom: 50px;
+  }
+}/*# sourceMappingURL=submit_record.css.map */

@@ -117,21 +117,35 @@ $big-margin-right-mb: px;*/
   width: 172.5px;
   height: 62.5px;
   border-radius: 12px;
-  background: linear-gradient(-45deg, #A000C7 0%, #40c9ff 100%);
+  animation: gradient 20s ease infinite;
+  background: linear-gradient(-45deg, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff);
+  background-size: 900% 900%;
   z-index: -10;
   pointer-events: none;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  animation: gradientColors 5s linear infinite;
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 .input-submit-connexion::after {
   content: "";
   z-index: -1;
   position: absolute;
   inset: 0;
-  background: linear-gradient(-45deg, #A000C7 0%, #00dbde 100%);
+  animation: gradient 20s ease infinite;
+  background: linear-gradient(-45deg, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff);
+  background-size: 900% 900%;
   transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
+  filter: blur(15px);
 }
 
 .input-submit-connexion:hover::after {
@@ -201,6 +215,7 @@ $big-margin-right-mb: px;*/
   font-family: RobotoBold;
   text-transform: uppercase;
   transform: translate(5px, -50px) scale(0.6);
+  color: rgb(42, 255, 34);
 }
 
 @media screen and (max-width: 700px) and (min-width: 400px) {

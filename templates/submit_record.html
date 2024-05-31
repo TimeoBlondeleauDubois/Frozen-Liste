@@ -7,20 +7,72 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Soumettre un record</h1>
-    <form method="POST">
-        <label for="joueur_nom">Nom du Joueur:</label>
-        <input type="text" id="joueur_nom" name="joueur_nom" required><br><br>
-        
-        <label for="niveau_nom">Nom du Niveau:</label>
-        <input type="text" id="niveau_nom" name="niveau_nom" required><br><br>
-        
-        <label for="createur">Créateur du Niveau:</label>
-        <input type="text" id="createur" name="createur" required><br><br>
-        
-        <label for="video_url">URL de la Vidéo:</label>
-        <input type="url" id="video_url" name="video_url" required><br><br>
-        
-        <button type="submit">Soumettre</button>
-    </form>
+    <div class="page-content">
+        <div class="wrapper">
+            <form class="form" method="POST">
+                <h1 class="h1-submit" >Soumettre un record</h1>
+                <div class="question">
+                    <input class="input-nom-joueur-submit" type="text" id="joueur_nom" name="joueur_nom" required><br><br>
+                    <label class="p-nom-joueur-submit" for="joueur_nom">Nom du Joueur:</label>
+                </div>
+                <div class="question">
+                    <input class="input-nom-niveau-submit" type="text" id="niveau_nom" name="niveau_nom" required><br><br>
+                    <label class="p-nom-niveau-submit" for="niveau_nom">Nom du Niveau:</label>
+                </div>
+                <div class="question">
+                    <input class="input-nom-createur-submit" type="text" id="createur" name="createur" required><br><br>
+                    <label class="p-nom-createur-submit" for="createur">Créateur du Niveau:</label>
+                </div>
+                <div class="question">
+                    <input class="input-url-submit" type="url" id="video_url" name="video_url" required><br><br>
+                    <label class="p-url-submit" for="video_url">URL de la Vidéo:</label>
+                </div>
+                <button class="input-submit-submit" type="submit">Soumettre</button>
+            </form>
+        </div>
+        <div class="glow"></div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const circle = document.querySelector('.glow');
+        const pageContent = document.querySelector('.page-content');
+
+        setTimeout(() => {
+            circle.classList.add('visible');
+        }, 2000);
+
+        function getRandomPosition() {
+            const x = Math.random() * (pageContent.clientWidth - circle.clientWidth);
+            const y = Math.random() * (pageContent.clientHeight - circle.clientHeight);
+            return { x, y };
+        }
+
+        function moveCircle() {
+            const { x, y } = getRandomPosition();
+            circle.style.top = `${y}px`;
+            circle.style.left = `${x}px`;
+        }
+
+        function continuousMove() {
+            moveCircle();
+            setTimeout(continuousMove, 3000);
+        }
+
+        moveCircle();
+        continuousMove();
+
+        function adjustHeight() {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const footerHeight = document.querySelector('footer').offsetHeight;
+            const mainContent = document.querySelector('.page-content');
+            mainContent.style.minHeight = `calc(100vh - ${headerHeight + footerHeight}px)`;
+        }
+
+        window.addEventListener('DOMContentLoaded', adjustHeight);
+        window.addEventListener('resize', adjustHeight);
+    });
+</script>
 {% endblock %}
