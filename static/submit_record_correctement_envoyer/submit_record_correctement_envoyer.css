@@ -49,11 +49,12 @@ $big-margin-right-mb: px;*/
 }
 .page-content .wrapper h1 {
   color: white;
-  font-size: 60px;
   font-family: RobotoBold;
   max-width: 1000px;
   margin-bottom: 40px;
   z-index: 1;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .page-content .wrapper p {
   color: rgb(42, 255, 34);
@@ -61,9 +62,13 @@ $big-margin-right-mb: px;*/
   font-family: RobotoRegular;
   margin-bottom: 40px;
   z-index: 1;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .page-content .wrapper .button-home {
   margin-bottom: 15px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .page-content .wrapper .button-home {
   font-family: RobotoRegular;
@@ -92,10 +97,10 @@ $big-margin-right-mb: px;*/
   content: "";
   position: absolute;
   inset: 0;
-  left: -8.5px;
+  left: -6.5px;
   margin: auto;
-  width: 247.5px;
-  height: 92.5px;
+  width: 242.5px;
+  height: 87.5px;
   border-radius: 12px;
   animation: gradient 20s ease infinite;
   background: linear-gradient(-45deg, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff);
@@ -154,6 +159,8 @@ $big-margin-right-mb: px;*/
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   margin-top: 20px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .page-content .wrapper .button-submit-record:hover {
   background-color: #23252B;
@@ -162,10 +169,10 @@ $big-margin-right-mb: px;*/
   content: "";
   position: absolute;
   inset: 0;
-  left: -8.5px;
+  left: -6.5px;
   margin: auto;
-  width: 247.5px;
-  height: 92.5px;
+  width: 242.5px;
+  height: 87.5px;
   border-radius: 12px;
   animation: gradient2 20s ease infinite;
   background: linear-gradient(-45deg, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff, #A000C7, #40c9ff);
@@ -204,4 +211,15 @@ $big-margin-right-mb: px;*/
 }
 .page-content .wrapper .button-submit-record:active::before {
   scale: 0.7;
+}
+
+@media screen and (max-width: 700px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+@media screen and (min-width: 700px) {
+  h1 {
+    font-size: 60px;
+  }
 }/*# sourceMappingURL=submit_record_correctement_envoyer.css.map */
