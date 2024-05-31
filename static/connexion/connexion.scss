@@ -216,7 +216,7 @@
         font-family: $RobotoBold;
         text-transform: uppercase;
         @include transform( translate( 5px , -50px ) scale(0.6));
-        color: rgb(42, 255, 34);
+        color: $green;
       }
     }
 }

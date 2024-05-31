@@ -2,4 +2,211 @@
 
 .page-content {
     background-color: $primary-color-black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .glow {
+        position: absolute;
+        width: 100%;
+        max-width: 300px;
+        aspect-ratio: 1 / 1;
+        background-color: rgba(255, 255, 255, 0.1);
+        filter: blur(125px);
+        transition: top 3s, left 3s;
+        pointer-events: none;
+        border-radius: 100%;
+    }
+
+    
+    .wrapper {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        h1 {
+            color: white;
+            font-size: $h1-size-pc;
+            font-family: $RobotoBold;
+            max-width: 1000px;
+            margin-bottom: $medium-margin-bottom-pc;
+            z-index: 1;
+        }
+        
+        p {
+            color: $green;
+            font-size: $p-size-pc;
+            font-family: $RobotoRegular;
+            margin-bottom: $medium-margin-bottom-pc;
+            z-index: 1;
+        }
+
+        .button-home {
+            margin-bottom: 15px;
+        }
+
+        .button-home {
+            font-family: $RobotoRegular;
+            font-size: $p-size-pc;
+            position: relative;
+            width: 230px;
+            height: 75px;
+            background-color: $secondary-color-grey;
+            display: flex;
+            align-items: center;
+            color: white;
+            flex-direction: column;
+            justify-content: center;
+            border: none;
+            padding: 12px;
+            gap: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 20px;
+        
+            &:hover {
+                background-color: $primary-color-black;
+            }
+        }
+        
+        .button-home::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          left: -8.5px;
+          margin: auto;
+          width: 247.5px;
+          height: 92.5px;
+          border-radius: 12px;
+          animation: gradient 20s ease infinite;
+          background: linear-gradient(-45deg, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff);
+          background-size: 900% 900%;
+          z-index: -10;
+          pointer-events: none;
+          transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+         
+            50% {
+                background-position: 100% 50%;
+            }
+         
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .button-home::after {
+          content: "";
+          z-index: -1;
+          position: absolute;
+          inset: 0;
+          animation: gradient 20s ease infinite;
+          background: linear-gradient(-45deg, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff);
+          background-size: 900% 900%;
+          transform: translate3d(0, 0, 0) scale(0.95);
+          filter: blur(15px);
+        }
+        
+        .button-home:hover::after {
+          filter: blur(30px);
+        }
+        
+        .button-home:hover::before {
+          transform: rotate(-180deg);
+        }
+        
+        .button-home:active::before {
+          scale: 0.7;
+        }
+
+        .button-submit-record {
+            font-family: $RobotoRegular;
+            font-size: $p-size-pc;
+            position: relative;
+            width: 230px;
+            height: 75px;
+            background-color: $secondary-color-grey;
+            display: flex;
+            align-items: center;
+            color: white;
+            flex-direction: column;
+            justify-content: center;
+            border: none;
+            padding: 12px;
+            gap: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 20px;
+        
+            &:hover {
+                background-color: $primary-color-black;
+            }
+        }
+        
+        .button-submit-record::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          left: -8.5px;
+          margin: auto;
+          width: 247.5px;
+          height: 92.5px;
+          border-radius: 12px;
+          animation: gradient2 20s ease infinite;
+          background: linear-gradient(-45deg, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff);
+          background-size: 900% 900%;
+          z-index: -10;
+          pointer-events: none;
+          transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes gradient2 {
+            0% {
+                background-position: 100% 50%;
+            }
+         
+            50% {
+                background-position: 0% 50%;
+            }
+         
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        .button-submit-record::after {
+          content: "";
+          z-index: -1;
+          position: absolute;
+          inset: 0;
+          animation: gradient2 20s ease infinite;
+          background: linear-gradient(-45deg, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff, $secondary-color-purple, #40c9ff);
+          background-size: 900% 900%;
+          transform: translate3d(0, 0, 0) scale(0.95);
+          filter: blur(15px);
+        }
+        
+        .button-submit-record:hover::after {
+          filter: blur(30px);
+        }
+        
+        .button-submit-record:hover::before {
+          transform: rotate(-180deg);
+        }
+        
+        .button-submit-record:active::before {
+          scale: 0.7;
+        }
+    }
 }

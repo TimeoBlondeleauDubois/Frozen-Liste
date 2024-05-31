@@ -91,6 +91,9 @@ def not_found_error(error):
 def error404():
     return render_template('404.html')
 
+@app.route('/home')
+def home():
+    return redirect('/')
 
 #SubmitRecord
 @app.route('/submit_record', methods=['GET', 'POST'])

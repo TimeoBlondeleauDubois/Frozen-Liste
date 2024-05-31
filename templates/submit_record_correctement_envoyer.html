@@ -8,8 +8,13 @@
 
 {% block content %}
     <div class="page-content">
-        <h1>Merci d'avoir soumis votre enregistrement !</h1>
-        <p>Votre enregistrement a bien été reçu.</p>
+        <div class="glow"></div>
+        <div class="wrapper">
+            <h1>Merci d'avoir soumis votre enregistrement !</h1>
+            <p>Votre enregistrement a bien été envoyé.</p>
+            <button class="button-home" onclick="window.location.href='/home';">Retourner sur </br> la liste</button>
+            <button class="button-submit-record" onclick="window.location.href='/submit_record';">Envoyer un autre enregistrement</button>
+        </div>
     </div>
 {% endblock %}
 
