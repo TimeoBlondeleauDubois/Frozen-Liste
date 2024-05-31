@@ -118,6 +118,7 @@ $big-margin-right-mb: px;*/
 }
 .input-submit-submit:hover {
   background-color: #23252B;
+  transition-delay: 0.6s;
 }
 
 .input-submit-submit::before {

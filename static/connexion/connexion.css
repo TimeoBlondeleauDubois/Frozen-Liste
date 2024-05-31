@@ -105,6 +105,7 @@ $big-margin-right-mb: px;*/
 }
 .input-submit-connexion:hover {
   background-color: #23252B;
+  transition-delay: 0.6s;
 }
 
 .input-submit-connexion::before {
