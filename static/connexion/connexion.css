@@ -82,6 +82,8 @@ $big-margin-right-mb: px;*/
           backdrop-filter: blur(200px);
   margin-left: 15px;
   margin-right: 15px;
+  margin-top: 160px;
+  margin-bottom: 40px;
 }
 
 .input-submit-connexion {
@@ -226,13 +228,9 @@ $big-margin-right-mb: px;*/
   input:not(.input-submit-connexion) {
     padding: 15px 20px;
   }
-  label {
+  .p-mdp-connexion, .p-identifiant-connexion {
     margin-top: -45px !important;
     padding: 5px 20px !important;
-  }
-  .wrapper {
-    margin-top: 40px;
-    margin-bottom: 40px;
   }
   .h1-connexion {
     font-size: 40px;
@@ -252,10 +250,6 @@ $big-margin-right-mb: px;*/
 @media screen and (min-width: 700px) {
   label, input {
     font-size: 27px;
-  }
-  .wrapper {
-    margin-top: 80px;
-    margin-bottom: 80px;
   }
   .h1-connexion {
     margin-bottom: 60px;
@@ -283,7 +277,7 @@ $big-margin-right-mb: px;*/
   input:not(.input-submit-connexion) {
     padding: 15px 18px;
   }
-  label {
+  .p-mdp-connexion, .p-identifiant-connexion {
     margin-top: -40px !important;
     padding: 5px 18px !important;
   }

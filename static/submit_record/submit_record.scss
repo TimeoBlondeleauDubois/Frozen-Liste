@@ -17,7 +17,6 @@
 }
 
 .page-content {
-  
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,6 +29,7 @@
     animation: gradient 10s ease infinite;
     background: linear-gradient(-45deg, $primary-color-black, $secondary-color-grey);
     background-size: 400% 400%;
+    padding-top: 110px;
 }
 
 @keyframes gradient {
@@ -89,7 +89,8 @@
     backdrop-filter: blur(200px);
     margin-left: $border-margin-left-pc;
     margin-right: $border-margin-right-pc;
-    
+    margin-top: 40px;
+    margin-bottom: 40px;
 } 
 
 .input-submit-submit {
@@ -248,14 +249,14 @@
         padding: 15px 20px;
     }
     
-    label {
+    .p-nom-joueur-submit, .p-nom-niveau-submit, .p-nom-createur-submit, .p-url-submit  {
         margin-top: -76px !important;
         padding: 5px 20px !important;
     }
     
     .wrapper {
         margin-top: $medium-margin-top-pc;
-        margin-bottom: $medium-margin-bottom-pc;
+        margin-bottom: $medium-margin-bottom-pc; 
     }
 
     .h1-submit {
@@ -318,7 +319,7 @@
         padding: 15px 18px;
     }
 
-    label {
+    .p-nom-joueur-submit, .p-nom-niveau-submit, .p-nom-createur-submit, .p-url-submit  {
         margin-top: -72px !important;
         padding: 5px 18px !important;
     }

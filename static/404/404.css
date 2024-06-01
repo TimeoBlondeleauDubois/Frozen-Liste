@@ -31,6 +31,16 @@ $big-margin-right-mb: px;*/
   overflow: hidden;
 }
 
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  margin-top: 190px;
+  margin-bottom: 40px;
+}
+
 .glow {
   position: absolute;
   width: 100%;
