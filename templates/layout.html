@@ -11,7 +11,6 @@
 <body>
     <header>
         <div class="nav-background"></div>
-        <div class="nav-background-color"></div>
         <a href="/home" class="logo" target="_blank">
             <img src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de la Frozen Liste">
         </a>
@@ -20,8 +19,8 @@
         <nav class="nav"> 		
             <ul class="pt-5">
                 <li><a {% if active_page == 'home' %}class="class-home"{% endif %} href="/home">Liste</a></li>
-                <li><a href="/classement">Classement</a></li>
-                <li><a href="/information">Information</a></li>
+                <li><a {% if active_page == 'classement' %}class="class-classement"{% endif %} href="/classement">Classement</a></li>
+                <li><a {% if active_page == 'information' %}class="class-information"{% endif %} href="/information">Information</a></li>
                 <li><a class="lien-logo-discord" href="https://discord.gg/X5H7XFTtmA"><img class="logo-discord" src="{{ url_for('static', filename='pictures/discord.svg') }}" alt="Logo discord"></a></li>
                 <li><a href="/submit_record">Envoyer une vidéo</a></li>
             </ul>

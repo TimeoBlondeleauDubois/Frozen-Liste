@@ -83,6 +83,16 @@ def index():
     active_page = 'home'
     return render_template('home.html', active_page=active_page)
 
+@app.route('/classement')
+def classement():
+    active_page = 'classement'
+    return render_template('classement.html', active_page=active_page)
+
+@app.route('/information')
+def information():
+    active_page = 'information'
+    return render_template('information.html', active_page=active_page)
+
 @app.errorhandler(404)
 def not_found_error(error):
     return redirect('/error404')
