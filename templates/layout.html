@@ -7,12 +7,13 @@
     <link href="../static/reset.css" rel="stylesheet">
     {% block styles %}{% endblock %}
     <link href="../static/layout/layout.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='pictures/icon.png') }}">
 </head>
 <body>
     <header>
         <div class="mobile">
             <div class="nav-background"></div>
-            <a href="/home" class="logo" target="_blank">
+            <a href="/home" class="logo">
                 <img src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de la Frozen Liste">
             </a>
             <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
@@ -22,7 +23,7 @@
                     <li><a {% if active_page == 'home' %}class="class-home"{% endif %} href="/home">Liste</a></li>
                     <li><a {% if active_page == 'classement' %}class="class-classement"{% endif %} href="/classement">Classement</a></li>
                     <li><a {% if active_page == 'information' %}class="class-information"{% endif %} href="/information">Information</a></li>
-                    <li><a class="lien-logo-discord" href="https://discord.gg/X5H7XFTtmA"><img class="logo-discord" src="{{ url_for('static', filename='pictures/discord.svg') }}" alt="Logo discord"></a></li>
+                    <li><a class="lien-logo-discord" href="https://discord.gg/X5H7XFTtmA" target="_blank"><img class="logo-discord" src="{{ url_for('static', filename='pictures/discord.svg') }}" alt="Logo discord"></a></li>
                     <li><a href="/submit_record">
                             <div class="hexagon-wrapper">
                                 <div class="hexagon">
@@ -37,14 +38,14 @@
             <div class="nav-pc">
                 <div class="nav-bar-pc-wrapper">
                     <div class="nav-pc-container1">
-                        <a href="/home" class="link-logo-pc" target="_blank"><img class="logo-pc" src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de la Frozen Liste"></a>
+                        <a href="/home" class="link-logo-pc"><img class="logo-pc" src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de la Frozen Liste"></a>
                         <a class="home-pc {% if active_page == 'home' %}class-home-pc{% endif %}" href="/home">Liste</a>
                         <a class="classement-pc {% if active_page == 'classement' %}class-classement-pc{% endif %}" href="/classement">Classement</a>
                         <a class="information-pc {% if active_page == 'information' %}class-information-pc{% endif %}" href="/information">Information</a>
                     </div>
                     <div class="nav-pc-container2">
                         <a class="submit-record-pc" href="/submit_record">Envoyer une vidéo</a>
-                        <a class="lien-logo-discord-pc" href="https://discord.gg/X5H7XFTtmA"><img class="logo-discord" src="{{ url_for('static', filename='pictures/discord.svg') }}" alt="Logo discord"></a>
+                        <a class="lien-logo-discord-pc" href="https://discord.gg/X5H7XFTtmA" target="_blank"><img class="logo-discord" src="{{ url_for('static', filename='pictures/discord.svg') }}" alt="Logo discord"></a>
                     </div>
                 </div>
             </div>

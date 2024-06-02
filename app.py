@@ -78,8 +78,8 @@ init_db()
 
 
 #pages
-@app.route('/')
-def index():
+@app.route('/liste')
+def liste():
     active_page = 'home'
     return render_template('home.html', active_page=active_page)
 
@@ -101,9 +101,13 @@ def not_found_error(error):
 def error404():
     return render_template('404.html')
 
+@app.route('/')
+def noroute():
+    return redirect('/liste')
+
 @app.route('/home')
 def home():
-    return redirect('/')
+    return redirect('/liste')
 
 #SubmitRecord
 @app.route('/submit_record', methods=['GET', 'POST'])
