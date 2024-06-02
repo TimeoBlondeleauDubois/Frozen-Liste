@@ -37,14 +37,14 @@
         <div class="pc">
             <div class="nav-pc">
                 <div class="nav-bar-pc-wrapper">
+                    <a href="/home" class="link-logo-pc"><img class="logo-pc" src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de la Frozen Liste"></a>
                     <div class="nav-pc-container1">
-                        <a href="/home" class="link-logo-pc"><img class="logo-pc" src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de la Frozen Liste"></a>
                         <a class="home-pc {% if active_page == 'home' %}class-home-pc{% endif %}" href="/home">Liste</a>
                         <a class="classement-pc {% if active_page == 'classement' %}class-classement-pc{% endif %}" href="/classement">Classement</a>
+                        <a class="submit-record-pc {% if active_page == 'envoyerunevideo' %}class-submit-record-pc{% endif %}" href="/submit_record">Envoyer une vidéo</a>
                         <a class="information-pc {% if active_page == 'information' %}class-information-pc{% endif %}" href="/information">Information</a>
                     </div>
                     <div class="nav-pc-container2">
-                        <a class="submit-record-pc" href="/submit_record">Envoyer une vidéo</a>
                         <a class="lien-logo-discord-pc" href="https://discord.gg/X5H7XFTtmA" target="_blank"><img class="logo-discord" src="{{ url_for('static', filename='pictures/discord.svg') }}" alt="Logo discord"></a>
                     </div>
                 </div>

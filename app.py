@@ -112,6 +112,7 @@ def home():
 #SubmitRecord
 @app.route('/submit_record', methods=['GET', 'POST'])
 def submit_record():
+    active_page = 'envoyerunevideo'
     if request.method == 'POST':
         joueur_nom = request.form['joueur_nom']
         niveau_nom = request.form['niveau_nom']
@@ -129,7 +130,7 @@ def submit_record():
         
         return render_template('submit_record_correctement_envoyer.html')
 
-    return render_template('submit_record.html')
+    return render_template('submit_record.html', active_page=active_page)
 
 
 

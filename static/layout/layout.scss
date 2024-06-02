@@ -456,7 +456,6 @@ body {
 .nav-pc-container1 {
     display: flex;
     align-items: center;
-    margin-left: 30px;
 }
 
 .nav-pc-container2 {
@@ -470,18 +469,11 @@ body {
 }
 
 .link-logo-pc {
-    margin-right: 40px;
+    margin-left: 45px;
 }
 
 .nav-pc-container1 a {
     margin-left: 10px;
-    font-size: 30px;
-    font-family: $RobotoBold;
-    color: white;
-}
-
-.submit-record-pc {
-    margin-right: 80px;
     font-size: 30px;
     font-family: $RobotoBold;
     color: white;
@@ -492,24 +484,12 @@ body {
     max-height: auto;
 }
 
-.class-home-pc {
+.class-home-pc, .class-classement-pc, .class-information-pc, .class-submit-record-pc {
     background-color: white;
     border-radius: 300px;
     color: $secondary-color-purple !important;
 }
 
-.class-classement-pc {
-    background-color: white;
-    border-radius: 300px;
-    color: $secondary-color-purple !important;
-}
-
-.class-information-pc {
-    background-color: white;
-    border-radius: 300px;
-    color: $secondary-color-purple !important;
-}
-
-.home-pc, .classement-pc, .information-pc {
+.home-pc, .classement-pc, .information-pc, .submit-record-pc {
     padding: 20px 30px;
 }
