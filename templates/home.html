@@ -7,5 +7,27 @@
 {% endblock %}
 
 {% block content %}
-    <h1>HomePage</h1>
+<div class="page-content">
+    <div class="wrapper">
+        <div class="home-left">
+            <ul>
+                {% for niveau in niveaux %}
+                    <li>{{ niveau[1] }} - {{ niveau[0] }}</li>  <!-- Affiche le classement et le nom du niveau -->
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="home-right">
+            <ul>
+                {% for niveau in niveaux %}
+                    <li>
+                        <h3> nom du niveau: {{ niveau[0] }}</h3> <!-- Nom du niveau -->
+                        <p>Créateur: {{ niveau[1] }}</p> <!-- Nom du créateur -->
+                        <p>Classement: {{ niveau[2] }}</p> <!-- Classement -->
+                        <iframe width="560" height="315" src="{{ niveau[3] }}"></iframe>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="page-content">
     <h1>Créer un Niveau</h1>
     <form action="/ajouter_niveau" method="post">
         <label for="id_niveau">ID du niveau:</label><br>
@@ -93,4 +94,5 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}

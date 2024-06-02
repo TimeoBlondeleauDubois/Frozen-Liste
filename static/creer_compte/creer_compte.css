@@ -20,4 +20,7 @@ $big-margin-bottom-mb: px;
 */
 /*
 $big-margin-left-mb: px;
-$big-margin-right-mb: px;*//*# sourceMappingURL=creer_compte.css.map */
+$big-margin-right-mb: px;*/
+.page-content {
+  margin-top: 110px;
+}/*# sourceMappingURL=creer_compte.css.map */

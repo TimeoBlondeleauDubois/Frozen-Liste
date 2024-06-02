@@ -20,4 +20,7 @@ $big-margin-bottom-mb: px;
 */
 /*
 $big-margin-left-mb: px;
-$big-margin-right-mb: px;*//*# sourceMappingURL=admin.css.map */
+$big-margin-right-mb: px;*/
+.page-content {
+  padding-top: 110px;
+}/*# sourceMappingURL=admin.css.map */

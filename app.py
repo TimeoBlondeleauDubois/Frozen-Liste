@@ -81,7 +81,12 @@ init_db()
 @app.route('/liste')
 def liste():
     active_page = 'home'
-    return render_template('home.html', active_page=active_page)
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    cursor.execute('SELECT nom, createurs, classement, video_url FROM Niveau ORDER BY classement')
+    niveaux = cursor.fetchall()
+    connection.close()
+    return render_template('home.html', active_page=active_page, niveaux=niveaux)
 
 @app.route('/classement')
 def classement():

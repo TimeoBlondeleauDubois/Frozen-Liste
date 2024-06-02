@@ -21,6 +21,38 @@ $big-margin-bottom-mb: px;
 /*
 $big-margin-left-mb: px;
 $big-margin-right-mb: px;*/
-h1 {
-  font-family: Beligerent;
+.page-content {
+  overflow: hidden; /* Prevent the entire page from scrolling */
+  background-color: #23252B;
+}
+
+.wrapper {
+  display: flex;
+  height: calc(100vh - 110px);
+}
+
+.home-left {
+  height: 100%;
+  width: 35vw;
+  overflow-y: scroll;
+  margin-top: 110px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-right {
+  height: 100%;
+  width: 65vw;
+  overflow-y: scroll;
+  margin-top: 110px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-left {
+  background-color: #A000C7;
+}
+
+.home-right {
+  background-color: #23252B;
 }/*# sourceMappingURL=home.css.map */

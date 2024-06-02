@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="page-content">
     <h2>Créer un compte</h2>
     <form action="/creer_compte" method="POST">
         <label for="username">Nom d'utilisateur :</label><br>
@@ -15,4 +16,5 @@
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="Créer le compte">
     </form>
+</div>
 {% endblock %}

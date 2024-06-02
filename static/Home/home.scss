@@ -1,5 +1,37 @@
 @import '../Global/Global.scss';
 
-h1 {
-    font-family: $Beligerent;
+.page-content {
+    overflow: hidden; /* Prevent the entire page from scrolling */
+    background-color: $primary-color-black;
+}
+
+.wrapper {
+    display: flex;
+    height: calc(100vh - 110px);
+}
+
+.home-left {
+    height: 100%;
+    width: 35vw;
+    overflow-y: scroll;
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+}
+
+.home-right {
+    height: 100%;
+    width: 65vw;
+    overflow-y: scroll;
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+}
+
+.home-left {
+    background-color: $secondary-color-purple;
+}
+
+.home-right {
+    background-color: $primary-color-black;
 }
