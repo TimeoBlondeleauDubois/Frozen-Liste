@@ -319,6 +319,13 @@ body {
     min-height: auto;
 }
 
+@media screen and (max-height: 729px) {
+    .hexagon {
+        scale: 0.8 !important;
+        margin-top: 10px !important;
+    }
+}
+
 .lien-logo-discord {
     margin-top: 25px;
 }
@@ -364,11 +371,12 @@ body {
     height: 80%;
     margin: auto;
     color: white;
-    background: linear-gradient(-180deg, rgb(255, 255, 255), rgb(255, 236, 251));
+    background: linear-gradient(-180deg, rgb(255, 255, 255), rgb(255, 255, 255));
     display: flex;
     align-content: center;
     justify-content: center;
-    transition: 0.5s;
+    transition: all 0.5s ease-in-out;
+    margin-top: 40px;
 }
 
 .hexagon:before,
@@ -397,24 +405,30 @@ body {
 }
 
 .envoyerunevideo {
-    font-size: 30px;
+    font-size: 25px;
     color: $secondary-color-purple;
     z-index: 500;
     text-align: center;
     font-family: $RobotoBold;
     align-self: center;
+    padding: 15px 15px;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1400px) {
     .mobile {
         display: none;
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
     .pc {
         display: none;
     }
+}
+
+.submit-record-fit-content, .hexagon-wrapper {
+    width: fit-content;
+    height: fit-content;
 }
 
 .nav-pc {
@@ -442,7 +456,7 @@ body {
 .nav-pc-container1 {
     display: flex;
     align-items: center;
-    margin-left: 30px;
+    margin-left: -20px;
 }
 
 .nav-pc-container2 {
@@ -453,4 +467,22 @@ body {
 
 .home-pc, .classement-pc, .information-pc, .submit-record-pc {
     text-decoration: none;
+}
+
+.nav-pc-container1 a {
+    margin-left: 60px;
+    font-size: 30px;
+    font-family: $RobotoBold;
+    color: white;
+}
+
+.link-logo-pc {
+    margin-right: 20px;
+}
+
+.submit-record-pc {
+    margin-right: 80px;
+    font-size: 30px;
+    font-family: $RobotoBold;
+    color: white;
 }

@@ -12,7 +12,9 @@
           "scrollbar-width",
           "scrollbar-color",
           "min-height: auto",
-          "rotate"
+          "rotate",
+          "width: fit-content",
+          "height: fit-content"
         ]
       }
     ]

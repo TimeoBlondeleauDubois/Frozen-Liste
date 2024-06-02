@@ -24,12 +24,12 @@
                     <li><a {% if active_page == 'classement' %}class="class-classement"{% endif %} href="/classement">Classement</a></li>
                     <li><a {% if active_page == 'information' %}class="class-information"{% endif %} href="/information">Information</a></li>
                     <li><a class="lien-logo-discord" href="https://discord.gg/X5H7XFTtmA" target="_blank"><img class="logo-discord" src="{{ url_for('static', filename='pictures/discord.svg') }}" alt="Logo discord"></a></li>
-                    <li><a href="/submit_record">
-                            <div class="hexagon-wrapper">
+                    <li><a class="submit-record-fit-content" href="/submit_record">
+                            <a href="/submit_record" class="hexagon-wrapper">
                                 <div class="hexagon">
                                     <p class="envoyerunevideo">Envoyer une vidéo</p>
                                 </div>
-                            </div>
+                            </a>
                     </a></li>
                 </ul>
             </nav>
