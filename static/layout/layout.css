@@ -302,7 +302,7 @@ body {
 }
 
 .logo img {
-  max-width: 90px;
+  max-width: 75px;
   height: auto;
   width: auto;
   display: block;
@@ -480,7 +480,7 @@ body {
 .nav-pc-container1 {
   display: flex;
   align-items: center;
-  margin-left: -20px;
+  margin-left: 30px;
 }
 
 .nav-pc-container2 {
@@ -493,15 +493,15 @@ body {
   text-decoration: none;
 }
 
+.link-logo-pc {
+  margin-right: 40px;
+}
+
 .nav-pc-container1 a {
-  margin-left: 60px;
+  margin-left: 10px;
   font-size: 30px;
   font-family: RobotoBold;
   color: white;
-}
-
-.link-logo-pc {
-  margin-right: 20px;
 }
 
 .submit-record-pc {
@@ -509,4 +509,31 @@ body {
   font-size: 30px;
   font-family: RobotoBold;
   color: white;
+}
+
+.logo-pc {
+  max-width: 80px;
+  max-height: auto;
+}
+
+.class-home-pc {
+  background-color: white;
+  border-radius: 300px;
+  color: #A000C7 !important;
+}
+
+.class-classement-pc {
+  background-color: white;
+  border-radius: 300px;
+  color: #A000C7 !important;
+}
+
+.class-information-pc {
+  background-color: white;
+  border-radius: 300px;
+  color: #A000C7 !important;
+}
+
+.home-pc, .classement-pc, .information-pc {
+  padding: 20px 30px;
 }/*# sourceMappingURL=layout.css.map */
