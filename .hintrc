@@ -11,7 +11,8 @@
           "scale",
           "scrollbar-width",
           "scrollbar-color",
-          "min-height: auto"
+          "min-height: auto",
+          "rotate"
         ]
       }
     ]
