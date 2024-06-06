@@ -22,7 +22,7 @@ $big-margin-bottom-mb: px;
 $big-margin-left-mb: px;
 $big-margin-right-mb: px;*/
 .page-content {
-  overflow: hidden; /* Prevent the entire page from scrolling */
+  overflow: hidden;
   background-color: #23252B;
 }
 
@@ -38,6 +38,25 @@ $big-margin-right-mb: px;*/
   margin-top: 110px;
   display: flex;
   justify-content: center;
+  background-color: #A000C7;
+}
+.home-left::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+.home-left::-webkit-scrollbar-track {
+  background: #aaaaaa;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-left::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+  border-radius: 300px;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-left::-webkit-scrollbar-thumb:hover {
+  background: #6e6e6e;
 }
 
 .home-right {
@@ -47,12 +66,28 @@ $big-margin-right-mb: px;*/
   margin-top: 110px;
   display: flex;
   justify-content: center;
-}
-
-.home-left {
-  background-color: #A000C7;
-}
-
-.home-right {
   background-color: #23252B;
+}
+.home-right::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+.home-right::-webkit-scrollbar-track {
+  background: #aaaaaa;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-right::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+  border-radius: 300px;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-right::-webkit-scrollbar-thumb:hover {
+  background: #6e6e6e;
+}
+
+.home-left, .home-right {
+  scrollbar-width: thin;
+  scrollbar-color: #5c5c5c #aaaaaa;
 }/*# sourceMappingURL=home.css.map */

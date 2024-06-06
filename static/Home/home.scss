@@ -1,7 +1,7 @@
 @import '../Global/Global.scss';
 
 .page-content {
-    overflow: hidden; /* Prevent the entire page from scrolling */
+    overflow: hidden;
     background-color: $primary-color-black;
 }
 
@@ -17,6 +17,27 @@
     margin-top: 110px;
     display: flex;
     justify-content: center;
+    background-color: $secondary-color-purple;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 12px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #aaaaaa;
+        transition: all 300ms ease-in-out;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: #5c5c5c;
+        border-radius: 300px;
+        transition: all 300ms ease-in-out;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: #6e6e6e;
+    }
 }
 
 .home-right {
@@ -26,12 +47,30 @@
     margin-top: 110px;
     display: flex;
     justify-content: center;
-}
-
-.home-left {
-    background-color: $secondary-color-purple;
-}
-
-.home-right {
     background-color: $primary-color-black;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 12px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #aaaaaa;
+        transition: all 300ms ease-in-out;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: #5c5c5c;
+        border-radius: 300px;
+        transition: all 300ms ease-in-out;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: #6e6e6e;
+    }
+}
+
+.home-left, .home-right {
+    scrollbar-width: thin;
+    scrollbar-color: #5c5c5c #aaaaaa;
 }
