@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
-    <link href="../static/Home/home.css" rel="stylesheet">
+    <link href="../static/home/home.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -9,9 +9,9 @@
     <div class="wrapper">
         <div class="home-left">
             <ul>
-                {% for niveau in niveaux %}
-                    <li onclick="location.href='/detailniveau/{{ niveau[4] }}'">
-                        {{ niveau[2] }} - {{ niveau[0] }}
+                {% for classementniveaux in classementniveaux %}
+                    <li onclick="location.href='/liste/{{ classementniveaux[3] }}'">
+                        {{ classementniveaux[3] }} - {{ classementniveaux[1] }}
                     </li>
                 {% endfor %}
             </ul>
@@ -21,7 +21,7 @@
             <h3>Nom du niveau: {{ niveau[0] }}</h3>
             <p>Créateur: {{ niveau[1] }}</p>
             <p>Classement: {{ niveau[2] }}</p>
-            <iframe width="560" height="315" src="{{ niveau[3] }}" allowfullscreen></iframe>
+            <!-- <iframe width="560" height="315" src="{{ niveau[3] }}" allowfullscreen></iframe> -->
             
             <h2>Victoires</h2>
             <ul>

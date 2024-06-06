@@ -89,15 +89,15 @@ def liste():
     return render_template('home.html', active_page=active_page, niveaux=niveaux)
 
 @app.route('/liste/<int:classement>')
-def detailniveau(classement):
+def niveau(classement):
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
     
     cursor.execute('SELECT nom, createurs, classement, video_url FROM Niveau WHERE classement = ?', (classement,))
     niveau = cursor.fetchone()
 
-    if niveau is None:
-        return "Niveau non trouvé", 404
+    cursor.execute('SELECT id, nom, createurs, classement, video_url FROM Niveau ORDER BY classement')
+    classementniveaux = cursor.fetchall()
 
     cursor.execute('''
         SELECT Joueur.nom, ReussiteNiveau.video_url 
@@ -110,7 +110,7 @@ def detailniveau(classement):
 
     connection.close()
 
-    return render_template('detailniveau.html', niveau=niveau, victoires=victoires)
+    return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux)
 
 @app.route('/classement')
 def classement():
