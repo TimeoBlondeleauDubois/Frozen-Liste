@@ -16,8 +16,12 @@
     overflow-y: scroll;
     margin-top: 110px;
     display: flex;
-    justify-content: center;
-    background-color: $secondary-color-purple;
+    align-items: center;
+    background-color: $primary-color-black;
+    flex-direction: column;
+    font-family: $RobotoRegular;
+    color: white;
+    font-size: $p-size-pc-mid;
 
     &::-webkit-scrollbar {
         width: 8px;
@@ -37,6 +41,30 @@
     
     &::-webkit-scrollbar-thumb:hover {
         background: #6e6e6e;
+    }
+
+    .home-left-container {
+
+        .classement_nom_du_niveau {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+
+            .classement_nom_du_niveau_classement {
+                margin-right: 8px;
+            }
+
+            .lien-vers-niveau {
+                width: fit-content;
+                height: fit-content;
+                border-radius: 8px;
+
+                .classement_nom_du_niveau_nom_du_niveau {
+                    padding: 4px 8px;
+                    border-radius: 8px;
+                }
+            }
+        }
     }
 }
 

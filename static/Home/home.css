@@ -37,8 +37,12 @@ $big-margin-right-mb: px;*/
   overflow-y: scroll;
   margin-top: 110px;
   display: flex;
-  justify-content: center;
-  background-color: #A000C7;
+  align-items: center;
+  background-color: #23252B;
+  flex-direction: column;
+  font-family: RobotoRegular;
+  color: white;
+  font-size: 25px;
 }
 .home-left::-webkit-scrollbar {
   width: 8px;
@@ -57,6 +61,25 @@ $big-margin-right-mb: px;*/
 }
 .home-left::-webkit-scrollbar-thumb:hover {
   background: #6e6e6e;
+}
+.home-left .home-left-container .classement_nom_du_niveau {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.home-left .home-left-container .classement_nom_du_niveau .classement_nom_du_niveau_classement {
+  margin-right: 8px;
+}
+.home-left .home-left-container .classement_nom_du_niveau .lien-vers-niveau {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 8px;
+}
+.home-left .home-left-container .classement_nom_du_niveau .lien-vers-niveau .classement_nom_du_niveau_nom_du_niveau {
+  padding: 4px 8px;
+  border-radius: 8px;
 }
 
 .home-right {

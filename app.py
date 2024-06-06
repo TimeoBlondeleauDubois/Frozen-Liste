@@ -90,6 +90,7 @@ def liste():
 
 @app.route('/liste/<int:classement>')
 def niveau(classement):
+    active_page = 'home'
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
     
@@ -110,7 +111,7 @@ def niveau(classement):
 
     connection.close()
 
-    return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux)
+    return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux, active_page=active_page)
 
 @app.route('/classement')
 def classement():

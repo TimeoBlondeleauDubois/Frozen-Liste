@@ -8,13 +8,21 @@
 <div class="page-content">
     <div class="wrapper">
         <div class="home-left">
-            <ul>
-                {% for niveau in niveaux %}
-                    <li onclick="location.href='/liste/{{ niveau[3] }}'">
-                        {{ niveau[3] }} - {{ niveau[1] }}
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="home-left-container">
+                <div class="search-container">
+                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher">
+                </div>
+                <ul id="levelsList">
+                    {% for niveau in niveaux %}
+                        <div class="classement_nom_du_niveau">
+                            <p class="classement_nom_du_niveau_classement">#{{ niveau[3] }}</p>
+                            <li class="lien-vers-niveau" onclick="location.href='/liste/{{ niveau[3] }}'">
+                                <p class="classement_nom_du_niveau_nom_du_niveau">{{ niveau[1] }}<p>
+                            </li>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         <div class="home-right">
             <ul>
@@ -30,4 +38,25 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function filterLevels() {
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toUpperCase();
+        
+        var levelsList = document.getElementById('levelsList');
+        var levels = levelsList.getElementsByClassName('classement_nom_du_niveau');
+
+        for (var i = 0; i < levels.length; i++) {
+            var levelName = levels[i].getElementsByClassName('classement_nom_du_niveau_nom_du_niveau')[0];
+            if (levelName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                levels[i].style.display = '';
+            } else {
+                levels[i].style.display = 'none';
+            }
+        }
+    }
+</script>
 {% endblock %}
