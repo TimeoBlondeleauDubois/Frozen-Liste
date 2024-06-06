@@ -3,7 +3,7 @@
 {% block title %}Détails du Niveau{% endblock %}
 
 {% block styles %}
-    <link href="{{ url_for('static', filename='Home/home.css') }}" rel="stylesheet">
+    <link href="../static/Home/home.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -23,14 +23,14 @@
             <h3>Nom du niveau: {{ niveau[0] }}</h3>
             <p>Créateur: {{ niveau[1] }}</p>
             <p>Classement: {{ niveau[2] }}</p>
-            <iframe loading="lazy" width="560" height="315" src="{{ niveau[3] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="{{ niveau[3] }}" allowfullscreen></iframe>
             
             <h2>Victoires</h2>
             <ul>
                 {% for victoire in victoires %}
                     <li>
                         <p>Nom du joueur: {{ victoire[0] }}</p>
-                        <iframe width="560" height="315" src="{{ victoire[1] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <a href="{{ victoire[1] }}">lien de la vid</a>
                     </li>
                 {% endfor %}
             </ul>
