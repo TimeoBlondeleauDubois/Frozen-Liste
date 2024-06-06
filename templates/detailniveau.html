@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}Détails du Niveau{% endblock %}
+
+{% block styles %}
+    <link href="{{ url_for('static', filename='Home/home.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="wrapper">
+        <div class="home-left">
+            <ul>
+                {% for niveau in niveaux %}
+                    <li onclick="location.href='/detailniveau/{{ niveau[4] }}'">
+                        {{ niveau[2] }} - {{ niveau[0] }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="home-right">
+            <h2>Détails du Niveau</h2>
+            <h3>Nom du niveau: {{ niveau[0] }}</h3>
+            <p>Créateur: {{ niveau[1] }}</p>
+            <p>Classement: {{ niveau[2] }}</p>
+            <iframe loading="lazy" width="560" height="315" src="{{ niveau[3] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+            <h2>Victoires</h2>
+            <ul>
+                {% for victoire in victoires %}
+                    <li>
+                        <p>Nom du joueur: {{ victoire[0] }}</p>
+                        <iframe width="560" height="315" src="{{ victoire[1] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

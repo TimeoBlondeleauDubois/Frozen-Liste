@@ -83,10 +83,34 @@ def liste():
     active_page = 'home'
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT nom, createurs, classement, video_url FROM Niveau ORDER BY classement')
+    cursor.execute('SELECT id, nom, createurs, classement, video_url FROM Niveau ORDER BY classement')
     niveaux = cursor.fetchall()
     connection.close()
     return render_template('home.html', active_page=active_page, niveaux=niveaux)
+
+@app.route('/liste/<int:classement>')
+def detailniveau(classement):
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    
+    cursor.execute('SELECT nom, createurs, classement, video_url FROM Niveau WHERE classement = ?', (classement,))
+    niveau = cursor.fetchone()
+
+    if niveau is None:
+        return "Niveau non trouvé", 404
+
+    cursor.execute('''
+        SELECT Joueur.nom, ReussiteNiveau.video_url 
+        FROM ReussiteNiveau
+        JOIN Joueur ON ReussiteNiveau.joueur_id = Joueur.id
+        WHERE ReussiteNiveau.niveau_id = (SELECT id FROM Niveau WHERE classement = ?)
+        ORDER BY ReussiteNiveau.rowid
+    ''', (classement,))
+    victoires = cursor.fetchall()
+
+    connection.close()
+
+    return render_template('detailniveau.html', niveau=niveau, victoires=victoires)
 
 @app.route('/classement')
 def classement():

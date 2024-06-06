@@ -12,7 +12,9 @@
         <div class="home-left">
             <ul>
                 {% for niveau in niveaux %}
-                    <li>{{ niveau[1] }} - {{ niveau[0] }}</li>  <!-- Affiche le classement et le nom du niveau -->
+                    <li onclick="location.href='/liste/{{ niveau[3] }}'">
+                        {{ niveau[3] }} - {{ niveau[1] }}
+                    </li>
                 {% endfor %}
             </ul>
         </div>
@@ -20,10 +22,10 @@
             <ul>
                 {% for niveau in niveaux %}
                     <li>
-                        <h3> nom du niveau: {{ niveau[0] }}</h3> <!-- Nom du niveau -->
-                        <p>Créateur: {{ niveau[1] }}</p> <!-- Nom du créateur -->
-                        <p>Classement: {{ niveau[2] }}</p> <!-- Classement -->
-                        <iframe width="560" height="315" src="{{ niveau[3] }}"></iframe>
+                        <h3> Nom du niveau: {{ niveau[1] }}</h3>
+                        <p>Créateur: {{ niveau[2] }}</p>
+                        <p>Classement: {{ niveau[3] }}</p>
+                        <iframe loading="lazy" width="560" height="315" src="{{ niveau[4] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </li>
                 {% endfor %}
             </ul>
