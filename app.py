@@ -139,6 +139,8 @@ def noroute():
 def home():
     return redirect('/liste')
 
+
+
 #SubmitRecord
 @app.route('/submit_record', methods=['GET', 'POST'])
 def submit_record():

@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
-    <link href="../static/home/home.css" rel="stylesheet">
+<link href="../static/home/home.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -10,14 +10,14 @@
         <div class="home-left">
             <div class="home-left-container">
                 <div class="search-container">
-                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher">
+                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off">
                 </div>
                 <ul id="levelsList">
                     {% for classementniveaux in classementniveaux %}
                         <div class="classement_nom_du_niveau">
                             <p class="classement_nom_du_niveau_classement">#{{ classementniveaux[3] }}</p>
                             <li class="lien-vers-niveau" onclick="location.href='/liste/{{ classementniveaux[3] }}'">
-                                <p class="classement_nom_du_niveau_nom_du_niveau">{{ classementniveaux[1] }}<p>
+                                <p class="classement_nom_du_niveau_nom_du_niveau {% if classementniveaux[3] == niveau[2] %} selected-level{% endif %}">{{ classementniveaux[1] }}<p>
                             </li>
                         </div>
                     {% endfor %}
@@ -30,7 +30,7 @@
             <p>Créateur: {{ niveau[1] }}</p>
             <p>Classement: {{ niveau[2] }}</p>
             <!-- <iframe width="560" height="315" src="{{ niveau[3] }}" allowfullscreen></iframe> -->
-            
+
             <h2>Victoires</h2>
             <ul>
                 {% for victoire in victoires %}
@@ -50,7 +50,7 @@
     function filterLevels() {
         var input = document.getElementById('searchInput');
         var filter = input.value.toUpperCase();
-        
+
         var levelsList = document.getElementById('levelsList');
         var levels = levelsList.getElementsByClassName('classement_nom_du_niveau');
 
