@@ -17,7 +17,7 @@
                         <div class="classement_nom_du_niveau">
                             <p class="classement_nom_du_niveau_classement">#{{ classementniveaux[3] }}</p>
                             <li class="lien-vers-niveau" onclick="location.href='/liste/{{ classementniveaux[3] }}'">
-                                <p class="classement_nom_du_niveau_nom_du_niveau {% if classementniveaux[3] == niveau[2] %} selected-level{% endif %}">{{ classementniveaux[1] }}<p>
+                                <p class="classement_nom_du_niveau_nom_du_niveau {% if classementniveaux[3] == niveau[4] %} selected-level{% endif %}">{{ classementniveaux[1] }}   <p>
                             </li>
                         </div>
                     {% endfor %}
@@ -28,15 +28,21 @@
             <h2>Détails du Niveau</h2>
             <h3>Nom du niveau: {{ niveau[0] }}</h3>
             <p>Créateur: {{ niveau[1] }}</p>
-            <p>Classement: {{ niveau[2] }}</p>
-            <!-- <iframe width="560" height="315" src="{{ niveau[3] }}" allowfullscreen></iframe> -->
+            <p>Vérificateur: {{ niveau[2] }}</p>
+            <p>Publieur: {{ niveau[3] }}</p>
+            <p>Classement: {{ niveau[4] }}</p>
+            <p>Points: {{ niveau[6] }}</p>
+            <p>ID Niveau: {{ niveau[5] }}</p>
+            <p>Mot de Passe: {{ niveau[7] }}</p>
+            <p>Victoires: {{ niveau[9] }}</p>
+            <iframe width="560" height="315" src="{{ niveau[8] }}" allowfullscreen></iframe>
 
             <h2>Victoires</h2>
             <ul>
                 {% for victoire in victoires %}
                     <li>
                         <p>Nom du joueur: {{ victoire[0] }}</p>
-                        <a href="{{ victoire[1] }}">lien de la vid</a>
+                        <a href="{{ victoire[1] }}">lien de la vidéo</a>
                     </li>
                 {% endfor %}
             </ul>

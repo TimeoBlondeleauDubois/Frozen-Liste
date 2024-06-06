@@ -18,6 +18,8 @@ def init_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nom TEXT NOT NULL UNIQUE,
         createurs TEXT NOT NULL,
+        verifier TEXT,
+        publisher TEXT,
         id_niveau INTEGER UNIQUE,
         points INTEGER NOT NULL,
         classement INTEGER,
@@ -77,6 +79,7 @@ init_db()
 
 
 
+
 #pages
 @app.route('/liste')
 def liste():
@@ -94,10 +97,10 @@ def niveau(classement):
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
     
-    cursor.execute('SELECT nom, createurs, classement, video_url FROM Niveau WHERE classement = ?', (classement,))
+    cursor.execute('SELECT nom, createurs, verifier, publisher, classement, id_niveau, points, mot_de_passe, video_url, victoires FROM Niveau WHERE classement = ?', (classement,))
     niveau = cursor.fetchone()
 
-    cursor.execute('SELECT id, nom, createurs, classement, video_url FROM Niveau ORDER BY classement')
+    cursor.execute('SELECT id, nom, createurs, classement, video_url, victoires FROM Niveau ORDER BY classement')
     classementniveaux = cursor.fetchall()
 
     cursor.execute('''
@@ -235,17 +238,19 @@ def admin():
 
 @app.route('/ajouter_niveau', methods=['POST'])
 def ajouter_niveau():
-    id_niveau = int(request.form['id_niveau'])
-    nom_niveau = request.form['nom_niveau']
-    createurs = request.form['createurs']
-    classement = int(request.form['classement'])
-    mot_de_passe = request.form['mot_de_passe']
-    video_url = request.form['video_url']
-
-    if classement <= 0:
-        return f'Erreur : Le classement doit être un entier positif'
-
     try:
+        id_niveau = int(request.form['id_niveau'])
+        nom_niveau = request.form['nom_niveau']
+        createurs = request.form['createurs']
+        verifier = request.form['verifier']
+        publisher = request.form['publieur']
+        classement = int(request.form['classement'])
+        mot_de_passe = request.form['mot_de_passe']
+        video_url = request.form['video_url']
+
+        if classement <= 0:
+            return f'Erreur : Le classement doit être un entier positif'
+
         connection = sqlite3.connect('DataBase.db')
         cursor = connection.cursor()
 
@@ -260,9 +265,9 @@ def ajouter_niveau():
         points = calculer_points(classement)
 
         cursor.execute('''
-        INSERT INTO Niveau (id_niveau, nom, createurs, points, classement, mot_de_passe, video_url) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (id_niveau, nom_niveau, createurs, points, classement, mot_de_passe, video_url))
+        INSERT INTO Niveau (id_niveau, nom, createurs, verifier, publisher, points, classement, mot_de_passe, video_url) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (id_niveau, nom_niveau, createurs, verifier, publisher, points, classement, mot_de_passe, video_url))
 
         connection.commit()
         connection.close()
@@ -273,6 +278,8 @@ def ajouter_niveau():
     
     except sqlite3.IntegrityError:
         return f'Erreur : Le niveau {nom_niveau} ou l\'ID {id_niveau} existe déjà.'
+    except KeyError as e:
+        return f'Erreur : Champ manquant {str(e)}'
 
 @app.route('/modifier_ordre_niveaux', methods=['POST'])
 def modifier_ordre_niveaux():
