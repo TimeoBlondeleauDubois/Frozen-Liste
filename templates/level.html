@@ -14,22 +14,16 @@
                 </div>
             </div>
             <div class="home-left-container">
-                <ul class="levelsList" id="levelsList">
-                    {% for classementniveaux in classementniveaux %}
-                        <div class="classement_nom_du_niveau">
-                            <p class="classement_nom_du_niveau_classement">#{{ loop.index }}</p>
-                        </div>
-                    {% endfor %}
-                </ul>
                 <ul id="levelsList">
                     {% for classementniveaux in classementniveaux %}
-                        <div class="classement_nom_du_niveau">
-                            <li class="lien-vers-niveau" onclick="location.href='/liste/{{ classementniveaux[3] }}'">
+                        <li class="classement_nom_du_niveau">
+                            <p class="classement_nom_du_niveau_classement">#{{ loop.index }}</p>
+                            <div class="lien-vers-niveau" onclick="location.href='/liste/{{ classementniveaux[3] }}'">
                                 <p class="classement_nom_du_niveau_nom_du_niveau {% if classementniveaux[3] == niveau[4] %} selected-level{% endif %}">
                                     {{ classementniveaux[1] }}
                                 </p>
-                            </li>
-                        </div>
+                            </div>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -54,7 +48,7 @@
                     <div class="victoires">
                         <ul class="align-self">
                             {% for victoire in victoires %}
-                                <li class="position">                    
+                                <li class="position">
                                     <p>#{{ loop.index }}</p>
                                 </li>
                             {% endfor %}
