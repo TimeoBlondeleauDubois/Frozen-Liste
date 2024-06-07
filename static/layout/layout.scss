@@ -394,10 +394,6 @@ body {
     margin-right: 52px;
 }
 
-.home-pc, .classement-pc, .information-pc, .submit-record-pc {
-    text-decoration: none;
-}
-
 .link-logo-pc {
     margin-left: 45px;
 }
@@ -415,11 +411,19 @@ body {
 }
 
 .class-home-pc, .class-classement-pc, .class-information-pc, .class-submit-record-pc {
-    background-color: white;
+    background-color: white !important;
     border-radius: 300px;
     color: $secondary-color-purple !important;
 }
 
 .home-pc, .classement-pc, .information-pc, .submit-record-pc {
     padding: 20px 30px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: #ab00ce;
+        color: white;
+        border-radius: 300px;
+    
+    }
 }

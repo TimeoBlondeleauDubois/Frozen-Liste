@@ -11,10 +11,6 @@
   src: url(/static/Font/belligerent.ttf);
 }
 /*
-$h2-size-pc: px;
-$h2-size-mb: px;
-*/
-/*
 $big-margin-top-mb: px;
 $big-margin-bottom-mb: px;
 */
@@ -418,10 +414,6 @@ body {
   margin-right: 52px;
 }
 
-.home-pc, .classement-pc, .information-pc, .submit-record-pc {
-  text-decoration: none;
-}
-
 .link-logo-pc {
   margin-left: 45px;
 }
@@ -439,11 +431,17 @@ body {
 }
 
 .class-home-pc, .class-classement-pc, .class-information-pc, .class-submit-record-pc {
-  background-color: white;
+  background-color: white !important;
   border-radius: 300px;
   color: #A000C7 !important;
 }
 
 .home-pc, .classement-pc, .information-pc, .submit-record-pc {
   padding: 20px 30px;
+  text-decoration: none;
+}
+.home-pc:hover, .classement-pc:hover, .information-pc:hover, .submit-record-pc:hover {
+  background-color: #ab00ce;
+  color: white;
+  border-radius: 300px;
 }/*# sourceMappingURL=layout.css.map */
