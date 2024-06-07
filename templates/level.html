@@ -8,16 +8,26 @@
 <div class="page-content">
     <div class="wrapper">
         <div class="home-left">
-            <div class="home-left-container">
-                <div class="search-container">
+            <div class="searchinput-container">
+                <div class="inputbackground">
                     <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off">
                 </div>
+            </div>
+            <div class="home-left-container">
+                <ul class="levelsList" id="levelsList">
+                    {% for classementniveaux in classementniveaux %}
+                        <div class="classement_nom_du_niveau">
+                            <p class="classement_nom_du_niveau_classement">#{{ loop.index }}</p>
+                        </div>
+                    {% endfor %}
+                </ul>
                 <ul id="levelsList">
                     {% for classementniveaux in classementniveaux %}
                         <div class="classement_nom_du_niveau">
-                            <p class="classement_nom_du_niveau_classement">#{{ classementniveaux[3] }}</p>
                             <li class="lien-vers-niveau" onclick="location.href='/liste/{{ classementniveaux[3] }}'">
-                                <p class="classement_nom_du_niveau_nom_du_niveau {% if classementniveaux[3] == niveau[4] %} selected-level{% endif %}">{{ classementniveaux[1] }}   <p>
+                                <p class="classement_nom_du_niveau_nom_du_niveau {% if classementniveaux[3] == niveau[4] %} selected-level{% endif %}">
+                                    {{ classementniveaux[1] }}
+                                </p>
                             </li>
                         </div>
                     {% endfor %}
@@ -25,27 +35,51 @@
             </div>
         </div>
         <div class="home-right">
-            <h2>Détails du Niveau</h2>
-            <h3>Nom du niveau: {{ niveau[0] }}</h3>
-            <p>Créateur: {{ niveau[1] }}</p>
-            <p>Vérificateur: {{ niveau[2] }}</p>
-            <p>Publieur: {{ niveau[3] }}</p>
-            <p>Classement: {{ niveau[4] }}</p>
-            <p>Points: {{ niveau[6] }}</p>
-            <p>ID Niveau: {{ niveau[5] }}</p>
-            <p>Mot de Passe: {{ niveau[7] }}</p>
-            <p>Victoires: {{ niveau[9] }}</p>
-            <iframe width="560" height="315" src="{{ niveau[8] }}" allowfullscreen></iframe>
-
-            <h2>Victoires</h2>
-            <ul>
-                {% for victoire in victoires %}
-                    <li>
-                        <p>Nom du joueur: {{ victoire[0] }}</p>
-                        <a href="{{ victoire[1] }}">lien de la vidéo</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="home-right-container">
+                <div class="home-right-wrapper">
+                    <h1 class="title"><span id="bold">{{ niveau[0] }}</span></h1>
+                    <p>Créer par <span id="bold">{{ niveau[1] }}</span></p>
+                    <p>Vérifier par <span id="bold">{{ niveau[2] }}</span></p>
+                    <p>Publier par <span id="bold">{{ niveau[3] }}</span></p>
+                    <iframe class="iframe" src="{{ niveau[8] }}" allowfullscreen></iframe>
+                    <div class="wrapper-top">
+                        <p>Nombre de points: <span id="bold">{{ niveau[6] }}</span></p>
+                        <p>ID du niveau: <span id="bold">{{ niveau[5] }}</span></p>
+                    </div>
+                    <div class="wrapper-bottom">
+                        <p>Durée du niveau: <span id="bold"></span></p>
+                        <p>Mot de Passe: <span id="bold">{{ niveau[7] }}</span></p>
+                    </div>
+                    <h2 class="h2">Victoires: {{ niveau[9] }}</h2>
+                    <div class="victoires">
+                        <ul class="align-self">
+                            {% for victoire in victoires %}
+                                <li class="position">                    
+                                    <p>#{{ loop.index }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <ul>
+                            {% for victoire in victoires %}
+                                <li class="name-player">
+                                    <div>
+                                        <p>{{ victoire[0] }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="logoyt-container">
+                            {% for victoire in victoires %}
+                                <li class="logo-yt">
+                                    <a class="victoires-joueur-vid-link" href="{{ victoire[1] }}">
+                                        <img class="logoyt" src="{{ url_for('static', filename='pictures/logo_youtube.svg') }}" alt="YouTube Video">
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -56,7 +90,6 @@
     function filterLevels() {
         var input = document.getElementById('searchInput');
         var filter = input.value.toUpperCase();
-
         var levelsList = document.getElementById('levelsList');
         var levels = levelsList.getElementsByClassName('classement_nom_du_niveau');
 

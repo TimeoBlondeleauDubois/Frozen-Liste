@@ -10,13 +10,66 @@
     height: calc(100vh - 110px);
 }
 
+.searchinput-container {
+    width: 30%;
+    position: fixed;
+
+    .inputbackground {
+        background-color: #23252b65;
+        margin-right: 11px;
+        -webkit-backdrop-filter: blur(1px);
+        backdrop-filter: blur(3px);
+    }
+}
+
+.searchInput {
+    width: 60%;
+    height: 40px;
+    border-radius: 300px;
+    border: none;
+    padding: 0px 16px;
+    background-color: $secondary-color-grey;
+    color: white;
+    font-family: $RobotoRegular;
+    font-size: $p-size-pc-mid;
+    transition: all 300ms ease-in-out;
+    margin-left: 60px;
+    margin-top: 30px;
+
+    &:focus {
+        outline: none;
+        background-color: $secondary-color-grey-secondary;
+    }
+}
+
+.searchInput::-webkit-input-placeholder {
+    color: $secondary-color-grey-white;
+    font-family: $RobotoBold;
+}
+
+.searchInput::-moz-placeholder {
+    color: $secondary-color-grey-white; 
+    font-family: $RobotoBold;
+}
+
+.searchInput:-moz-placeholder {
+    color: $secondary-color-grey-white;
+    font-family: $RobotoBold;
+}
+
+.searchInput:-ms-input-placeholder {
+    color: $secondary-color-grey-white; 
+    font-family: $RobotoBold;
+}
+
 .home-left {
     height: 100%;
-    width: 35%;
+    width: 30%;
+    max-width: 30%;
     overflow-y: scroll;
     margin-top: 110px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     background-color: $primary-color-black;
     flex-direction: column;
     font-family: $RobotoRegular;
@@ -44,52 +97,27 @@
     }
 
     .home-left-container {
-        width: 75%;
+        width: 65%;
+        max-width: 65%;
+        margin-top: 90px;
+        margin-left: 60px;
+        display: flex;
 
-        .searchInput {
-            width: 80%;
-            height: 40px;
-            border-radius: 300px;
-            border: none;
-            padding: 5px 16px;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            background-color: $secondary-color-grey;
-            color: white;
-            font-family: $RobotoRegular;
-            font-size: $p-size-pc-mid;
-            transition: all 300ms ease-in-out;
-
-            &:focus {
-                outline: none;
-                background-color: $secondary-color-grey-secondary;
-            }
+        .levelsList {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
 
-        .searchInput::-webkit-input-placeholder {
-            color: $secondary-color-grey-white;
-            font-family: $RobotoBold;
-        }
-        
-        .searchInput::-moz-placeholder {
-            color: $secondary-color-grey-white; 
-            font-family: $RobotoBold;
-        }
-        
-        .searchInput:-moz-placeholder {
-            color: $secondary-color-grey-white;
-            font-family: $RobotoBold;
-        }
-        
-        .searchInput:-ms-input-placeholder {
-            color: $secondary-color-grey-white; 
-            font-family: $RobotoBold;
+        .classement_nom_du_niveau_classement {
+            padding-bottom: 8px;
+            padding-top: 8px;
         }
 
         .classement_nom_du_niveau {
             display: flex;
-            align-items: center;
-            margin-bottom: 8px;
+            align-items: flex-end;
+            margin-bottom: 6px;
             margin-left: 15px;
 
             .classement_nom_du_niveau_classement {
@@ -111,9 +139,8 @@
                     background-color: $secondary-color-purple !important;
                 }
                 
-
                 .classement_nom_du_niveau_nom_du_niveau {
-                    padding: 8px 16px;
+                    padding: 8px 8px;
                     border-radius: 12px;
                 }
             }
@@ -123,12 +150,15 @@
 
 .home-right {
     height: 100%;
-    width: 65%;
+    width: 70%;
     overflow-y: scroll;
     margin-top: 110px;
     display: flex;
     justify-content: center;
     background-color: $primary-color-black;
+    font-family: $RobotoRegular;
+    font-size: $p-size-pc-mid;
+    color: white;
 
     &::-webkit-scrollbar {
         width: 8px;
@@ -149,9 +179,107 @@
     &::-webkit-scrollbar-thumb:hover {
         background: #6e6e6e;
     }
+
+    .home-right-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        width: 100%;
+        margin-left: 80px;
+
+        .home-right-wrapper {
+            width: fit-content;
+        }
+
+        .iframe {
+            width: 40vw;
+            min-height: 400px;
+            border: none;
+            margin-top: 13px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+        }
+
+        .title {
+            font-size: $h1-size-pc;
+            margin-bottom: 20px;
+        }
+
+        .wrapper-top, .wrapper-bottom {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .h2 {
+            font-size: $h2-size-pc;
+            font-family: $RobotoBold;
+            margin-top: 13px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 7px;
+        }
+
+        .victoires {
+            display: flex;
+
+            .align-self {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            ul {
+                margin-right: 8px;
+
+                .name-player {
+                    margin-bottom: 10px;
+                }
+
+                .position {
+                    margin-bottom: 10px;
+                    max-height: 25px;
+                    margin-left: -12px;
+                }
+
+                .logo-yt {
+                    margin-bottom: 7px;
+                }
+            }
+
+            .logoyt-container {
+                margin-top: -1px;
+
+                .victoires-joueur-vid-link {
+                    cursor: pointer;
+                    transition: all 300ms ease-in-out;
+                    border-radius: 8px;
+                    margin-top: -4px;
+    
+                    &:hover {
+                        background-color: $secondary-color-grey;
+                    }
+    
+                    .logoyt {
+                        transition: all 300ms ease-in-out;
+                        width: 35px;
+                        height: auto;
+                        margin-top: -4px;
+                        margin-bottom: -7px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .home-left, .home-right {
     scrollbar-width: thin;
     scrollbar-color: #5c5c5c #aaaaaa;
+}
+
+#bold {
+    font-family: $RobotoBold;
 }

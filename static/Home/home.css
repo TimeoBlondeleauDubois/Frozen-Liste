@@ -11,10 +11,6 @@
   src: url(/static/Font/belligerent.ttf);
 }
 /*
-$h2-size-pc: px;
-$h2-size-mb: px;
-*/
-/*
 $big-margin-top-mb: px;
 $big-margin-bottom-mb: px;
 */
@@ -31,13 +27,64 @@ $big-margin-right-mb: px;*/
   height: calc(100vh - 110px);
 }
 
+.searchinput-container {
+  width: 30%;
+  position: fixed;
+}
+.searchinput-container .inputbackground {
+  background-color: rgba(35, 37, 43, 0.3960784314);
+  margin-right: 11px;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(3px);
+}
+
+.searchInput {
+  width: 60%;
+  height: 40px;
+  border-radius: 300px;
+  border: none;
+  padding: 0px 16px;
+  background-color: #36383B;
+  color: white;
+  font-family: RobotoRegular;
+  font-size: 25px;
+  transition: all 300ms ease-in-out;
+  margin-left: 60px;
+  margin-top: 30px;
+}
+.searchInput:focus {
+  outline: none;
+  background-color: #3a3a3a;
+}
+
+.searchInput::-webkit-input-placeholder {
+  color: #9A9A9A;
+  font-family: RobotoBold;
+}
+
+.searchInput::-moz-placeholder {
+  color: #9A9A9A;
+  font-family: RobotoBold;
+}
+
+.searchInput:-moz-placeholder {
+  color: #9A9A9A;
+  font-family: RobotoBold;
+}
+
+.searchInput:-ms-input-placeholder {
+  color: #9A9A9A;
+  font-family: RobotoBold;
+}
+
 .home-left {
   height: 100%;
-  width: 35%;
+  width: 30%;
+  max-width: 30%;
   overflow-y: scroll;
   margin-top: 110px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   background-color: #23252B;
   flex-direction: column;
   font-family: RobotoRegular;
@@ -63,46 +110,25 @@ $big-margin-right-mb: px;*/
   background: #6e6e6e;
 }
 .home-left .home-left-container {
-  width: 75%;
+  width: 65%;
+  max-width: 65%;
+  margin-top: 90px;
+  margin-left: 60px;
+  display: flex;
 }
-.home-left .home-left-container .searchInput {
-  width: 80%;
-  height: 40px;
-  border-radius: 300px;
-  border: none;
-  padding: 5px 16px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  background-color: #36383B;
-  color: white;
-  font-family: RobotoRegular;
-  font-size: 25px;
-  transition: all 300ms ease-in-out;
+.home-left .home-left-container .levelsList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
-.home-left .home-left-container .searchInput:focus {
-  outline: none;
-  background-color: #3a3a3a;
-}
-.home-left .home-left-container .searchInput::-webkit-input-placeholder {
-  color: #9A9A9A;
-  font-family: RobotoBold;
-}
-.home-left .home-left-container .searchInput::-moz-placeholder {
-  color: #9A9A9A;
-  font-family: RobotoBold;
-}
-.home-left .home-left-container .searchInput:-moz-placeholder {
-  color: #9A9A9A;
-  font-family: RobotoBold;
-}
-.home-left .home-left-container .searchInput:-ms-input-placeholder {
-  color: #9A9A9A;
-  font-family: RobotoBold;
+.home-left .home-left-container .classement_nom_du_niveau_classement {
+  padding-bottom: 8px;
+  padding-top: 8px;
 }
 .home-left .home-left-container .classement_nom_du_niveau {
   display: flex;
-  align-items: center;
-  margin-bottom: 8px;
+  align-items: flex-end;
+  margin-bottom: 6px;
   margin-left: 15px;
 }
 .home-left .home-left-container .classement_nom_du_niveau .classement_nom_du_niveau_classement {
@@ -124,18 +150,21 @@ $big-margin-right-mb: px;*/
   background-color: #A000C7 !important;
 }
 .home-left .home-left-container .classement_nom_du_niveau .lien-vers-niveau .classement_nom_du_niveau_nom_du_niveau {
-  padding: 8px 16px;
+  padding: 8px 8px;
   border-radius: 12px;
 }
 
 .home-right {
   height: 100%;
-  width: 65%;
+  width: 70%;
   overflow-y: scroll;
   margin-top: 110px;
   display: flex;
   justify-content: center;
   background-color: #23252B;
+  font-family: RobotoRegular;
+  font-size: 25px;
+  color: white;
 }
 .home-right::-webkit-scrollbar {
   width: 8px;
@@ -155,8 +184,90 @@ $big-margin-right-mb: px;*/
 .home-right::-webkit-scrollbar-thumb:hover {
   background: #6e6e6e;
 }
+.home-right .home-right-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+  margin-left: 80px;
+}
+.home-right .home-right-container .home-right-wrapper {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.home-right .home-right-container .iframe {
+  width: 40vw;
+  min-height: 400px;
+  border: none;
+  margin-top: 13px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+.home-right .home-right-container .title {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+.home-right .home-right-container .wrapper-top, .home-right .home-right-container .wrapper-bottom {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.home-right .home-right-container .h2 {
+  font-size: 40px;
+  font-family: RobotoBold;
+  margin-top: 13px;
+  margin-bottom: 20px;
+}
+.home-right .home-right-container p {
+  margin-bottom: 7px;
+}
+.home-right .home-right-container .victoires {
+  display: flex;
+}
+.home-right .home-right-container .victoires .align-self {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.home-right .home-right-container .victoires ul {
+  margin-right: 8px;
+}
+.home-right .home-right-container .victoires ul .name-player {
+  margin-bottom: 10px;
+}
+.home-right .home-right-container .victoires ul .position {
+  margin-bottom: 10px;
+  max-height: 25px;
+  margin-left: -12px;
+}
+.home-right .home-right-container .victoires ul .logo-yt {
+  margin-bottom: 7px;
+}
+.home-right .home-right-container .victoires .logoyt-container {
+  margin-top: -1px;
+}
+.home-right .home-right-container .victoires .logoyt-container .victoires-joueur-vid-link {
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  border-radius: 8px;
+  margin-top: -4px;
+}
+.home-right .home-right-container .victoires .logoyt-container .victoires-joueur-vid-link:hover {
+  background-color: #36383B;
+}
+.home-right .home-right-container .victoires .logoyt-container .victoires-joueur-vid-link .logoyt {
+  transition: all 300ms ease-in-out;
+  width: 35px;
+  height: auto;
+  margin-top: -4px;
+  margin-bottom: -7px;
+}
 
 .home-left, .home-right {
   scrollbar-width: thin;
   scrollbar-color: #5c5c5c #aaaaaa;
+}
+
+#bold {
+  font-family: RobotoBold;
 }/*# sourceMappingURL=home.css.map */
