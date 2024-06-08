@@ -27,17 +27,23 @@
             </div>
         </div>
         <div class="home-right">
-            <ul>
+            <ul class="home-right-home-container">
                 {% for niveau in niveaux %}
-                    <li>
-                        <h3> Nom du niveau: {{ niveau[1] }}</h3>
-                        <p>Créateur: {{ niveau[2] }}</p>
-                        <p>Classement: {{ niveau[3] }}</p>
-                        <iframe width="560" height="315" src="{{ niveau[4] }}" allowfullscreen></iframe>
+                    <li class="container1" onclick="location.href='/liste/{{ niveau[3] }}'">
+                        <iframe class="iframe_minia" width="560" height="315" src="{{ niveau[4] }}" allowfullscreen></iframe>
+                        <div class="container2">
+                            <div class="container3">
+                                <h2>#{{ niveau[3] }}:</h2>
+                                <div class="display">
+                                    <h2>{{ niveau[1] }}</h2>
+                                    <p>{{ niveau[2] }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
-        </div>
+        </div>             
     </div>
 </div>
 {% endblock %}
