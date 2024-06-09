@@ -3,6 +3,7 @@
 .page-content {
     overflow: hidden;
     background-color: $primary-color-black;
+    height: 100vh;
 }
 
 .wrapper {
@@ -232,7 +233,7 @@
             }
 
             ul {
-                margin-right: 8px;
+                margin-right: 16px;
 
                 .name-player {
                     margin-bottom: 10px;
@@ -241,7 +242,6 @@
                 .position {
                     margin-bottom: 10px;
                     max-height: 25px;
-                    margin-left: -12px;
                 }
 
                 .logo-yt {

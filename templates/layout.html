@@ -80,12 +80,7 @@
             moveCircle();
             continuousMove();
         });
-        function adjustHeight() {
-            const headerHeight = document.querySelector('header').offsetHeight;
-            const footerHeight = document.querySelector('footer').offsetHeight;
-            const mainContent = document.querySelector('.page-content');
-            mainContent.style.minHeight = `calc(100vh - ${headerHeight + footerHeight}px)`;
-        }
+      
 
         window.addEventListener('DOMContentLoaded', adjustHeight);
         window.addEventListener('resize', adjustHeight);

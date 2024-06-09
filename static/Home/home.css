@@ -20,6 +20,7 @@ $big-margin-right-mb: px;*/
 .page-content {
   overflow: hidden;
   background-color: #23252B;
+  height: 100vh;
 }
 
 .wrapper {
@@ -230,7 +231,7 @@ $big-margin-right-mb: px;*/
   align-items: flex-end;
 }
 .home-right .home-right-container .victoires ul {
-  margin-right: 8px;
+  margin-right: 16px;
 }
 .home-right .home-right-container .victoires ul .name-player {
   margin-bottom: 10px;
@@ -238,7 +239,6 @@ $big-margin-right-mb: px;*/
 .home-right .home-right-container .victoires ul .position {
   margin-bottom: 10px;
   max-height: 25px;
-  margin-left: -12px;
 }
 .home-right .home-right-container .victoires ul .logo-yt {
   margin-bottom: 7px;

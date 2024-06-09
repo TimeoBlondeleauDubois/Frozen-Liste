@@ -11,10 +11,6 @@
   src: url(/static/Font/belligerent.ttf);
 }
 /*
-$h2-size-pc: px;
-$h2-size-mb: px;
-*/
-/*
 $big-margin-top-mb: px;
 $big-margin-bottom-mb: px;
 */
@@ -36,6 +32,7 @@ $big-margin-right-mb: px;*/
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  min-height: 100vh;
 }
 
 .glow {
@@ -82,7 +79,7 @@ $big-margin-right-mb: px;*/
           backdrop-filter: blur(30px);
   margin-left: 15px;
   margin-right: 15px;
-  margin-top: 160px;
+  margin-top: 150px;
   margin-bottom: 40px;
 }
 
