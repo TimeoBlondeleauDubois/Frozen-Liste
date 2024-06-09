@@ -79,8 +79,7 @@ init_db()
 
 
 
-
-#pages
+#Liste
 @app.route('/liste')
 def liste():
     active_page = 'home'
@@ -116,23 +115,61 @@ def niveau(classement):
 
     return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux, active_page=active_page)
 
+
+
+#classement
 @app.route('/classement')
 def classement():
     active_page = 'classement'
-    return render_template('classement.html', active_page=active_page)
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    cursor.execute('SELECT id, nom, points FROM Joueur ORDER BY points DESC')
+    joueurs = cursor.fetchall()
+    connection.close()
+    return render_template('classement.html', active_page=active_page, joueurs=joueurs)
+
+@app.route('/classement/<string:nom>')
+def joueur(nom):
+    active_page = 'classement'
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT id, nom, points FROM Joueur WHERE nom = ?', (nom,))
+    joueur = cursor.fetchone()
+    if joueur is None:
+        return redirect(url_for('classement'))
+
+    joueur_id = joueur[0]
+
+    cursor.execute('''
+        SELECT Niveau.nom, Niveau.points, ReussiteNiveau.video_url 
+        FROM ReussiteNiveau
+        JOIN Niveau ON ReussiteNiveau.niveau_id = Niveau.id
+        WHERE ReussiteNiveau.joueur_id = ?
+    ''', (joueur_id,))
+    reussites = cursor.fetchall()
+
+    cursor.execute('SELECT id, nom, points FROM Joueur ORDER BY points DESC')
+    joueurs = cursor.fetchall()
+
+    connection.close()
+    return render_template('classement_joueur.html', joueur=joueur, reussites=reussites, joueurs=joueurs, selected_joueur=nom, active_page=active_page)
 
 @app.route('/information')
 def information():
     active_page = 'information'
     return render_template('information.html', active_page=active_page)
 
-@app.errorhandler(404)
-def not_found_error(error):
-    return redirect('/error404')
-
 @app.route('/error404')
 def error404():
     return render_template('404.html')
+
+
+
+#Redirect
+@app.errorhandler(404)
+def not_found_error(error):
+    return redirect('/error404')
 
 @app.route('/')
 def noroute():

@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+<link href="../static/classement/classement.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="wrapper">
+        <div class="home-left">
+            <div class="searchinput-container">
+                <div class="inputbackground">
+                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off">
+                </div>
+            </div>
+            <div class="home-left-container">
+                <ul id="levelsList">
+                    {% for joueur_item in joueurs %}
+                        <div class="classement_nom_du_joueur">
+                            <p class="classement_nom_du_joueur_position">#{{ loop.index }}</p>
+                            <a class="home-right-container-wrapper {% if joueur_item[1] == selected_joueur %}selected{% endif %}" href="{{ url_for('joueur', nom=joueur_item[1]) }}">
+                                {{ joueur_item[1] }}:
+                            </a>                            
+                            <p class="home-right-container-paragraph">{{ joueur_item[2] }} points</p>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="home-right">
+            <div class="home-right-container">
+                <div class="home-right-wrapper">
+                    <h1 class="title"><span id="bold">{{ joueur[1] }}</span></h1>
+                    <p>Points: <span id="bold">{{ joueur[2] }}</span></p>
+                    <h2 class="h2">Réussites</h2>
+                    <div class="reussites">
+                        <ul>
+                            {% for reussite in reussites %}
+                                <li class="reussite">
+                                    <div>
+                                        <p>Niveau: {{ reussite[0] }}</p>
+                                        <p>Points: {{ reussite[1] }}</p>
+                                        <a href="{{ reussite[2] }}">Voir la vidéo</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

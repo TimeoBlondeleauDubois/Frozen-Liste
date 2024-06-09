@@ -111,8 +111,8 @@ $big-margin-right-mb: px;*/
   background: #6e6e6e;
 }
 .home-left .home-left-container {
-  width: 65%;
-  max-width: 65%;
+  width: -moz-fit-content;
+  width: fit-content;
   margin-top: 90px;
   margin-left: 60px;
   display: flex;

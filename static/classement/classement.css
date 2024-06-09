@@ -1,1 +1,186 @@
-/*# sourceMappingURL=classement.css.map */
+@font-face {
+  font-family: RobotoRegular;
+  src: url(/static/Font/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url(/static/Font/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: Beligerent;
+  src: url(/static/Font/belligerent.ttf);
+}
+/*
+$big-margin-top-mb: px;
+$big-margin-bottom-mb: px;
+*/
+/*
+$big-margin-left-mb: px;
+$big-margin-right-mb: px;*/
+.page-content {
+  overflow: hidden;
+  background-color: #23252B;
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  height: calc(100vh - 110px);
+}
+
+.searchinput-container {
+  width: 30%;
+  position: fixed;
+}
+.searchinput-container .inputbackground {
+  background-color: rgba(35, 37, 43, 0.3960784314);
+  margin-right: 11px;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(3px);
+}
+
+.searchInput {
+  width: 60%;
+  height: 40px;
+  border-radius: 300px;
+  border: none;
+  padding: 0px 16px;
+  background-color: #36383B;
+  color: white;
+  font-family: RobotoRegular;
+  font-size: 25px;
+  transition: all 300ms ease-in-out;
+  margin-left: 60px;
+  margin-top: 30px;
+}
+.searchInput:focus {
+  outline: none;
+  background-color: #3a3a3a;
+}
+
+.searchInput::-webkit-input-placeholder {
+  color: #9A9A9A;
+  font-family: RobotoBold;
+}
+
+.searchInput::-moz-placeholder {
+  color: #9A9A9A;
+  font-family: RobotoBold;
+}
+
+.searchInput:-moz-placeholder {
+  color: #9A9A9A;
+  font-family: RobotoBold;
+}
+
+.searchInput:-ms-input-placeholder {
+  color: #9A9A9A;
+  font-family: RobotoBold;
+}
+
+.home-left {
+  height: 100%;
+  width: 30%;
+  max-width: 30%;
+  overflow-y: scroll;
+  margin-top: 110px;
+  display: flex;
+  align-items: flex-start;
+  background-color: #23252B;
+  flex-direction: column;
+  font-family: RobotoRegular;
+  color: white;
+  font-size: 25px;
+}
+.home-left::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+.home-left::-webkit-scrollbar-track {
+  background: #aaaaaa;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-left::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+  border-radius: 300px;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-left::-webkit-scrollbar-thumb:hover {
+  background: #6e6e6e;
+}
+.home-left .home-left-container {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 90px;
+  margin-left: 60px;
+  display: flex;
+}
+.home-left .home-left-container .classement_nom_du_joueur {
+  display: flex;
+  margin-bottom: 6px;
+  align-items: center;
+  margin-left: 8px;
+}
+.home-left .home-left-container .classement_nom_du_joueur .classement_nom_du_joueur_nom, .home-left .home-left-container .classement_nom_du_joueur .classement_nom_du_joueur_position, .home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper {
+  color: white;
+  text-decoration: none;
+  font-family: RobotoRegular;
+}
+.home-left .home-left-container .classement_nom_du_joueur .classement_nom_du_joueur_position, .home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper .home-right-container-paragraph-2 {
+  margin-right: 5px;
+}
+.home-left .home-left-container .classement_nom_du_joueur .home-right-container-paragraph {
+  margin-left: 5px;
+}
+.home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper {
+  padding: 8px;
+  border-radius: 12px;
+}
+.home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper:hover {
+  background-color: #36383B;
+}
+.home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper.selected {
+  background-color: #A000C7 !important;
+}
+
+.home-right {
+  height: 100%;
+  width: 70%;
+  overflow-y: scroll;
+  margin-top: 110px;
+  display: flex;
+  justify-content: center;
+  background-color: #23252B;
+  font-family: RobotoRegular;
+  font-size: 25px;
+  color: white;
+}
+.home-right::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+.home-right::-webkit-scrollbar-track {
+  background: #aaaaaa;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-right::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+  border-radius: 300px;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-right::-webkit-scrollbar-thumb:hover {
+  background: #6e6e6e;
+}
+
+.home-left, .home-right {
+  scrollbar-width: thin;
+  scrollbar-color: #5c5c5c #aaaaaa;
+}
+
+#bold {
+  font-family: RobotoBold;
+}/*# sourceMappingURL=classement.css.map */
