@@ -439,6 +439,7 @@ body {
 .home-pc, .classement-pc, .information-pc, .submit-record-pc {
   padding: 20px 30px;
   text-decoration: none;
+  transition: all 300ms ease-in-out;
 }
 .home-pc:hover, .classement-pc:hover, .information-pc:hover, .submit-record-pc:hover {
   background-color: #ab00ce;

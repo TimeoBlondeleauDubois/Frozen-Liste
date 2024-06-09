@@ -137,6 +137,7 @@ $big-margin-right-mb: px;*/
 .home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper {
   padding: 8px;
   border-radius: 12px;
+  transition: all 300ms ease-in-out;
 }
 .home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper:hover {
   background-color: #36383B;
