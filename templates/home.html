@@ -18,8 +18,8 @@
                     {% for niveau in niveaux %}
                         <div class="classement_nom_du_niveau">
                             <p class="classement_nom_du_niveau_classement">#{{ niveau[3] }}</p>
-                            <li class="lien-vers-niveau" onclick="location.href='/liste/{{ niveau[3] }}'">
-                                <p class="classement_nom_du_niveau_nom_du_niveau">{{ niveau[1] }}<p>
+                            <li class="lien-vers-niveau" onclick="location.href='/liste/{{ niveau[1] }}'">
+                                <p class="classement_nom_du_niveau_nom_du_niveau">{{ niveau[1] }}</p>
                             </li>
                         </div>
                     {% endfor %}

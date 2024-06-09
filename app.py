@@ -90,13 +90,13 @@ def liste():
     connection.close()
     return render_template('home.html', active_page=active_page, niveaux=niveaux)
 
-@app.route('/liste/<int:classement>')
-def niveau(classement):
+@app.route('/liste/<string:nom_niveau>')
+def niveau(nom_niveau):
     active_page = 'home'
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
     
-    cursor.execute('SELECT nom, createurs, verifier, publisher, classement, id_niveau, points, mot_de_passe, video_url, victoires FROM Niveau WHERE classement = ?', (classement,))
+    cursor.execute('SELECT nom, createurs, verifier, publisher, classement, id_niveau, points, mot_de_passe, video_url, victoires FROM Niveau WHERE nom = ?', (nom_niveau,))
     niveau = cursor.fetchone()
 
     cursor.execute('SELECT id, nom, createurs, classement, video_url, victoires FROM Niveau ORDER BY classement')
@@ -106,15 +106,14 @@ def niveau(classement):
         SELECT Joueur.nom, ReussiteNiveau.video_url 
         FROM ReussiteNiveau
         JOIN Joueur ON ReussiteNiveau.joueur_id = Joueur.id
-        WHERE ReussiteNiveau.niveau_id = (SELECT id FROM Niveau WHERE classement = ?)
+        WHERE ReussiteNiveau.niveau_id = (SELECT id FROM Niveau WHERE nom = ?)
         ORDER BY ReussiteNiveau.rowid
-    ''', (classement,))
+    ''', (nom_niveau,))
     victoires = cursor.fetchall()
 
     connection.close()
 
     return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux, active_page=active_page)
-
 
 
 #classement
