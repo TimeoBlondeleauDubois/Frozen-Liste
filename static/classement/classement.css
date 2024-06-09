@@ -129,10 +129,10 @@ $big-margin-right-mb: px;*/
   font-family: RobotoRegular;
 }
 .home-left .home-left-container .classement_nom_du_joueur .classement_nom_du_joueur_position, .home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper .home-right-container-paragraph-2 {
-  margin-right: 5px;
+  margin-right: 7px;
 }
 .home-left .home-left-container .classement_nom_du_joueur .home-right-container-paragraph {
-  margin-left: 5px;
+  margin-left: 7px;
 }
 .home-left .home-left-container .classement_nom_du_joueur .home-right-container-wrapper {
   padding: 8px;
