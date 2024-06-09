@@ -19,8 +19,8 @@
                         <div class="classement_nom_du_joueur">
                             <p class="classement_nom_du_joueur_position">#{{ loop.index }}</p>
                             <a class="home-right-container-wrapper {% if joueur_item[1] == selected_joueur %}selected{% endif %}" href="{{ url_for('joueur', nom=joueur_item[1]) }}">
-                                {{ joueur_item[1] }}:
-                            </a>                            
+                                <span class="classement_nom_du_joueur_nom">{{ joueur_item[1] }}:</span>
+                            </a>
                             <p class="home-right-container-paragraph">{{ joueur_item[2] }} points</p>
                         </div>
                     {% endfor %}
@@ -31,6 +31,7 @@
             <div class="home-right-container">
                 <div class="home-right-wrapper">
                     <h1 class="title"><span id="bold">{{ joueur[1] }}</span></h1>
+                    <p>Classement: <span id="bold">#{{ joueur_classement }}</span></p>
                     <p>Points: <span id="bold">{{ joueur[2] }}</span></p>
                     <h2 class="h2">Réussites</h2>
                     <div class="reussites">
@@ -38,7 +39,7 @@
                             {% for reussite in reussites %}
                                 <li class="reussite">
                                     <div>
-                                        <p>Niveau: {{ reussite[0] }}</p>
+                                        <p>Niveau: {{ reussite[0] }} (Classement: #{{ reussite[3] }})</p>
                                         <p>Points: {{ reussite[1] }}</p>
                                         <a href="{{ reussite[2] }}">Voir la vidéo</a>
                                     </div>
@@ -51,4 +52,24 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function filterLevels() {
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toUpperCase();
+        var levelsList = document.getElementById('levelsList');
+        var levels = levelsList.getElementsByClassName('classement_nom_du_joueur');
+
+        for (var i = 0; i < levels.length; i++) {
+            var joueurName = levels[i].getElementsByClassName('classement_nom_du_joueur_nom')[0];
+            if (joueurName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                levels[i].style.display = '';
+            } else {
+                levels[i].style.display = 'none';
+            }
+        }
+    }
+</script>
 {% endblock %}

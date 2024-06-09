@@ -19,7 +19,7 @@
                         <div class="classement_nom_du_joueur">
                             <p class="classement_nom_du_joueur_position">#{{ loop.index }}</p>
                             <a class="home-right-container-wrapper {% if joueur[1] == selected_joueur %}selected{% endif %}" href="{{ url_for('joueur', nom=joueur[1]) }}">
-                                {{ joueur[1] }}:
+                                <span class="classement_nom_du_joueur_nom">{{ joueur[1] }}:</span>
                             </a>                            
                             <p class="home-right-container-paragraph">{{ joueur[2] }} points</p>
                         </div>

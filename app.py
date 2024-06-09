@@ -141,8 +141,12 @@ def joueur(nom):
 
     joueur_id = joueur[0]
 
+    cursor.execute('SELECT nom FROM Joueur ORDER BY points DESC')
+    joueurs = cursor.fetchall()
+    joueur_classement = next((index + 1 for index, joueur_item in enumerate(joueurs) if joueur_item[0] == nom), None)
+
     cursor.execute('''
-        SELECT Niveau.nom, Niveau.points, ReussiteNiveau.video_url 
+        SELECT Niveau.nom, Niveau.points, ReussiteNiveau.video_url, Niveau.classement
         FROM ReussiteNiveau
         JOIN Niveau ON ReussiteNiveau.niveau_id = Niveau.id
         WHERE ReussiteNiveau.joueur_id = ?
@@ -153,13 +157,19 @@ def joueur(nom):
     joueurs = cursor.fetchall()
 
     connection.close()
-    return render_template('classement_joueur.html', joueur=joueur, reussites=reussites, joueurs=joueurs, selected_joueur=nom, active_page=active_page)
+    return render_template('classement_joueur.html', joueur=joueur, reussites=reussites, joueurs=joueurs, selected_joueur=nom, joueur_classement=joueur_classement, active_page=active_page)
 
+
+
+#Information
 @app.route('/information')
 def information():
     active_page = 'information'
     return render_template('information.html', active_page=active_page)
 
+
+
+#Erreur404
 @app.route('/error404')
 def error404():
     return render_template('404.html')
