@@ -1,4 +1,4 @@
-# Projet en cours de création❗(Back done)
+# Projet en cours de création❗
 
 # Lien du site : [Frozen Liste](https://lafrozenliste.eu.pythonanywhere.com)
 
