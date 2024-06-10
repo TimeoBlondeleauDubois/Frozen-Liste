@@ -43,13 +43,13 @@ $big-margin-right-mb: px;*/
 .searchinput-container {
   width: 30%;
   position: fixed;
-  z-index: 1;
 }
 .searchinput-container .inputbackground {
   background-color: rgba(35, 37, 43, 0.3960784314);
   margin-right: 11px;
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(3px);
+  z-index: 1;
 }
 
 .searchInput {

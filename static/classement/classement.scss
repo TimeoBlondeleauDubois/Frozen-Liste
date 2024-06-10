@@ -14,13 +14,13 @@
 .searchinput-container {
     width: 30%;
     position: fixed;
-    z-index: 1;
 
     .inputbackground {
         background-color: #23252b65;
         margin-right: 11px;
         -webkit-backdrop-filter: blur(1px);
         backdrop-filter: blur(3px);
+        z-index: 1;
     }
 }
 
