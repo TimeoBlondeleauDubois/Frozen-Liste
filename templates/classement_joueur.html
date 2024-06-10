@@ -19,7 +19,7 @@
                         <div class="classement_nom_du_joueur">
                             <p class="classement_nom_du_joueur_position">#{{ loop.index }}</p>
                             <a class="home-right-container-wrapper {% if joueur_item[1] == selected_joueur %}selected{% endif %}" href="{{ url_for('joueur', nom=joueur_item[1]) }}">
-                                <span class="classement_nom_du_joueur_nom">{{ joueur_item[1] }}:</span>
+                                <span class="classement_nom_du_joueur_nom">{{ joueur_item[1] }}</span>
                             </a>
                             <p class="home-right-container-paragraph">{{ joueur_item[2] }} points</p>
                         </div>
@@ -30,18 +30,47 @@
         <div class="home-right">
             <div class="home-right-container">
                 <div class="home-right-wrapper">
-                    <h1 class="title"><span id="bold">{{ joueur[1] }}</span></h1>
-                    <p>Classement: <span id="bold">#{{ joueur_classement }}</span></p>
-                    <p>Points: <span id="bold">{{ joueur[2] }}</span></p>
-                    <h2 class="h2">Réussites</h2>
+                    <div class="home-right-wrapper-classement-joueur">
+                        <p><span id="bold">#{{ joueur_classement }}</span></p>
+                        <h1 class="title"><span id="bold">{{ joueur[1] }}</span></h1>
+                    </div>
+                    <p class="home-right-points-joueurs">Points: <span id="bold">{{ joueur[2] }}</span></p>
+                    <h2 class="h2">Niveaux réussis:</h2>
                     <div class="reussites">
                         <ul>
-                            {% for reussite in reussites %}
+                            {% for reussite in reussites|reverse %}
+                                <li class="reussite-classement">
+                                    <div>
+                                        <p>#{{ reussite[3] }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <ul>
+                            {% for reussite in reussites|reverse %}
+                                <li class="reussite2">
+                                    <div>                                     
+                                        <a href="{{ url_for('niveau', nom_niveau=reussite[0]) }}">
+                                            <p>{{ reussite[0] }}</p>
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>                        
+                        <ul class="logoyt-container">
+                            {% for reussite in reussites|reverse %}
+                                <li class="logo-yt">
+                                    <a class="victoires-joueur-vid-link" target="_blank" href="{{ reussite[2] }}">
+                                        <img class="logoyt" src="{{ url_for('static', filename='pictures/logo_youtube.svg') }}" alt="YouTube Video">
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <ul>
+                            {% for reussite in reussites|reverse %}
                                 <li class="reussite">
                                     <div>
-                                        <p>Niveau: {{ reussite[0] }} (Classement: #{{ reussite[3] }})</p>
-                                        <p>Points: {{ reussite[1] }}</p>
-                                        <a href="{{ reussite[2] }}">Voir la vidéo</a>
+                                        <p><span id="bold">+{{ reussite[1] }}</span> points</p>
                                     </div>
                                 </li>
                             {% endfor %}
@@ -51,6 +80,7 @@
             </div>
         </div>
     </div>
+    <div class="glow"></div>
 </div>
 {% endblock %}
 

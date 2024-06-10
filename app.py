@@ -116,6 +116,7 @@ def niveau(nom_niveau):
     return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux, active_page=active_page)
 
 
+
 #classement
 @app.route('/classement')
 def classement():

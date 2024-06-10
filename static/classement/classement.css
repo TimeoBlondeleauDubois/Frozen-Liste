@@ -39,6 +39,18 @@ $big-margin-right-mb: px;*/
   backdrop-filter: blur(3px);
 }
 
+.glow {
+  position: absolute;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1/1;
+  background-color: rgba(255, 255, 255, 0.1);
+  filter: blur(125px);
+  transition: top 3s, left 3s;
+  pointer-events: none;
+  border-radius: 100%;
+}
+
 .searchInput {
   width: 60%;
   height: 40px;
@@ -175,6 +187,95 @@ $big-margin-right-mb: px;*/
 }
 .home-right::-webkit-scrollbar-thumb:hover {
   background: #6e6e6e;
+}
+.home-right .home-right-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+  margin-left: 80px;
+  font-family: RobotoRegular;
+  color: white;
+}
+.home-right .home-right-container .home-right-wrapper {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.home-right .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur {
+  display: flex;
+  font-family: RobotoBold;
+  font-size: 60px;
+  margin-bottom: 5px;
+}
+.home-right .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur h1 {
+  margin-left: 12px;
+}
+.home-right .home-right-container .home-right-wrapper .home-right-points-joueurs {
+  font-family: RobotoBold;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+.home-right .home-right-container .home-right-wrapper .h2 {
+  font-size: 40px;
+  font-family: RobotoBold;
+  margin-bottom: 20px;
+}
+.home-right .home-right-container .home-right-wrapper .reussites {
+  display: flex;
+}
+.home-right .home-right-container .home-right-wrapper .reussites .reussite-classement {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logoyt-container {
+  margin-top: 3.25px;
+  z-index: 1000000;
+}
+.logoyt-container .victoires-joueur-vid-link {
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  border-radius: 8px;
+}
+.logoyt-container .victoires-joueur-vid-link:hover {
+  background-color: #36383B;
+}
+.logoyt-container .victoires-joueur-vid-link .logoyt {
+  transition: all 300ms ease-in-out;
+  width: 35px;
+  height: auto;
+  margin-top: -4px;
+  margin-bottom: -7px;
+}
+
+.logo-yt {
+  margin-bottom: 10px;
+}
+
+.reussite-classement, .reussite, .reussite2 {
+  margin-bottom: 5.3px;
+}
+
+.reussite-classement, .reussite {
+  padding: 4px;
+}
+
+.reussite-classement, .reussite, .logoyt-container, .reussite2 {
+  margin-right: 14px;
+}
+
+.reussite2 p {
+  border-radius: 8px;
+  padding: 4px;
+  color: white;
+}
+.reussite2 p:hover {
+  background-color: #36383B;
+  cursor: pointer;
+}
+
+.reussite2 a {
+  text-decoration: none;
 }
 
 .home-left, .home-right {

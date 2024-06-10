@@ -6,6 +6,7 @@
 
 {% block content %}
 <div class="page-content">
+    <div class="glow"></div>
     <div class="wrapper">
         <div class="home-left">
             <div class="searchinput-container">
@@ -57,7 +58,9 @@
                             {% for victoire in victoires %}
                                 <li class="name-player">
                                     <div>
-                                        <p>{{ victoire[0] }}</p>
+                                        <a href="/classement/{{ victoire[0] }}" class="joueur-link">
+                                            <p>{{ victoire[0] }}</p>
+                                        </a>
                                     </div>
                                 </li>
                             {% endfor %}
@@ -65,7 +68,7 @@
                         <ul class="logoyt-container">
                             {% for victoire in victoires %}
                                 <li class="logo-yt">
-                                    <a class="victoires-joueur-vid-link" href="{{ victoire[1] }}">
+                                    <a class="victoires-joueur-vid-link" target="_blank" href="{{ victoire[1] }}">
                                         <img class="logoyt" src="{{ url_for('static', filename='pictures/logo_youtube.svg') }}" alt="YouTube Video">
                                     </a>
                                 </li>
@@ -74,7 +77,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
 </div>
 {% endblock %}
