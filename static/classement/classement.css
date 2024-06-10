@@ -31,6 +31,7 @@ $big-margin-right-mb: px;*/
 .searchinput-container {
   width: 30%;
   position: fixed;
+  z-index: 1;
 }
 .searchinput-container .inputbackground {
   background-color: rgba(35, 37, 43, 0.3960784314);
@@ -230,7 +231,6 @@ $big-margin-right-mb: px;*/
 
 .logoyt-container {
   margin-top: 3.25px;
-  z-index: 1000000;
 }
 .logoyt-container .victoires-joueur-vid-link {
   cursor: pointer;

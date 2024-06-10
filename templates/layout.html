@@ -39,8 +39,10 @@
                         <a class="information-pc {% if active_page == 'information' %}class-information-pc{% endif %}" href="/information">Information</a>
                     </div>
                     <div class="nav-pc-container2">
-                        <a class="lien-logo-discord-pc" href="https://discord.gg/X5H7XFTtmA" target="_blank"><img class="logo-discord" src="{{ url_for('static', filename='pictures/discord.svg') }}" alt="Logo discord"></a>
-                    </div>
+                        <a class="lien-logo-discord-pc" href="https://discord.gg/X5H7XFTtmA" target="_blank">
+                            <img id="discord-logo" class="logo-discord" src="{{ url_for('static', filename='pictures/discord_static.png') }}" alt="Logo discord">
+                        </a>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -81,6 +83,37 @@
             continuousMove();
         });
     </script>
+    <script>
+        var discordLogo = document.getElementById('discord-logo');
+    
+        var staticSrc = "{{ url_for('static', filename='pictures/discord_static.png') }}";
+        var animatedSrc = "{{ url_for('static', filename='pictures/discordgif.gif') }}";
+    
+        var gifDuration = 1300;
+        var startTime;
+    
+        discordLogo.addEventListener('mouseover', function() {
+            this.src = animatedSrc;
+            startTime = Date.now();
+            clearTimeout(timer);
+        });
+    
+        discordLogo.addEventListener('mouseout', function() {
+            var elapsedTime = Date.now() - startTime;
+            var remainingTime = gifDuration - elapsedTime;
+    
+            if (remainingTime > 0) {
+                timer = setTimeout(function() {
+                    discordLogo.src = staticSrc;
+                }, remainingTime);
+            } else {
+                discordLogo.src = staticSrc;
+            }
+        });
+    </script>
+    
+    
+    
     {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -14,6 +14,7 @@
 .searchinput-container {
     width: 30%;
     position: fixed;
+    z-index: 1;
 
     .inputbackground {
         background-color: #23252b65;
@@ -233,7 +234,6 @@
 
 .logoyt-container {
     margin-top: 3.25px;
-    z-index: 1000000;
 
     .victoires-joueur-vid-link {
         cursor: pointer;
