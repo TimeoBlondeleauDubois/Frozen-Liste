@@ -1,6 +1,6 @@
 # Projet en cours de création❗
 
-# Lien du site : [Frozen Liste](https://lafrozenliste.eu.pythonanywhere.com) Pour se connecter: IDENTIFIANT: "a" MOT DE PASSE: "a"
+# Lien du site : [Frozen Liste](https://lafrozenliste.eu.pythonanywhere.com), Pour se connecter: IDENTIFIANT: "a" MOT DE PASSE: "a"
 
 ## Projet: Classement des Niveaux Extreme Demon de la Team Frozen
 
