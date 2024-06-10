@@ -21,7 +21,7 @@ Ce projet est une application web qui permet de voir tous les niveaux Extreme et
 
 ### Fonctionnalités Admin
 
-- Créer un Joueur
+- Créer un Joueur (automatique avec la 1ère réussite d'un joueur)
 - Créer un Niveau
 - Supprimer un Niveau
 - Ajouter une Victoire
