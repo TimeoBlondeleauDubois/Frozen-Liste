@@ -11,6 +11,7 @@ Ce projet est une application web qui permet de voir tous les niveaux Extreme et
 - Liste des Niveaux: Une liste complète des niveaux réussis par les joueurs avec un système de recherche par nom de niveau.
 - Système de Classement : Classement des joueurs basé sur leurs victoires et en fonction de la difficulté avec un système de recherche par nom de joueur.
 - Accès aux vidéos des personnes ayant réussi un niveau.
+- Les joueurs peuvent envoyer une demande lorsqu'ils ont réussi un niveau.
 
 ### Technologies Utilisées
 
