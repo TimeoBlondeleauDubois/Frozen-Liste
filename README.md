@@ -8,7 +8,7 @@ Ce projet est une application web qui permet de voir tous les niveaux Extreme et
 
 ### Fonctionnalités
 
-- Liste des Niveaux Extreme Demon : Une liste complète des niveaux Extreme Demon réussis par les joueurs avec un système de recherche par nom de niveau.
+- Liste des Niveaux: Une liste complète des niveaux réussis par les joueurs avec un système de recherche par nom de niveau.
 - Système de Classement : Classement des joueurs basé sur leurs victoires et en fonction de la difficulté avec un système de recherche par nom de joueur.
 - Accès aux vidéos des personnes ayant réussi un niveau.
 
