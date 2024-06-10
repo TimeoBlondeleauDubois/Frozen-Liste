@@ -34,7 +34,7 @@ $big-margin-right-mb: px;*/
   animation: gradient 10s ease infinite;
   background: linear-gradient(-45deg, #23252B, #36383B);
   background-size: 400% 400%;
-  padding-top: 110px;
+  min-height: 100vh;
 }
 
 @keyframes gradient {
@@ -92,7 +92,7 @@ $big-margin-right-mb: px;*/
           backdrop-filter: blur(30px);
   margin-left: 15px;
   margin-right: 15px;
-  margin-top: 40px;
+  margin-top: 150px;
   margin-bottom: 40px;
 }
 
@@ -242,10 +242,6 @@ $big-margin-right-mb: px;*/
     margin-top: -76px !important;
     padding: 5px 20px !important;
   }
-  .wrapper {
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
   .h1-submit {
     font-size: 40px;
     margin-left: 15px;
@@ -264,10 +260,6 @@ $big-margin-right-mb: px;*/
 @media screen and (min-width: 700px) {
   label, input {
     font-size: 27px;
-  }
-  .wrapper {
-    margin-top: 80px;
-    margin-bottom: 80px;
   }
   .h1-submit {
     margin-bottom: 60px;

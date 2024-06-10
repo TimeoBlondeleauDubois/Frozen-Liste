@@ -29,7 +29,7 @@
     animation: gradient 10s ease infinite;
     background: linear-gradient(-45deg, $primary-color-black, $secondary-color-grey);
     background-size: 400% 400%;
-    padding-top: 110px;
+    min-height: 100vh;
 }
 
 @keyframes gradient {
@@ -89,7 +89,7 @@
     backdrop-filter: blur(30px);
     margin-left: $border-margin-left-pc;
     margin-right: $border-margin-right-pc;
-    margin-top: 40px;
+    margin-top: 150px;
     margin-bottom: 40px;
 } 
 
@@ -253,11 +253,6 @@
         margin-top: -76px !important;
         padding: 5px 20px !important;
     }
-    
-    .wrapper {
-        margin-top: $medium-margin-top-pc;
-        margin-bottom: $medium-margin-bottom-pc; 
-    }
 
     .h1-submit {
         font-size: $h1-size-mb;
@@ -280,11 +275,6 @@
 @media screen and (min-width: 700px) {
     label, input {
         font-size: $p-size-pc;
-    }
-
-    .wrapper {
-        margin-top: $big-margin-top-pc;
-        margin-bottom: $big-margin-bottom-pc;
     }
 
     .h1-submit {
