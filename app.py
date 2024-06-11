@@ -210,11 +210,13 @@ def submit_record():
         connection.commit()
         connection.close()
         
-        return render_template('submit_record_correctement_envoyer.html')
+        return redirect('/merci')
 
     return render_template('submit_record.html', active_page=active_page)
 
-
+@app.route('/merci')
+def submit_record_correctement_envoyer():
+    return render_template('submit_record_correctement_envoyer.html')
 
 #Accéder à la page Admin
 @app.route('/creer_compte', methods=['GET', 'POST'])
