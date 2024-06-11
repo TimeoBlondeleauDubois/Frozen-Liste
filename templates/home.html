@@ -7,6 +7,7 @@
 {% block content %}
 <div class="page-content">
     <div class="wrapper">
+        <button class="toggle-button" onclick="toggleView()"></button>
         <div class="home-left">
             <div class="searchinput-container">
                 <div class="inputbackground">
@@ -67,5 +68,30 @@
             }
         }
     }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.createElement('button');
+        toggleButton.classList.add('toggle-button');
+        document.body.appendChild(toggleButton);
+
+        toggleButton.addEventListener('click', function() {
+            const homeLeft = document.querySelector('.home-left');
+            const homeRight = document.querySelector('.home-right');
+            const isHomeLeftVisible = homeLeft.classList.contains('show');
+
+            if (isHomeLeftVisible) {
+                homeLeft.classList.remove('show');
+                homeLeft.classList.add('hide');
+                homeRight.classList.remove('hide');
+                homeRight.classList.add('show');
+            } else {
+                homeRight.classList.remove('show');
+                homeRight.classList.add('hide');
+                homeLeft.classList.remove('hide');
+                homeLeft.classList.add('show');
+            }
+        });
+    });
 </script>
 {% endblock %}

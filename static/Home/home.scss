@@ -78,8 +78,6 @@
 
 .home-left {
     height: 100%;
-    width: 30%;
-    max-width: 30%;
     overflow-y: scroll;
     margin-top: 110px;
     display: flex;
@@ -163,7 +161,6 @@
 
 .home-right {
     height: 100%;
-    width: 70%;
     overflow-y: scroll;
     margin-top: 110px;
     display: flex;
@@ -378,5 +375,67 @@
     &:hover {
         background-color: $secondary-color-grey;
         border-radius: 8px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .toggle-button {
+        display: none;
+    }
+
+    .home-left {
+        width: 30%;
+        max-width: 30%;
+    }
+
+    .home-right {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1400px) {
+    .home-left, .home-right {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        height: calc(100vh - 110px);
+    }
+
+    .home-left.hide, .home-right.hide {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    .home-left.show, .home-right.show {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .toggle-button {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+        background-color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+    }
+
+    .toggle-button::before {
+        content: '←';
+        font-size: 24px;
+        line-height: 40px;
+        text-align: center;
+        display: block;
+    }
+
+    .show-left .toggle-button::before {
+        content: '→';
     }
 }
