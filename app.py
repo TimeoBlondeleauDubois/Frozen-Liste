@@ -1,13 +1,15 @@
 import sqlite3
 import bcrypt
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, send_from_directory, session, url_for
 import os
+from werkzeug.utils import secure_filename
 import math
 
 app = Flask(__name__)
 app.secret_key = os.urandom(8192)
 
-
+app.config['UPLOAD_FOLDER'] = 'uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 # Création de la base de données
 def init_db():
@@ -25,7 +27,8 @@ def init_db():
         classement INTEGER,
         victoires INTEGER DEFAULT 0,
         mot_de_passe TEXT,
-        video_url TEXT
+        video_url TEXT,
+        image_url TEXT
     )
     ''')
 
@@ -116,16 +119,15 @@ def niveau(nom_niveau):
     return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux, active_page=active_page)
 
 
-
-
-@app.route('/video_urls')
-def video_urls():
+#Carousel
+@app.route('/image_urls')
+def image_urls():
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT video_url FROM Niveau ORDER BY id DESC LIMIT 10')
-    video_urls = cursor.fetchall()
+    cursor.execute('SELECT image_url FROM Niveau ORDER BY id DESC LIMIT 10')
+    image_urls = cursor.fetchall()
     connection.close()
-    return {'video_urls': [url[0] for url in video_urls]}
+    return {'image_urls': [url[0] for url in image_urls]}
 
 
 #classement
@@ -295,7 +297,6 @@ def admin():
         return render_template('admin.html', niveaux=niveaux, submissions=submissions)
     else:
         return redirect(url_for('connexion'))
-
 @app.route('/ajouter_niveau', methods=['POST'])
 def ajouter_niveau():
     try:
@@ -307,9 +308,18 @@ def ajouter_niveau():
         classement = int(request.form['classement'])
         mot_de_passe = request.form['mot_de_passe']
         video_url = request.form['video_url']
-
+        image_file = request.files['image_file']
+        
         if classement <= 0:
             return f'Erreur : Le classement doit être un entier positif'
+
+        if image_file and allowed_file(image_file.filename):
+            filename = secure_filename(image_file.filename)
+            image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            image_file.save(image_path)
+            image_url = url_for('uploaded_file', filename=filename)
+        else:
+            return f'Erreur : Fichier image non valide'
 
         connection = sqlite3.connect('DataBase.db')
         cursor = connection.cursor()
@@ -325,9 +335,9 @@ def ajouter_niveau():
         points = calculer_points(classement)
 
         cursor.execute('''
-        INSERT INTO Niveau (id_niveau, nom, createurs, verifier, publisher, points, classement, mot_de_passe, video_url) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (id_niveau, nom_niveau, createurs, verifier, publisher, points, classement, mot_de_passe, video_url))
+        INSERT INTO Niveau (id_niveau, nom, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (id_niveau, nom_niveau, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url))
 
         connection.commit()
         connection.close()
@@ -340,6 +350,15 @@ def ajouter_niveau():
         return f'Erreur : Le niveau {nom_niveau} ou l\'ID {id_niveau} existe déjà.'
     except KeyError as e:
         return f'Erreur : Champ manquant {str(e)}'
+    except Exception as e:
+        return f'Erreur : {str(e)}'
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 @app.route('/modifier_ordre_niveaux', methods=['POST'])
 def modifier_ordre_niveaux():

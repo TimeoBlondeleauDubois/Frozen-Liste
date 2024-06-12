@@ -7,7 +7,7 @@
 {% block content %}
 <div class="page-content">
     <h1>Créer un Niveau</h1>
-    <form action="/ajouter_niveau" method="post">
+    <form action="/ajouter_niveau" method="post" enctype="multipart/form-data">
         <label for="id_niveau">ID du niveau:</label><br>
         <input type="number" id="id_niveau" name="id_niveau" min="1" required><br>
         <label for="nom_niveau">Nom du niveau:</label><br>
@@ -22,36 +22,39 @@
         <input type="number" id="classement" name="classement" min="1" required><br>
         <label for="mot_de_passe">Mot de passe:</label><br>
         <input type="text" id="mot_de_passe" name="mot_de_passe" required><br>
-        <label for="video_url">Url de l'iframe de la vidéo de vérification:</label><br>
-        <input type="url" id="video_url" name="video_url" required><br><br>
+        <label for="video_url">Url de l'iframe de la vidéo de vérification (embed):</label><br>
+        <input type="url" id="video_url" name="video_url" required><br>
+        <label for="image_file">Image du niveau:</label>
+        <td><a href="https://ytshorts.savetube.me/fr/10" target="_blank">Récuperer la miniature</a></td><br>
+        <input type="file" id="image_file" name="image_file" accept="image/*" required><br>
         <input type="submit" value="Créer Niveau">
     </form>
-    
+    <br>
     <h1>Supprimer un Niveau</h1>
     <form action="/supprimer_niveau" method="post">
         <label for="nom_niveau">Nom du niveau:</label><br>
-        <input type="text" id="nom_niveau" name="nom_niveau" required><br><br>
-        <input type="submit" value="Supprimer Niveau">
+        <input type="text" id="nom_niveau" name="nom_niveau" required><br>
+        <input type="submit" value="Supprimer Niveau"><br>
     </form>
-    
+    <br>
     <h1>Supprimer une Réussite de Niveau</h1>
     <form action="/supprimer_reussite" method="post">
         <label for="nom_joueur">Nom du joueur:</label><br>
         <input type="text" id="nom_joueur" name="nom_joueur" required><br>
         <label for="nom_niveau">Nom du niveau:</label><br>
-        <input type="text" id="nom_niveau" name="nom_niveau" required><br><br>
-        <input type="submit" value="Supprimer Réussite">
+        <input type="text" id="nom_niveau" name="nom_niveau" required><br>
+        <input type="submit" value="Supprimer Réussite"><br>
     </form>
-
+    <br>
     <h1>Modifier l'ordre des Niveaux</h1>
     <form action="/modifier_ordre_niveaux" method="post">
         <label for="nom_niveau">Nom du niveau:</label><br>
         <input type="text" id="nom_niveau" name="nom_niveau" required><br>
         <label for="new_classement">Nouveau classement:</label><br>
-        <input type="number" id="new_classement" name="new_classement" min="1" required><br><br>
-        <input type="submit" value="Mettre à jour le classement">
+        <input type="number" id="new_classement" name="new_classement" min="1" required><br>
+        <input type="submit" value="Mettre à jour le classement"><br>
     </form>
-
+    <br>
     <h1>Liste des Niveaux</h1>
     <ul>
         {% for niveau in niveaux %}

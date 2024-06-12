@@ -29,7 +29,7 @@
         </div>
         <div class="home-right">
             <div class="carousel-container">
-                <div class="carousel" id="videoCarousel">
+                <div class="carousel" id="imageCarousel">
                 </div>
             </div>
         </div>
@@ -56,21 +56,21 @@
         }
     }
 
-    fetch('/video_urls')
+    fetch('/image_urls')
         .then(response => response.json())
         .then(data => {
-            const carousel = document.getElementById('videoCarousel');
+            const carousel = document.getElementById('imageCarousel');
             
-            data.video_urls.forEach(url => {
-                const iframe = document.createElement('iframe');
-                iframe.src = url;
-                carousel.appendChild(iframe);
+            data.image_urls.forEach(url => {
+                const img = document.createElement('img');
+                img.src = url;
+                carousel.appendChild(img);
             });
 
-            data.video_urls.forEach(url => {
-                const iframe = document.createElement('iframe');
-                iframe.src = url;
-                carousel.appendChild(iframe);
+            data.image_urls.forEach(url => {
+                const img = document.createElement('img');
+                img.src = url;
+                carousel.appendChild(img);
             });
         });
 </script>
