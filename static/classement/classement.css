@@ -36,16 +36,22 @@ $big-margin-right-mb: px;*/
   align-items: center;
   position: absolute;
   width: 100%;
-  animation: slide 16s linear infinite;
+  animation: slide 30s linear infinite;
+}
+
+.carousel a {
+  max-width: 60%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 20px;
+  padding-top: 2px;
 }
 
 .carousel img {
-  width: 40%;
+  width: 100%;
   height: auto;
   border-radius: 20px;
   border: none;
-  margin-bottom: 10px;
-  margin-top: 10px;
 }
 
 @keyframes slide {
@@ -289,8 +295,13 @@ $big-margin-right-mb: px;*/
   margin-bottom: 5.3px;
 }
 
-.reussite-classement, .reussite {
+.reussite {
   padding: 4px;
+}
+
+.reussite-classement {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 .reussite-classement, .reussite, .logoyt-container, .reussite2 {

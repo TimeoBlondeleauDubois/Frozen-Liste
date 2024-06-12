@@ -4,6 +4,7 @@ from flask import Flask, redirect, render_template, request, send_from_directory
 import os
 from werkzeug.utils import secure_filename
 import math
+from werkzeug.utils import escape
 
 app = Flask(__name__)
 app.secret_key = os.urandom(8192)
@@ -98,6 +99,12 @@ def niveau(nom_niveau):
     active_page = 'home'
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
+
+    cursor.execute('SELECT nom FROM Niveau WHERE nom = ?', (nom_niveau,))
+    niveau = cursor.fetchone()
+    if niveau is None:
+        connection.close()
+        return redirect(url_for('error404'))
     
     cursor.execute('SELECT nom, createurs, verifier, publisher, classement, id_niveau, points, mot_de_passe, video_url, victoires FROM Niveau WHERE nom = ?', (nom_niveau,))
     niveau = cursor.fetchone()
@@ -124,11 +131,12 @@ def niveau(nom_niveau):
 def image_urls():
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT image_url FROM Niveau ORDER BY id DESC LIMIT 10')
-    image_urls = cursor.fetchall()
+    cursor.execute('SELECT nom, image_url FROM Niveau ORDER BY id DESC LIMIT 10')
+    niveaux = cursor.fetchall()
     connection.close()
-    return {'image_urls': [url[0] for url in image_urls]}
-
+    return {
+        'niveaux': [{'nom': niveau[0], 'image_url': niveau[1]} for niveau in niveaux]
+    }
 
 #classement
 @app.route('/classement')
@@ -147,6 +155,12 @@ def joueur(nom):
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
 
+    cursor.execute('SELECT nom FROM Joueur WHERE nom = ?', (nom,))
+    joueur = cursor.fetchone()
+    if joueur is None:
+        connection.close()
+        return redirect(url_for('error404'))
+
     cursor.execute('SELECT id, nom, points FROM Joueur WHERE nom = ?', (nom,))
     joueur = cursor.fetchone()
     if joueur is None:
@@ -163,8 +177,10 @@ def joueur(nom):
         FROM ReussiteNiveau
         JOIN Niveau ON ReussiteNiveau.niveau_id = Niveau.id
         WHERE ReussiteNiveau.joueur_id = ?
+        ORDER BY Niveau.classement DESC
     ''', (joueur_id,))
     reussites = cursor.fetchall()
+
 
     cursor.execute('SELECT id, nom, points FROM Joueur ORDER BY points DESC')
     joueurs = cursor.fetchall()
@@ -262,7 +278,7 @@ def connexion():
 
         connection = sqlite3.connect('DataBase.db')
         cursor = connection.cursor()
-        cursor.execute('SELECT password FROM Utilisateur WHERE username = ?', (username,))
+        cursor.execute('SELECT password FROM Utilisateur WHERE username = ?', (escape(username),))
         result = cursor.fetchone()
         connection.close()
 
@@ -451,11 +467,15 @@ def supprimer_reussite():
 
     cursor.execute('DELETE FROM ReussiteNiveau WHERE joueur_id = ? AND niveau_id = ?', (joueur_id, niveau_id))
     connection.commit()
+    
+    mettre_a_jour_victoires()
+    
     connection.close()
     mettre_a_jour_points_utilisateurs()
     mettre_a_jour_points()
 
     return f'Réussite du joueur {nom_joueur} pour le niveau {nom_niveau} supprimée avec succès !'
+
 
 
 def calculer_points(classement, base=2):
@@ -578,6 +598,23 @@ def refuser_record():
     connection.close()
 
     return redirect(url_for('admin'))
+
+def mettre_a_jour_victoires():
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT id FROM Niveau')
+    niveaux = cursor.fetchall()
+
+    for niveau_id, in niveaux:
+        cursor.execute('SELECT COUNT(*) FROM ReussiteNiveau WHERE niveau_id = ?', (niveau_id,))
+        victoires = cursor.fetchone()[0]
+
+        cursor.execute('UPDATE Niveau SET victoires = ? WHERE id = ?', (victoires, niveau_id))
+
+    connection.commit()
+    connection.close()
+
 
 if __name__ == '__main__':
     app.run(debug=True)
