@@ -117,6 +117,17 @@ def niveau(nom_niveau):
 
 
 
+
+@app.route('/video_urls')
+def video_urls():
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    cursor.execute('SELECT video_url FROM Niveau ORDER BY id DESC LIMIT 10')
+    video_urls = cursor.fetchall()
+    connection.close()
+    return {'video_urls': [url[0] for url in video_urls]}
+
+
 #classement
 @app.route('/classement')
 def classement():
