@@ -7,7 +7,6 @@
 {% block content %}
 <div class="page-content">
     <div class="wrapper">
-        <button class="toggle-button" onclick="toggleView()"></button>
         <div class="home-left">
             <div class="searchinput-container">
                 <div class="inputbackground">
@@ -15,34 +14,7 @@
                 </div>
             </div>
             <div class="home-left-container">
-                <ul class="levellist-classid" id="levelsList">
-                    <div>
-                        {% for niveau in niveaux %}
-                            <div class="classement_nom_du_niveau">
-                                <p class="classement_nom_du_niveau_classement">#{{ niveau[3] }}</p>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div>
-                        {% for niveau in niveaux %}
-                            <div class="classement_nom_du_niveau2">
-                                <li class="lien-vers-niveau" onclick="location.href='/liste/{{ niveau[1] }}'">
-                                    <p class="classement_nom_du_niveau_nom_du_niveau">{{ niveau[1] }}</p>
-                                </li>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </ul>
-            </div>
-        </div>
-        <div class="home-left-mob">
-            <div class="searchinput-container">
-            </div>
-            <div class="home-left-container">
                 <ul id="levelsList">
-                    <div class="inputbackground">
-                        <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off">
-                    </div>
                     {% for niveau in niveaux %}
                         <div class="classement_nom_du_niveau">
                             <p class="classement_nom_du_niveau_classement">#{{ niveau[3] }}</p>
@@ -55,24 +27,6 @@
             </div>
         </div>
         <div class="home-right">
-            <ul class="home-right-home-container">
-                {% for niveau in niveaux %}
-                    <li class="container1" onclick="location.href='/liste/{{ niveau[1] }}'">
-                        <iframe class="iframe_minia" width="560" height="315" src="{{ niveau[4] }}" allowfullscreen></iframe>
-                        <div class="container2">
-                            <div class="container3">
-                                <h2>#{{ niveau[3] }}:</h2>
-                                <div class="display">
-                                    <h2>{{ niveau[1] }}</h2>
-                                    <p>{{ niveau[2] }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div> 
-        <div class="home-right-mob">
             <ul class="home-right-home-container">
                 {% for niveau in niveaux %}
                     <li class="container1" onclick="location.href='/liste/{{ niveau[1] }}'">
@@ -113,30 +67,5 @@
             }
         }
     }
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const toggleButton = document.createElement('button');
-        toggleButton.classList.add('toggle-button');
-        document.body.appendChild(toggleButton);
-
-        toggleButton.addEventListener('click', function() {
-            const homeLeft = document.querySelector('.home-left-mob');
-            const homeRight = document.querySelector('.home-right-mob');
-            const isHomeLeftVisible = homeLeft.classList.contains('show');
-
-            if (isHomeLeftVisible) {
-                homeLeft.classList.remove('show');
-                homeLeft.classList.add('hide');
-                homeRight.classList.remove('hide');
-                homeRight.classList.add('show');
-            } else {
-                homeRight.classList.remove('show');
-                homeRight.classList.add('hide');
-                homeLeft.classList.remove('hide');
-                homeLeft.classList.add('show');
-            }
-        });
-    });
 </script>
 {% endblock %}
