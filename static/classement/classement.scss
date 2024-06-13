@@ -6,6 +6,21 @@
     height: 100vh;
 }
 
+h1 {
+    z-index: 1;
+    font-family: $RobotoBold;
+    font-size: $h1-size-mb;
+    color: white;
+    height: fit-content;
+    background-color: #23252b2b;
+    backdrop-filter: blur(5px);
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
 .carousel-container {
     position: relative;
     width: 100%;
@@ -14,18 +29,14 @@
     display: flex;
     justify-content: center;
 
-    h1 {
+    &::before {
+        background: linear-gradient(to top, #23252b00 92%, #23252b 100%);
+        content: "";
+        height: 100%;
+        position: absolute;
+        width: 120%;
         z-index: 1;
-        font-family: $RobotoBold;
-        font-size: $h1-size-mb;
-        color: white;
-        height: fit-content;
-        background-color: #23252b2b;
-        backdrop-filter: blur(5px);
-        text-align: center;
-        margin-top: 20px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        pointer-events: none;
     }
 
     .carousel {
@@ -66,7 +77,6 @@
     100% { transform: translateY(-50%); }
 }
 
-
 .wrapper {
     display: flex;
     height: calc(100vh - 110px);
@@ -95,6 +105,7 @@
     transition: top 3s, left 3s;
     pointer-events: none;
     border-radius: 100%;
+    z-index: 1;
 }
 
 .searchInput {
@@ -225,6 +236,7 @@
     font-family: $RobotoRegular;
     font-size: $p-size-pc-mid;
     color: white;
+    flex-direction: column;
 
     &::-webkit-scrollbar {
         width: 8px;
