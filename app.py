@@ -313,6 +313,7 @@ def admin():
         return render_template('admin.html', niveaux=niveaux, submissions=submissions)
     else:
         return redirect(url_for('connexion'))
+    
 @app.route('/ajouter_niveau', methods=['POST'])
 def ajouter_niveau():
     try:
