@@ -90,7 +90,7 @@ def liste():
     active_page = 'home'
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT id, nom, createurs, classement, video_url, duree FROM Niveau ORDER BY classement')
+    cursor.execute('SELECT id, nom, createurs, classement, image_url, duree FROM Niveau ORDER BY classement')
     niveaux = cursor.fetchall()
     connection.close()
 
