@@ -29,7 +29,8 @@ def init_db():
         victoires INTEGER DEFAULT 0,
         mot_de_passe TEXT,
         video_url TEXT,
-        image_url TEXT
+        image_url TEXT,
+        duree INTEGER
     )
     ''')
 
@@ -89,10 +90,18 @@ def liste():
     active_page = 'home'
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT id, nom, createurs, classement, video_url FROM Niveau ORDER BY classement')
+    cursor.execute('SELECT id, nom, createurs, classement, video_url, duree FROM Niveau ORDER BY classement')
     niveaux = cursor.fetchall()
     connection.close()
-    return render_template('home.html', active_page=active_page, niveaux=niveaux)
+
+    niveaux_formattes = []
+    for niveau in niveaux:
+        duree = niveau[5] 
+        minutes = duree // 60
+        seconds = duree % 60
+        niveaux_formattes.append(niveau[:5] + (minutes, seconds) + niveau[6:])
+    
+    return render_template('home.html', active_page=active_page, niveaux=niveaux_formattes)
 
 @app.route('/liste/<string:nom_niveau>')
 def niveau(nom_niveau):
@@ -106,7 +115,7 @@ def niveau(nom_niveau):
         connection.close()
         return redirect(url_for('error404'))
     
-    cursor.execute('SELECT nom, createurs, verifier, publisher, classement, id_niveau, points, mot_de_passe, video_url, victoires FROM Niveau WHERE nom = ?', (nom_niveau,))
+    cursor.execute('SELECT nom, createurs, verifier, publisher, classement, id_niveau, points, mot_de_passe, video_url, victoires, duree FROM Niveau WHERE nom = ?', (nom_niveau,))
     niveau = cursor.fetchone()
 
     cursor.execute('SELECT id, nom, createurs, classement, video_url, victoires FROM Niveau ORDER BY classement')
@@ -123,7 +132,13 @@ def niveau(nom_niveau):
 
     connection.close()
 
+    duree = niveau[10] 
+    minutes = duree // 60
+    seconds = duree % 60
+    niveau = niveau[:10] + (minutes, seconds)
+
     return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux, active_page=active_page)
+
 
 
 #Carousel
@@ -326,10 +341,14 @@ def ajouter_niveau():
         mot_de_passe = request.form['mot_de_passe']
         video_url = request.form['video_url']
         image_file = request.files['image_file']
+        minutes = int(request.form['minutes'])
+        seconds = int(request.form['seconds'])
         
         if classement <= 0:
             return f'Erreur : Le classement doit être un entier positif'
-
+        
+        duree = minutes * 60 + seconds
+        
         if image_file and allowed_file(image_file.filename):
             filename = secure_filename(image_file.filename)
             image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -352,9 +371,9 @@ def ajouter_niveau():
         points = calculer_points(classement)
 
         cursor.execute('''
-        INSERT INTO Niveau (id_niveau, nom, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (id_niveau, nom_niveau, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url))
+        INSERT INTO Niveau (id_niveau, nom, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url, duree) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (id_niveau, nom_niveau, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url, duree))
 
         connection.commit()
         connection.close()

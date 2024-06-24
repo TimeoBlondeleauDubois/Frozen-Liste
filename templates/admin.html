@@ -27,6 +27,10 @@
         <label for="image_file">Image du niveau:</label>
         <td><a href="https://ytshorts.savetube.me/fr/10" target="_blank">Récuperer la miniature</a></td><br>
         <input type="file" id="image_file" name="image_file" accept="image/*" required><br>
+        <label for="minutes">Durée (minutes):</label><br>
+        <input type="number" id="minutes" name="minutes" min="0" required><br>
+        <label for="seconds">Durée (secondes):</label><br>
+        <input type="number" id="seconds" name="seconds" min="0" max="59" required><br>
         <input type="submit" value="Créer Niveau">
     </form>
     <br>
