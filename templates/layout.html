@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Frozen Liste</title>
+
+    <meta name="keywords" content="Frozen Team, Geometry Dash, Extreme Demon, Insane Demon, Jeux vidéo, Classement, Joueurs">
+    <meta name="author" content="Saoshirax">
+    <meta name="description" content="Découvrez le classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
+    <meta property="og:title" content="La Frozen Liste">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/liste">
+    <meta property="og:description" content="Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
+    <meta property="og:site_name" content="Frozen Liste">
+    <meta property="og:image" content="{{ url_for('static', filename='pictures/logo.png') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Frozen Liste">
+    <meta name="twitter:description" content="Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='pictures/logo.png') }}">
+    <link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/liste">
     <link href="../static/reset.css" rel="stylesheet">
     {% block styles %}{% endblock %}
     <link href="../static/layout/layout.css" rel="stylesheet" />
@@ -111,9 +126,6 @@
             }
         });
     </script>
-    
-    
-    
     {% block scripts %}{% endblock %}
 </body>
 </html>
