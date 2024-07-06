@@ -5,6 +5,7 @@ import os
 from werkzeug.utils import secure_filename
 import math
 from werkzeug.utils import escape
+from flask import jsonify
 
 app = Flask(__name__)
 app.secret_key = os.urandom(8192)
@@ -83,15 +84,74 @@ def init_db():
 
 init_db()
 
+@app.route('/api/niveaux', methods=['GET'])
+def api_niveaux():
+    nom_filter = request.args.get('nom', '')
+    duree_filter = request.args.get('duree', '')
+
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    
+    query = 'SELECT id, nom, createurs, classement, image_url, duree FROM Niveau WHERE nom LIKE ?'
+    params = [f'%{nom_filter}%']
+
+    if duree_filter:
+        if duree_filter == 'Tiny':
+            query += ' AND duree < 30'
+        elif duree_filter == 'Short':
+            query += ' AND duree >= 30 AND duree < 60'
+        elif duree_filter == 'Long':
+            query += ' AND duree >= 60 AND duree < 120'
+        elif duree_filter == 'XL':
+            query += ' AND duree >= 120'
+    
+    query += ' ORDER BY classement'
+    cursor.execute(query, params)
+    niveaux = cursor.fetchall()
+    connection.close()
+    
+    niveaux_formattes = []
+    for niveau in niveaux:
+        duree = niveau[5]
+        minutes = duree // 60
+        seconds = duree % 60
+        niveaux_formattes.append({
+            'id': niveau[0],
+            'nom': niveau[1],
+            'createurs': niveau[2],
+            'classement': niveau[3],
+            'image_url': niveau[4],
+            'minutes': minutes,
+            'seconds': seconds
+        })
+    
+    return jsonify(niveaux_formattes)
 
 
 #Liste
 @app.route('/liste')
 def liste():
     active_page = 'home'
+    nom_filter = request.args.get('nom', '')
+    duree_filter = request.args.get('duree', '')
+
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT id, nom, createurs, classement, image_url, duree FROM Niveau ORDER BY classement')
+    
+    query = 'SELECT id, nom, createurs, classement, image_url, duree FROM Niveau WHERE 1=1'
+    params = []
+
+    if nom_filter:
+        query += ' AND nom LIKE ?'
+        params.append(f'%{nom_filter}%')
+
+    if duree_filter:
+        query += ' AND duree_globale = ?'
+        params.append(duree_filter)
+    
+    query += ' ORDER BY classement'
+
+    cursor.execute(query, params)
     niveaux = cursor.fetchall()
     connection.close()
 
@@ -103,7 +163,6 @@ def liste():
         niveaux_formattes.append(niveau[:5] + (minutes, seconds) + niveau[6:])
     
     return render_template('home.html', active_page=active_page, niveaux=niveaux_formattes)
-
 @app.route('/liste/<string:nom_niveau>')
 def niveau(nom_niveau):
     active_page = 'home'

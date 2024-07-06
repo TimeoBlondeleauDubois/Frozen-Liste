@@ -1,22 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
-    <meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/liste">
-    <link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/liste">
-    <link href="../static/Home/home.css" rel="stylesheet">
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "WebPage",
-            "name": "Level - Frozen Liste",
-            "url": "https://lafrozenliste.eu.pythonanywhere.com/liste",
-            "description": "Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.",
-            "author": {
-                "@type": "Organization",
-                "name": "Saoshirax"
-            }
+<meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/liste">
+<link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/liste">
+<link href="../static/Home/home.css" rel="stylesheet">
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "name": "Level - Frozen Liste",
+        "url": "https://lafrozenliste.eu.pythonanywhere.com/liste",
+        "description": "Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.",
+        "author": {
+            "@type": "Organization",
+            "name": "Saoshirax"
         }
-    </script>
+    }
+</script>
 {% endblock %}
 
 {% block content %}
@@ -28,18 +28,27 @@
                 <div class="inputbackground">
                     <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off" spellcheck="false">
                 </div>
+                <div>
+                    <select id="dureeFilter" onchange="filterLevels()">
+                        <option value="">Tous</option>
+                        <option value="Tiny">Tiny (moins de 30s)</option>
+                        <option value="Short">Short (30s à moins de 1min)</option>
+                        <option value="Long">Long (1min à moins de 2min)</option>
+                        <option value="XL">XL (2min et plus)</option>
+                    </select>
+                </div>
             </div>
             <div class="home-left-container">
                 <ul id="levelsList">
                     {% for classementniveaux in classementniveaux %}
-                        <li class="classement_nom_du_niveau">
-                            <p class="classement_nom_du_niveau_classement">#{{ loop.index }}</p>
-                            <div class="lien-vers-niveau" onclick="location.href='/liste/{{ classementniveaux[1] }}'">
-                                <p class="classement_nom_du_niveau_nom_du_niveau {% if classementniveaux[3] == niveau[4] %} selected-level{% endif %}">
-                                    {{ classementniveaux[1] }}
-                                </p>
-                            </div>
-                        </li>
+                    <li class="classement_nom_du_niveau">
+                        <p class="classement_nom_du_niveau_classement">#{{ loop.index }}</p>
+                        <div class="lien-vers-niveau" onclick="location.href='/liste/{{ classementniveaux[1] }}'">
+                            <p class="classement_nom_du_niveau_nom_du_niveau {% if classementniveaux[3] == niveau[4] %} selected-level{% endif %}">
+                                {{ classementniveaux[1] }}
+                            </p>
+                        </div>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -64,29 +73,29 @@
                     <div class="victoires">
                         <ul class="align-self">
                             {% for victoire in victoires %}
-                                <li class="position">
-                                    <p>#{{ loop.index }}</p>
-                                </li>
+                            <li class="position">
+                                <p>#{{ loop.index }}</p>
+                            </li>
                             {% endfor %}
                         </ul>
                         <ul>
                             {% for victoire in victoires %}
-                                <li class="name-player">
-                                    <div>
-                                        <a href="/classement/{{ victoire[0] }}" class="joueur-link">
-                                            <p>{{ victoire[0] }}</p>
-                                        </a>
-                                    </div>
-                                </li>
+                            <li class="name-player">
+                                <div>
+                                    <a href="/classement/{{ victoire[0] }}" class="joueur-link">
+                                        <p>{{ victoire[0] }}</p>
+                                    </a>
+                                </div>
+                            </li>
                             {% endfor %}
                         </ul>
                         <ul class="logoyt-container">
                             {% for victoire in victoires %}
-                                <li class="logo-yt">
-                                    <a class="victoires-joueur-vid-link" target="_blank" href="{{ victoire[1] }}">
-                                        <img class="logoyt" src="{{ url_for('static', filename='pictures/logo_youtube.svg') }}" alt="YouTube Video">
-                                    </a>
-                                </li>
+                            <li class="logo-yt">
+                                <a class="victoires-joueur-vid-link" target="_blank" href="{{ victoire[1] }}">
+                                    <img class="logoyt" src="{{ url_for('static', filename='pictures/logo_youtube.svg') }}" alt="YouTube Video">
+                                </a>
+                            </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -99,20 +108,28 @@
 
 {% block scripts %}
 <script>
-    function filterLevels() {
-        var input = document.getElementById('searchInput');
-        var filter = input.value.toUpperCase();
-        var levelsList = document.getElementById('levelsList');
-        var levels = levelsList.getElementsByClassName('classement_nom_du_niveau');
+function filterLevels() {
+    var nom = document.getElementById('searchInput').value;
+    var duree = document.getElementById('dureeFilter').value;
+    
+    fetch(`/api/niveaux?nom=${encodeURIComponent(nom)}&duree=${encodeURIComponent(duree)}`)
+        .then(response => response.json())
+        .then(data => {
+            var levelsList = document.getElementById('levelsList');
+            levelsList.innerHTML = '';
 
-        for (var i = 0; i < levels.length; i++) {
-            var levelName = levels[i].getElementsByClassName('classement_nom_du_niveau_nom_du_niveau')[0];
-            if (levelName.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                levels[i].style.display = '';
-            } else {
-                levels[i].style.display = 'none';
-            }
-        }
-    }
+            data.forEach(function(niveau, index) {
+                var li = document.createElement('li');
+                li.className = 'classement_nom_du_niveau';
+                li.innerHTML = `
+                    <p class="classement_nom_du_niveau_classement">#${index + 1}</p>
+                    <div class="lien-vers-niveau" onclick="location.href='/liste/${niveau.nom}'">
+                        <p class="classement_nom_du_niveau_nom_du_niveau">${niveau.nom}</p>
+                    </div>
+                `;
+                levelsList.appendChild(li);
+            });
+        });
+}
 </script>
 {% endblock %}
