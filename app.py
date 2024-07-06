@@ -30,7 +30,8 @@ def init_db():
         mot_de_passe TEXT,
         video_url TEXT,
         image_url TEXT,
-        duree INTEGER
+        duree INTEGER,
+        duree_globale TEXT
     )
     ''')
 
@@ -379,6 +380,7 @@ def ajouter_niveau():
         connection.close()
         mettre_a_jour_points()
         mettre_a_jour_points_utilisateurs()
+        mettre_a_jour_duree_globale()
 
         return f'Niveau {nom_niveau} ajouté avec succès !'
     
@@ -433,6 +435,7 @@ def modifier_ordre_niveaux():
         mettre_a_jour_points()
         connection.close()
         mettre_a_jour_points_utilisateurs()
+        mettre_a_jour_duree_globale()
 
         return redirect(url_for('admin'))
     except sqlite3.Error as e:
@@ -461,6 +464,7 @@ def supprimer_niveau():
     
     mettre_a_jour_points()
     mettre_a_jour_points_utilisateurs()
+    mettre_a_jour_duree_globale()
 
     return f'Niveau {nom_niveau} supprimé avec succès !'
 
@@ -493,6 +497,7 @@ def supprimer_reussite():
     connection.close()
     mettre_a_jour_points_utilisateurs()
     mettre_a_jour_points()
+    mettre_a_jour_duree_globale()
 
     return f'Réussite du joueur {nom_joueur} pour le niveau {nom_niveau} supprimée avec succès !'
 
@@ -538,6 +543,28 @@ def mettre_a_jour_points_utilisateurs():
     connection.commit()
     connection.close()
 
+def mettre_a_jour_duree_globale():
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    
+    cursor.execute('SELECT id, duree FROM Niveau')
+    niveaux = cursor.fetchall()
+    
+    for niveau in niveaux:
+        niveau_id, duree = niveau
+        if duree < 30:
+            duree_globale = 'tiny'
+        elif 30 <= duree < 60:
+            duree_globale = 'short'
+        elif 60 <= duree < 120:
+            duree_globale = 'long'
+        else:
+            duree_globale = 'xl'
+        
+        cursor.execute('UPDATE Niveau SET duree_globale = ? WHERE id = ?', (duree_globale, niveau_id))
+    
+    connection.commit()
+    connection.close()
 
     
 # Valider ou refuser un record soumis et pouvoir modifier le nom du joueur et du niveau en cas d'erreur
