@@ -103,7 +103,9 @@ def api_niveaux():
         elif duree_filter == 'Long':
             query += ' AND duree >= 60 AND duree < 120'
         elif duree_filter == 'XL':
-            query += ' AND duree >= 120'
+            query += ' AND duree >= 120 AND duree < 300'
+        elif duree_filter == 'XXL':
+            query += ' AND duree >= 300'
     
     query += ' ORDER BY classement'
     cursor.execute(query, params)
