@@ -28,15 +28,20 @@
                 <div class="inputbackground">
                     <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off" spellcheck="false">
                 </div>
-                <div>
-                    <select id="dureeFilter" onchange="filterLevels()">
-                        <option value="">Tous</option>
-                        <option value="Tiny">Tiny</option>
-                        <option value="Short">Short</option>
-                        <option value="Long">Long</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                    </select>
+                <div class="inputbackground">
+                    <div class="dropdown">
+                        <button class="dropbtn">Durée</button>
+                        <ul class="dropdown-content" id="dureeFilter">
+                            <div class="dropdown-container">
+                                <li data-value="">Tous</li>
+                                <li data-value="Tiny">Tiny</li>
+                                <li data-value="Short">Short</li>
+                                <li data-value="Long">Long</li>
+                                <li data-value="XL">XL</li>
+                                <li data-value="XXL">XXL</li>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="home-left-container">
@@ -111,7 +116,7 @@
 <script>
 function filterLevels() {
     var nom = document.getElementById('searchInput').value;
-    var duree = document.getElementById('dureeFilter').value;
+    var duree = document.querySelector('.dropdown-content .selected')?.dataset.value || '';
     
     fetch(`/api/niveaux?nom=${encodeURIComponent(nom)}&duree=${encodeURIComponent(duree)}`)
         .then(response => response.json())
@@ -132,5 +137,15 @@ function filterLevels() {
             });
         });
 }
+
+document.querySelectorAll('.dropdown-content li').forEach(function(item) {
+    item.addEventListener('click', function() {
+        document.querySelectorAll('.dropdown-content li').forEach(function(el) {
+            el.classList.remove('selected');
+        });
+        this.classList.add('selected');
+        filterLevels();
+    });
+});
 </script>
 {% endblock %}
