@@ -114,11 +114,38 @@
 
 {% block scripts %}
 <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const selectedLevel = localStorage.getItem('selectedLevel');
+        if (selectedLevel) {
+            document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((element) => {
+                if (element.textContent.trim() === selectedLevel) {
+                    element.classList.add('selected-level');
+                }
+            });
+        }
+
+        document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
+            element.addEventListener('click', (event) => {
+                const levelName = element.querySelector('.classement_nom_du_niveau_nom_du_niveau').textContent.trim();
+
+                localStorage.setItem('selectedLevel', levelName);
+
+                window.location.href = `/liste/${levelName}`;
+            });
+        });
+    });
+
     function selectDuration(element) {
         var selectedValue = element.dataset.value;
         var label = selectedValue ? element.innerText : "Durée";
         document.getElementById("dureeLabel").innerText = label;
         document.getElementById("dureeFilter").classList.remove("show");
+
+        document.querySelectorAll('.dropdown-content li').forEach(function(el) {
+            el.classList.remove('selected');
+        });
+        element.classList.add('selected');
+
         filterLevels();
     }
     
@@ -143,20 +170,42 @@
                 var levelsList = document.getElementById('levelsList');
                 levelsList.innerHTML = '';
     
+                const selectedLevel = localStorage.getItem('selectedLevel');
+    
                 data.forEach(function(niveau) {
                     var li = document.createElement('li');
                     li.className = 'classement_nom_du_niveau';
                     li.innerHTML = `
                         <p class="classement_nom_du_niveau_classement">#${niveau.classement}</p>
-                        <div class="lien-vers-niveau" onclick="location.href='/liste/${niveau.nom}'">
-                            <p class="classement_nom_du_niveau_nom_du_niveau">${niveau.nom}</p>
+                        <div class="lien-vers-niveau" onclick="selectLevel('${niveau.nom}')">
+                            <p class="classement_nom_du_niveau_nom_du_niveau ${selectedLevel === niveau.nom ? 'selected-level' : ''}">${niveau.nom}</p>
                         </div>
                     `;
                     levelsList.appendChild(li);
                 });
+
+                document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
+                    element.addEventListener('click', (event) => {
+                        const levelName = element.querySelector('.classement_nom_du_niveau_nom_du_niveau').textContent.trim();
+
+                        localStorage.setItem('selectedLevel', levelName);
+
+                        window.location.href = `/liste/${levelName}`;
+                    });
+                });
             });
     }
     
+    function selectLevel(levelName) {
+        document.querySelectorAll('.selected-level').forEach((el) => {
+            el.classList.remove('selected-level');
+        });
+
+        document.querySelector(`.classement_nom_du_niveau_nom_du_niveau:contains("${levelName}")`).classList.add('selected-level');
+
+        localStorage.setItem('selectedLevel', levelName);
+    }
+
     document.querySelectorAll('.dropdown-content li').forEach(function(item) {
         item.addEventListener('click', function() {
             document.querySelectorAll('.dropdown-content li').forEach(function(el) {
@@ -166,8 +215,8 @@
             selectDuration(this); 
         });
     });
-    
+
     document.getElementById('searchInput').addEventListener('input', filterLevels);
-    
+
 </script>
 {% endblock %}
