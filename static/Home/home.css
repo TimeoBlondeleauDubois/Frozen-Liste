@@ -47,6 +47,10 @@ $big-margin-right-mb: px;*/
   border-radius: 20px;
 }
 
+.dropdown-content.show {
+  display: block;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
