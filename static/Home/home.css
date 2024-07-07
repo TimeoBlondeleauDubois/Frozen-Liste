@@ -29,7 +29,7 @@ $big-margin-right-mb: px;*/
   font-family: RobotoBold;
   transition: all 300ms ease-in-out;
   justify-content: center;
-  width: 120px;
+  width: 100px;
   font-size: 25px;
   margin-right: 40px;
 }
@@ -43,7 +43,7 @@ $big-margin-right-mb: px;*/
   margin-top: 20px;
   background-color: #36383B;
   z-index: 1;
-  width: 120px;
+  width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
 }
