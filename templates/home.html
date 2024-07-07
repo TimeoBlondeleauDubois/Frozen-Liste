@@ -85,18 +85,18 @@
     function filterLevels() {
         var nom = document.getElementById('searchInput').value;
         var duree = document.querySelector('.dropdown-content .selected')?.dataset.value || '';
-        
+    
         fetch(`/api/niveaux?nom=${encodeURIComponent(nom)}&duree=${encodeURIComponent(duree)}`)
             .then(response => response.json())
             .then(data => {
                 var levelsList = document.getElementById('levelsList');
                 levelsList.innerHTML = '';
     
-                data.forEach(function(niveau, index) {
+                data.forEach(function(niveau) {
                     var li = document.createElement('li');
                     li.className = 'classement_nom_du_niveau';
                     li.innerHTML = `
-                        <p class="classement_nom_du_niveau_classement">#${index + 1}</p>
+                        <p class="classement_nom_du_niveau_classement">#${niveau.classement}</p>
                         <div class="lien-vers-niveau" onclick="location.href='/liste/${niveau.nom}'">
                             <p class="classement_nom_du_niveau_nom_du_niveau">${niveau.nom}</p>
                         </div>
@@ -115,6 +115,8 @@
             filterLevels();
         });
     });
+    
+    
     </script>
     
 {% endblock %}

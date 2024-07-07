@@ -165,6 +165,7 @@ def liste():
         niveaux_formattes.append(niveau[:5] + (minutes, seconds) + niveau[6:])
     
     return render_template('home.html', active_page=active_page, niveaux=niveaux_formattes)
+
 @app.route('/liste/<string:nom_niveau>')
 def niveau(nom_niveau):
     active_page = 'home'
