@@ -2,7 +2,7 @@
 
 # Lien du site : [Frozen Liste](https://lafrozenliste.eu.pythonanywhere.com), Pour se connecter: IDENTIFIANT: "a" MOT DE PASSE: "a"
 
-## Projet: Classement des Niveaux Extreme Demon de la Team Frozen
+## Projet: Classement des niveaux réussis de la Team Frozen
 
 Ce projet est une application web qui permet de voir tous les niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team. Le site propose un système de classement des joueurs basé sur leurs performances et est conçue pour être responsive.
 
