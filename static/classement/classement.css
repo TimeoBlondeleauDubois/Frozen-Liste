@@ -315,10 +315,14 @@ h1 {
 .home-right .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur h1 {
   margin-left: 12px;
 }
+.home-right .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur p {
+  margin-top: 8px;
+}
 .home-right .home-right-container .home-right-wrapper .home-right-points-joueurs {
   font-family: RobotoBold;
   font-size: 25px;
   margin-bottom: 30px;
+  margin-top: -20px;
 }
 .home-right .home-right-container .home-right-wrapper .h2 {
   font-size: 40px;

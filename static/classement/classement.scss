@@ -312,12 +312,17 @@ h1 {
                 h1 {
                     margin-left: 12px;
                 }
+
+                p {
+                    margin-top: 8px;
+                }
             }
 
             .home-right-points-joueurs {
                 font-family: $RobotoBold;
                 font-size: $p-size-pc-mid;
                 margin-bottom: 30px;
+                margin-top: -20px;
             }
 
             .h2 {
