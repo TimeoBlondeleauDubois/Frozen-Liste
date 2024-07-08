@@ -4,7 +4,6 @@ from flask import Flask, redirect, render_template, request, send_from_directory
 import os
 from werkzeug.utils import secure_filename
 import math
-from werkzeug.utils import escape
 from flask import jsonify
 
 app = Flask(__name__)
@@ -354,7 +353,7 @@ def connexion():
 
         connection = sqlite3.connect('DataBase.db')
         cursor = connection.cursor()
-        cursor.execute('SELECT password FROM Utilisateur WHERE username = ?', (escape(username),))
+        cursor.execute('SELECT password FROM Utilisateur WHERE username = ?', (username,))
         result = cursor.fetchone()
         connection.close()
 
@@ -369,7 +368,7 @@ def connexion():
         return render_template('connexion.html')
 
 def validate_user_input(username, password):
-    return bool(username and password)
+    return username and password
 
 
 
