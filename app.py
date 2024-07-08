@@ -96,16 +96,14 @@ def api_niveaux():
     params = [f'%{nom_filter}%']
 
     if duree_filter:
-        if duree_filter == 'Tiny':
-            query += ' AND duree < 30'
-        elif duree_filter == 'Short':
-            query += ' AND duree >= 30 AND duree < 60'
+        if duree_filter == 'Short':
+            query += ' AND duree >= 0 AND duree < 60'
         elif duree_filter == 'Long':
             query += ' AND duree >= 60 AND duree < 120'
         elif duree_filter == 'XL':
-            query += ' AND duree >= 120 AND duree < 300'
+            query += ' AND duree >= 120 AND duree < 240'
         elif duree_filter == 'XXL':
-            query += ' AND duree >= 300'
+            query += ' AND duree >= 240'
     
     query += ' ORDER BY classement'
     cursor.execute(query, params)
@@ -614,14 +612,14 @@ def mettre_a_jour_duree_globale():
     
     for niveau in niveaux:
         niveau_id, duree = niveau
-        if duree < 30:
-            duree_globale = 'tiny'
-        elif 30 <= duree < 60:
+        if 0 <= duree < 60:
             duree_globale = 'short'
         elif 60 <= duree < 120:
             duree_globale = 'long'
-        else:
+        elif 120 <= duree < 240:
             duree_globale = 'xl'
+        else:
+            duree_globale = 'xxl'
         
         cursor.execute('UPDATE Niveau SET duree_globale = ? WHERE id = ?', (duree_globale, niveau_id))
     
