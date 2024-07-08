@@ -322,8 +322,9 @@ def submit_record():
 def submit_record_correctement_envoyer():
     return render_template('submit_record_correctement_envoyer.html')
 
+
 #Accéder à la page Admin
-@app.route('/creer_compte', methods=['GET', 'POST'])
+"""@app.route('/creer_compte', methods=['GET', 'POST'])
 def creer_compte():
     if request.method == 'POST':
         username = request.form['username']
@@ -340,7 +341,7 @@ def creer_compte():
         except sqlite3.IntegrityError:
             return 'Erreur : Nom d\'utilisateur déjà utilisé.'
     else:
-        return render_template('creer_compte.html')
+        return render_template('creer_compte.html')"""
 
 @app.route('/connexion', methods=['GET', 'POST'])
 def connexion():
