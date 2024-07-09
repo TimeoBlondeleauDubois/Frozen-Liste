@@ -201,6 +201,9 @@ $big-margin-right-mb: px;*/
 .home-left .home-left-container .classement_nom_du_niveau_classement {
   padding-bottom: 8px;
   padding-top: 8px;
+  width: 43px;
+  display: flex;
+  justify-content: end;
 }
 .home-left .home-left-container .classement_nom_du_niveau {
   display: flex;
