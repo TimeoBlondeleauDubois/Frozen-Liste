@@ -30,4 +30,4 @@ Ce projet est une application web qui permet de voir tous les niveaux Extreme et
 - Changer le placement des niveaux
 
 ## Voici la base de donnée:
-![BDD](https://github.com/TimeoBlondeleauDubois/Frozen-Liste/assets/150905525/679eaa75-13b7-4439-8b2f-3e1d602af291)
+https://github.com/TimeoBlondeleauDubois/Frozen-Liste/assets/150905525/679eaa75-13b7-4439-8b2f-3e1d602af291
