@@ -131,7 +131,6 @@ $big-margin-right-mb: px;*/
 }
 .searchInput:focus {
   outline: none;
-  background-color: #313131;
 }
 
 .searchInput::-webkit-input-placeholder {

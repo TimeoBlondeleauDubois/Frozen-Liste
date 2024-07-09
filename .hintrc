@@ -14,7 +14,8 @@
           "min-height: auto",
           "rotate",
           "width: fit-content",
-          "height: fit-content"
+          "height: fit-content",
+          "max-width: fit-content"
         ]
       }
     ]
