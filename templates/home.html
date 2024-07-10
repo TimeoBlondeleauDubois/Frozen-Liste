@@ -112,7 +112,7 @@
             });
         }
 
-        filterLevels(); // Call to apply the filter on page load
+        filterLevels();
 
         document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
             element.addEventListener('click', (event) => {
@@ -133,6 +133,10 @@
 
         document.getElementById('searchInput').addEventListener('input', (event) => {
             localStorage.setItem('searchInputValue', event.target.value);
+        });
+
+        homeLeft.addEventListener('scroll', (event) => {
+            localStorage.setItem('scrollPosition', homeLeft.scrollTop);
         });
     });
 
@@ -226,13 +230,5 @@
     });
 
     document.getElementById('searchInput').addEventListener('input', filterLevels);
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const homeLeft = document.querySelector('.home-left');
-        const scrollPosition = localStorage.getItem('scrollPosition');
-
-        if (scrollPosition) {
-            homeLeft.scrollTop = scrollPosition;
-        }
-    });
 </script>
 {% endblock %}
