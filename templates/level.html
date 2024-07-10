@@ -117,7 +117,9 @@
         const homeLeft = document.querySelector('.home-left');
         const selectedLevel = localStorage.getItem('selectedLevel');
         const scrollPosition = localStorage.getItem('scrollPosition');
-    
+        const selectedDuration = localStorage.getItem('selectedDuration');
+        const searchInputValue = localStorage.getItem('searchInputValue');  // Ajouter cette ligne
+        
         if (selectedLevel) {
             document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((element) => {
                 if (element.textContent.trim() === selectedLevel) {
@@ -129,6 +131,21 @@
         if (scrollPosition) {
             homeLeft.scrollTop = scrollPosition;
         }
+    
+        if (selectedDuration) {
+            document.querySelectorAll('.dropdown-content li').forEach((element) => {
+                if (element.dataset.value === selectedDuration) {
+                    element.classList.add('selected');
+                    document.getElementById("dureeLabel").innerText = element.innerText;
+                }
+            });
+        }
+    
+        if (searchInputValue) {  // Ajouter cette condition
+            document.getElementById('searchInput').value = searchInputValue;
+        }
+    
+        filterLevels(); // Ajouté pour filtrer les niveaux au chargement de la page
     
         document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
             element.addEventListener('click', (event) => {
@@ -143,22 +160,28 @@
                 localStorage.setItem('selectedLevel', levelName);
                 localStorage.setItem('scrollPosition', homeLeft.scrollTop);
     
-                window.location.href = `/liste/${levelName}`;
+                // Ajouter un délai de 0,1 seconde avant la navigation
+                setTimeout(() => {
+                    window.location.href = `/liste/${levelName}`;
+                }, 100);
             });
         });
     });
-
+    
     function selectDuration(element) {
         var selectedValue = element.dataset.value;
         var label = selectedValue ? element.innerText : "Durée";
         document.getElementById("dureeLabel").innerText = label;
         document.getElementById("dureeFilter").classList.remove("show");
-
+    
         document.querySelectorAll('.dropdown-content li').forEach(function(el) {
             el.classList.remove('selected');
         });
         element.classList.add('selected');
-
+    
+        // Enregistrer la durée sélectionnée dans le localStorage
+        localStorage.setItem('selectedDuration', selectedValue);
+    
         filterLevels();
     }
     
@@ -175,8 +198,9 @@
     
     function filterLevels() {
         var nom = document.getElementById('searchInput').value;
-        var duree = document.querySelector('.dropdown-content .selected')?.dataset.value || '';
-        
+        localStorage.setItem('searchInputValue', nom);  // Ajouter cette ligne
+        var duree = localStorage.getItem('selectedDuration') || '';
+    
         fetch(`/api/niveaux?nom=${encodeURIComponent(nom)}&duree=${encodeURIComponent(duree)}`)
             .then(response => response.json())
             .then(data => {
@@ -196,19 +220,19 @@
                     `;
                     levelsList.appendChild(li);
                 });
-
+    
                 document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
                     element.addEventListener('click', (event) => {
                         const levelName = element.querySelector('.classement_nom_du_niveau_nom_du_niveau').textContent.trim();
-
+    
                         document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((el) => {
                             el.classList.remove('selected-level');
                         });
-
+    
                         element.querySelector('.classement_nom_du_niveau_nom_du_niveau').classList.add('selected-level');
-
+    
                         localStorage.setItem('selectedLevel', levelName);
-
+    
                         window.location.href = `/liste/${levelName}`;
                     });
                 });
@@ -219,12 +243,12 @@
         document.querySelectorAll('.selected-level').forEach((el) => {
             el.classList.remove('selected-level');
         });
-
+    
         document.querySelector(`.classement_nom_du_niveau_nom_du_niveau:contains("${levelName}")`).classList.add('selected-level');
-
+    
         localStorage.setItem('selectedLevel', levelName);
     }
-
+    
     document.querySelectorAll('.dropdown-content li').forEach(function(item) {
         item.addEventListener('click', function() {
             document.querySelectorAll('.dropdown-content li').forEach(function(el) {
@@ -234,7 +258,7 @@
             selectDuration(this); 
         });
     });
-
+    
     document.getElementById('searchInput').addEventListener('input', filterLevels);
     document.addEventListener('DOMContentLoaded', (event) => {
         const homeLeft = document.querySelector('.home-left');

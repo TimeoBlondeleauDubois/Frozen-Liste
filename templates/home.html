@@ -41,7 +41,6 @@
                         </ul>
                     </div>
                 </div>
-                
             </div>
             <div class="home-left-container">
                 <ul id="levelsList">
@@ -73,7 +72,7 @@
                     </li>
                 {% endfor %}
             </ul>
-        </div>             
+        </div>
     </div>
     <div class="glow"></div>
 </div>
@@ -85,7 +84,9 @@
         const homeLeft = document.querySelector('.home-left');
         const selectedLevel = localStorage.getItem('selectedLevel');
         const scrollPosition = localStorage.getItem('scrollPosition');
-    
+        const searchInputValue = localStorage.getItem('searchInputValue');
+        const selectedDuration = localStorage.getItem('selectedDuration');
+
         if (selectedLevel) {
             document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((element) => {
                 if (element.textContent.trim() === selectedLevel) {
@@ -93,26 +94,45 @@
                 }
             });
         }
-    
+
         if (scrollPosition) {
             homeLeft.scrollTop = scrollPosition;
         }
-    
+
+        if (searchInputValue) {
+            document.getElementById('searchInput').value = searchInputValue;
+        }
+
+        if (selectedDuration) {
+            document.querySelectorAll('.dropdown-content li').forEach((element) => {
+                if (element.dataset.value === selectedDuration) {
+                    element.classList.add('selected');
+                    document.getElementById("dureeLabel").innerText = element.innerText;
+                }
+            });
+        }
+
+        filterLevels(); // Call to apply the filter on page load
+
         document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
             element.addEventListener('click', (event) => {
                 const levelName = element.querySelector('.classement_nom_du_niveau_nom_du_niveau').textContent.trim();
-    
+
                 document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((el) => {
                     el.classList.remove('selected-level');
                 });
-    
+
                 element.querySelector('.classement_nom_du_niveau_nom_du_niveau').classList.add('selected-level');
-    
+
                 localStorage.setItem('selectedLevel', levelName);
                 localStorage.setItem('scrollPosition', homeLeft.scrollTop);
-    
+
                 window.location.href = `/liste/${levelName}`;
             });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (event) => {
+            localStorage.setItem('searchInputValue', event.target.value);
         });
     });
 
@@ -127,29 +147,33 @@
         });
         element.classList.add('selected');
 
+        localStorage.setItem('selectedDuration', selectedValue);
+
         filterLevels();
     }
-    
+
     function toggleDropdown() {
         document.getElementById("dureeFilter").classList.toggle("show");
     }
-    
+
     document.addEventListener('click', function(event) {
         var dropdown = document.getElementById("dureeFilter");
         if (!event.target.closest('.dropbtn')) {
             dropdown.classList.remove('show');
         }
     });
-    
+
     function filterLevels() {
         var nom = document.getElementById('searchInput').value;
-        var duree = document.querySelector('.dropdown-content .selected')?.dataset.value || '';
-        
+        var duree = localStorage.getItem('selectedDuration') || '';
+
         fetch(`/api/niveaux?nom=${encodeURIComponent(nom)}&duree=${encodeURIComponent(duree)}`)
             .then(response => response.json())
             .then(data => {
                 var levelsList = document.getElementById('levelsList');
                 levelsList.innerHTML = '';
+
+                const selectedLevel = localStorage.getItem('selectedLevel');
 
                 data.forEach(function(niveau) {
                     var li = document.createElement('li');
@@ -157,7 +181,7 @@
                     li.innerHTML = `
                         <p class="classement_nom_du_niveau_classement">#${niveau.classement}</p>
                         <div class="lien-vers-niveau" onclick="selectLevel('${niveau.nom}')">
-                            <p class="classement_nom_du_niveau_nom_du_niveau">${niveau.nom}</p>
+                            <p class="classement_nom_du_niveau_nom_du_niveau ${selectedLevel === niveau.nom ? 'selected-level' : ''}">${niveau.nom}</p>
                         </div>
                     `;
                     levelsList.appendChild(li);
@@ -202,16 +226,13 @@
     });
 
     document.getElementById('searchInput').addEventListener('input', filterLevels);
-
     document.addEventListener('DOMContentLoaded', (event) => {
         const homeLeft = document.querySelector('.home-left');
         const scrollPosition = localStorage.getItem('scrollPosition');
-    
+
         if (scrollPosition) {
             homeLeft.scrollTop = scrollPosition;
         }
     });
 </script>
-
-    
 {% endblock %}
