@@ -82,20 +82,35 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        localStorage.removeItem('selectedLevel');
-
+        const homeLeft = document.querySelector('.home-left');
+        const selectedLevel = localStorage.getItem('selectedLevel');
+        const scrollPosition = localStorage.getItem('scrollPosition');
+    
+        if (selectedLevel) {
+            document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((element) => {
+                if (element.textContent.trim() === selectedLevel) {
+                    element.classList.add('selected-level');
+                }
+            });
+        }
+    
+        if (scrollPosition) {
+            homeLeft.scrollTop = scrollPosition;
+        }
+    
         document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
             element.addEventListener('click', (event) => {
                 const levelName = element.querySelector('.classement_nom_du_niveau_nom_du_niveau').textContent.trim();
-
+    
                 document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((el) => {
                     el.classList.remove('selected-level');
                 });
-
+    
                 element.querySelector('.classement_nom_du_niveau_nom_du_niveau').classList.add('selected-level');
-
+    
                 localStorage.setItem('selectedLevel', levelName);
-
+                localStorage.setItem('scrollPosition', homeLeft.scrollTop);
+    
                 window.location.href = `/liste/${levelName}`;
             });
         });
@@ -188,6 +203,14 @@
 
     document.getElementById('searchInput').addEventListener('input', filterLevels);
 
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const homeLeft = document.querySelector('.home-left');
+        const scrollPosition = localStorage.getItem('scrollPosition');
+    
+        if (scrollPosition) {
+            homeLeft.scrollTop = scrollPosition;
+        }
+    });
 </script>
 
     
