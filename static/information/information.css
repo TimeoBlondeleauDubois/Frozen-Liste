@@ -110,7 +110,6 @@ $big-margin-right-mb: px;*/
     max-width: 35px;
     max-height: 30px;
     margin-right: -5px;
-    margin-bottom: 30px;
     margin-left: 5px;
   }
   .img_logo_instagram {
@@ -129,7 +128,6 @@ $big-margin-right-mb: px;*/
     max-width: 30px;
     max-height: 30px;
     margin-right: -5px;
-    margin-bottom: 30px;
     margin-top: -15px;
     margin-left: 5px;
   }
@@ -161,7 +159,6 @@ $big-margin-right-mb: px;*/
     max-width: 45px;
     max-height: 40px;
     margin-right: -5px;
-    margin-bottom: 30px;
     margin-left: 5px;
   }
   .img_logo_instagram {
@@ -180,8 +177,10 @@ $big-margin-right-mb: px;*/
     max-width: 40px;
     max-height: 40px;
     margin-right: -5px;
-    margin-bottom: 30px;
     margin-top: -15px;
     margin-left: 5px;
   }
+}
+.link-logo-yt, .link_logo_github {
+  margin-bottom: 30px;
 }/*# sourceMappingURL=information.css.map */
