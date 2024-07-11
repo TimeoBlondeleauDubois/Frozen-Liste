@@ -104,22 +104,26 @@ $big-margin-right-mb: px;*/
     max-width: 25px;
     max-height: 20px;
     margin-right: -5px;
+    margin-left: 5px;
   }
   .img_logo_yt {
     max-width: 35px;
     max-height: 30px;
     margin-right: -5px;
     margin-bottom: 30px;
+    margin-left: 5px;
   }
   .img_logo_instagram {
     max-width: 30px;
     max-height: 30px;
     margin-right: -5px;
+    margin-left: 5px;
   }
   .img_logo_linkedin {
     max-width: 30px;
     max-height: 30px;
     margin-right: -5px;
+    margin-left: 5px;
   }
   .img_logo_github {
     max-width: 30px;
@@ -127,6 +131,7 @@ $big-margin-right-mb: px;*/
     margin-right: -5px;
     margin-bottom: 30px;
     margin-top: -15px;
+    margin-left: 5px;
   }
 }
 @media screen and (min-width: 700px) {
@@ -150,22 +155,26 @@ $big-margin-right-mb: px;*/
     max-width: 35px;
     max-height: 30px;
     margin-right: -5px;
+    margin-left: 5px;
   }
   .img_logo_yt {
     max-width: 45px;
     max-height: 40px;
     margin-right: -5px;
     margin-bottom: 30px;
+    margin-left: 5px;
   }
   .img_logo_instagram {
     max-width: 40px;
     max-height: 40px;
     margin-right: -5px;
+    margin-left: 5px;
   }
   .img_logo_linkedin {
     max-width: 40px;
     max-height: 40px;
     margin-right: -5px;
+    margin-left: 5px;
   }
   .img_logo_github {
     max-width: 40px;
@@ -173,5 +182,6 @@ $big-margin-right-mb: px;*/
     margin-right: -5px;
     margin-bottom: 30px;
     margin-top: -15px;
+    margin-left: 5px;
   }
 }/*# sourceMappingURL=information.css.map */
