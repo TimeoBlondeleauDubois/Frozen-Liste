@@ -82,18 +82,12 @@
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const homeLeft = document.querySelector('.home-left');
-        const selectedLevel = localStorage.getItem('selectedLevel');
+
+        localStorage.removeItem('selectedLevel');
+
         const scrollPosition = localStorage.getItem('scrollPosition');
         const searchInputValue = localStorage.getItem('searchInputValue');
         const selectedDuration = localStorage.getItem('selectedDuration');
-
-        if (selectedLevel) {
-            document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((element) => {
-                if (element.textContent.trim() === selectedLevel) {
-                    element.classList.add('selected-level');
-                }
-            });
-        }
 
         if (scrollPosition) {
             homeLeft.scrollTop = scrollPosition;
@@ -177,7 +171,6 @@
                 var levelsList = document.getElementById('levelsList');
                 levelsList.innerHTML = '';
 
-                const selectedLevel = localStorage.getItem('selectedLevel');
 
                 data.forEach(function(niveau) {
                     var li = document.createElement('li');
@@ -185,7 +178,7 @@
                     li.innerHTML = `
                         <p class="classement_nom_du_niveau_classement">#${niveau.classement}</p>
                         <div class="lien-vers-niveau" onclick="selectLevel('${niveau.nom}')">
-                            <p class="classement_nom_du_niveau_nom_du_niveau ${selectedLevel === niveau.nom ? 'selected-level' : ''}">${niveau.nom}</p>
+                            <p class="classement_nom_du_niveau_nom_du_niveau">${niveau.nom}</p>
                         </div>
                     `;
                     levelsList.appendChild(li);
