@@ -27,7 +27,7 @@
     margin-left: auto;
     margin-right: auto;
     animation: gradient 10s ease infinite;
-    background: linear-gradient(-45deg, $primary-color-black, $secondary-color-grey);
+    background: $primary-color-black;
     background-size: 400% 400%;
     min-height: 100vh;
 }

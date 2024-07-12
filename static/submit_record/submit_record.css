@@ -32,7 +32,7 @@ $big-margin-right-mb: px;*/
   margin-left: auto;
   margin-right: auto;
   animation: gradient 10s ease infinite;
-  background: linear-gradient(-45deg, #23252B, #36383B);
+  background: #23252B;
   background-size: 400% 400%;
   min-height: 100vh;
 }
