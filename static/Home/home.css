@@ -529,7 +529,7 @@ $big-margin-right-mb: px;*/
     width: 205px !important;
   }
 }
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 980px) and (min-width: 796px) {
   .home-left-container {
     margin-left: 0px !important;
   }
@@ -572,7 +572,7 @@ $big-margin-right-mb: px;*/
     margin-bottom: 0px !important;
   }
 }
-@media screen and (max-width: 796px) {
+@media screen and (max-width: 796px) and (min-width: 700px) {
   .home-left-container {
     margin-left: 0px !important;
   }
