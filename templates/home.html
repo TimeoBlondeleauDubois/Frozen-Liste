@@ -141,25 +141,33 @@
         });
 
         showLeftButton.addEventListener('click', () => {
-            homeLeft.style.display = 'block';
-            homeRight.style.display = 'none';
+            homeLeft.classList.add('show');
+            homeRight.classList.remove('show');
+            homeLeft.classList.remove('hide');
+            homeRight.classList.add('hide');
         });
 
         showRightButton.addEventListener('click', () => {
-            homeRight.style.display = 'block';
-            homeLeft.style.display = 'none';
+            homeRight.classList.add('show');
+            homeLeft.classList.remove('show');
+            homeRight.classList.remove('hide');
+            homeLeft.classList.add('hide');
         });
 
-        homeRight.style.display = 'block';
-        homeLeft.style.display = 'none';
+        homeRight.classList.add('show');
+        homeLeft.classList.add('hide');
 
         function adjustVisibility() {
             if (window.innerWidth < 700) {
-                homeLeft.style.display = 'none';
-                homeRight.style.display = 'block';
+                homeLeft.classList.remove('show');
+                homeLeft.classList.add('hide');
+                homeRight.classList.add('show');
+                homeRight.classList.remove('hide');
             } else {
-                homeLeft.style.display = 'block';
-                homeRight.style.display = 'block';
+                homeLeft.classList.add('show');
+                homeLeft.classList.remove('hide');
+                homeRight.classList.add('show');
+                homeRight.classList.remove('hide');
             }
         }
 

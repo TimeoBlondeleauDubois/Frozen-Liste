@@ -666,10 +666,33 @@ $big-margin-right-mb: px;*/
     position: fixed;
     z-index: 10000000;
   }
-  .home-left {
-    display: none;
+  .home-left, .home-right {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateX(100%);
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 110px) !important;
   }
-  .home-right {
-    display: block;
+  .home-left.show, .home-right.show {
+    opacity: 1;
+    transform: translateX(0);
   }
+  .home-left.hide, .home-right.hide {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  .home-left.show {
+    transform: translateX(0);
+  }
+  .home-right.show {
+    transform: translateX(0);
+  }
+  .home-left.hide, .home-right.hide {
+    pointer-events: none;
+  }
+}
+body {
+  overflow-y: hidden;
+  overflow-x: hidden;
 }/*# sourceMappingURL=home.css.map */
