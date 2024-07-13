@@ -158,21 +158,20 @@
         homeLeft.classList.add('hide');
 
         function adjustVisibility() {
+            const homeLeft = document.querySelector('.home-left');
+            const homeRight = document.querySelector('.home-right');
+        
             if (window.innerWidth < 700) {
-                homeLeft.classList.remove('show');
                 homeLeft.classList.add('hide');
-                homeRight.classList.add('show');
                 homeRight.classList.remove('hide');
             } else {
-                homeLeft.classList.add('show');
                 homeLeft.classList.remove('hide');
-                homeRight.classList.add('show');
                 homeRight.classList.remove('hide');
             }
         }
-
-        adjustVisibility();
+        
         window.addEventListener('resize', adjustVisibility);
+        adjustVisibility();
     });
 
     function selectDuration(element) {

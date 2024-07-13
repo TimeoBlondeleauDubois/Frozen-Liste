@@ -766,14 +766,30 @@
         height: calc(100% - 110px) !important;
     }
 
+    .home-left,
+    .home-right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        transition: transform 0.5s ease-in-out;
+    }
+
     .home-left.show, .home-right.show {
         opacity: 1;
         transform: translateX(0);
     }
 
-    .home-left.hide, .home-right.hide {
-        opacity: 0;
+    .home-left.hide {
         transform: translateX(100%);
+        opacity: 0;
+    }
+    
+    .home-right.hide {
+        transform: translateX(100%);
+        opacity: 0;
     }
 
     .home-left.show {
@@ -797,9 +813,15 @@
        width: fit-content;
        margin-left: 37px;
     }
-}
 
-body {
-    overflow-y: hidden;
-    overflow-x: hidden;
+    body {
+        overflow: hidden;
+    }
+    
+    .wrapper {
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+    }
 }
