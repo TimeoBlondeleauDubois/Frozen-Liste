@@ -665,6 +665,7 @@ $big-margin-right-mb: px;*/
   .toggle-buttons {
     position: fixed;
     z-index: 10000000;
+    margin-top: 100px;
   }
   .home-left, .home-right {
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
@@ -690,6 +691,15 @@ $big-margin-right-mb: px;*/
   }
   .home-left.hide, .home-right.hide {
     pointer-events: none;
+  }
+  .home-left {
+    display: flex;
+    align-items: center;
+  }
+  .searchinput-container {
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: 37px;
   }
 }
 body {

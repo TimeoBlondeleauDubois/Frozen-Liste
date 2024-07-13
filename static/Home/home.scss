@@ -754,6 +754,7 @@
     .toggle-buttons {
         position: fixed;
         z-index: 10000000;
+        margin-top: 100px;
     }
 
     .home-left, .home-right {
@@ -785,6 +786,16 @@
 
     .home-left.hide, .home-right.hide {
         pointer-events: none;
+    }
+
+    .home-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .searchinput-container {
+       width: fit-content;
+       margin-left: 37px;
     }
 }
 
