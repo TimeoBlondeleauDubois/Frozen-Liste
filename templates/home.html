@@ -22,6 +22,10 @@
 {% block content %}
 <div class="page-content">
     <div class="wrapper">
+        <div class="toggle-buttons">
+            <button id="showLeft">Show Left</button>
+            <button id="showRight">Show Right</button>
+        </div>
         <div class="home-left">
             <div class="searchinput-container">
                 <div class="inputbackground">
@@ -82,6 +86,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const homeLeft = document.querySelector('.home-left');
+        const homeRight = document.querySelector('.home-right');
+        const showLeftButton = document.getElementById('showLeft');
+        const showRightButton = document.getElementById('showRight');
 
         localStorage.removeItem('selectedLevel');
 
@@ -132,6 +139,32 @@
         homeLeft.addEventListener('scroll', (event) => {
             localStorage.setItem('scrollPosition', homeLeft.scrollTop);
         });
+
+        showLeftButton.addEventListener('click', () => {
+            homeLeft.style.display = 'block';
+            homeRight.style.display = 'none';
+        });
+
+        showRightButton.addEventListener('click', () => {
+            homeRight.style.display = 'block';
+            homeLeft.style.display = 'none';
+        });
+
+        homeRight.style.display = 'block';
+        homeLeft.style.display = 'none';
+
+        function adjustVisibility() {
+            if (window.innerWidth < 700) {
+                homeLeft.style.display = 'none';
+                homeRight.style.display = 'block';
+            } else {
+                homeLeft.style.display = 'block';
+                homeRight.style.display = 'block';
+            }
+        }
+
+        adjustVisibility();
+        window.addEventListener('resize', adjustVisibility);
     });
 
     function selectDuration(element) {
@@ -170,7 +203,6 @@
             .then(data => {
                 var levelsList = document.getElementById('levelsList');
                 levelsList.innerHTML = '';
-
 
                 data.forEach(function(niveau) {
                     var li = document.createElement('li');
