@@ -4,6 +4,7 @@
 <meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/liste">
 <link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/liste">
 <link href="../static/Home/home.css" rel="stylesheet">
+<link href="../static/Home/res_level.css" rel="stylesheet">
 <script type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -23,6 +24,10 @@
 <div class="page-content">
     <div class="glow"></div>
     <div class="wrapper">
+        <div class="toggle-buttons">
+            <button id="showLeft">Show Left</button>
+            <button id="showRight">Show Right</button>
+        </div>
         <div class="home-left">
             <div class="searchinput-container">
                 <div class="inputbackground">
@@ -115,10 +120,13 @@
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     const homeLeft = document.querySelector('.home-left');
+    const homeRight = document.querySelector('.home-right');
     const selectedLevel = localStorage.getItem('selectedLevel');
     const scrollPosition = localStorage.getItem('scrollPosition');
     const searchInputValue = localStorage.getItem('searchInputValue');
     const selectedDuration = localStorage.getItem('selectedDuration');
+    const showLeftButton = document.getElementById('showLeft');
+    const showRightButton = document.getElementById('showRight');
 
     if (selectedLevel) {
         document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((element) => {
@@ -176,6 +184,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     localStorage.removeItem('scrollPosition');
+
+    showLeftButton.addEventListener('click', () => {
+        homeLeft.classList.add('show');
+        homeRight.classList.remove('show');
+        homeLeft.classList.remove('hide');
+        homeRight.classList.add('hide');
+    });
+
+    showRightButton.addEventListener('click', () => {
+        homeRight.classList.add('show');
+        homeLeft.classList.remove('show');
+        homeRight.classList.remove('hide');
+        homeLeft.classList.add('hide');
+    });
+
+    homeRight.classList.add('show');
+    homeLeft.classList.add('hide');
+
+    function adjustVisibility() {
+        const homeLeft = document.querySelector('.home-left');
+        const homeRight = document.querySelector('.home-right');
+    
+        if (window.innerWidth < 700) {
+            homeLeft.classList.add('hide');
+            homeRight.classList.remove('hide');
+        } else {
+            homeLeft.classList.remove('hide');
+            homeRight.classList.remove('hide');
+        }
+    }
+    
+    window.addEventListener('resize', adjustVisibility);
+    adjustVisibility();
 });
 
 function selectDuration(element) {
