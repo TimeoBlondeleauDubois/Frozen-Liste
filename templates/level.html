@@ -25,8 +25,7 @@
     <div class="glow"></div>
     <div class="wrapper">
         <div class="toggle-buttons">
-            <button id="showLeft">Show Left</button>
-            <button id="showRight">Show Right</button>
+            <button class="button_switcher" id="toggleView"><img class="fleche" src="{{ url_for('static', filename='pictures/fleche.png') }}"></img></button>
         </div>
         <div class="home-left">
             <div class="searchinput-container">
@@ -125,8 +124,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const scrollPosition = localStorage.getItem('scrollPosition');
     const searchInputValue = localStorage.getItem('searchInputValue');
     const selectedDuration = localStorage.getItem('selectedDuration');
-    const showLeftButton = document.getElementById('showLeft');
-    const showRightButton = document.getElementById('showRight');
+    const toggleViewButton = document.getElementById('toggleView');
 
     if (selectedLevel) {
         document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((element) => {
@@ -185,18 +183,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     localStorage.removeItem('scrollPosition');
 
-    showLeftButton.addEventListener('click', () => {
-        homeLeft.classList.add('show');
-        homeRight.classList.remove('show');
-        homeLeft.classList.remove('hide');
-        homeRight.classList.add('hide');
-    });
-
-    showRightButton.addEventListener('click', () => {
-        homeRight.classList.add('show');
-        homeLeft.classList.remove('show');
-        homeRight.classList.remove('hide');
-        homeLeft.classList.add('hide');
+    toggleViewButton.addEventListener('click', () => {
+        if (homeLeft.classList.contains('show')) {
+            homeLeft.classList.remove('show');
+            homeLeft.classList.add('hide');
+            homeRight.classList.add('show');
+            homeRight.classList.remove('hide');
+        } else {
+            homeRight.classList.remove('show');
+            homeRight.classList.add('hide');
+            homeLeft.classList.add('show');
+            homeLeft.classList.remove('hide');
+        }
     });
 
     homeRight.classList.add('show');
@@ -309,5 +307,14 @@ document.querySelectorAll('.dropdown-content li').forEach(function(item) {
 });
 
 document.getElementById('searchInput').addEventListener('input', filterLevels);
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const toggleViewButton = document.getElementById('toggleView');
+    const fleche = document.querySelector('.fleche');
+
+    toggleViewButton.addEventListener('click', () => {
+        fleche.classList.toggle('rotated');
+    });
+});
 </script>
 {% endblock %}

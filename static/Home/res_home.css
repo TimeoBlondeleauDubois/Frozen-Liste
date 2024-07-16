@@ -207,9 +207,6 @@ $big-margin-right-mb: px;*/
   }
 }
 @media screen and (max-width: 700px) {
-  .toggle-buttons {
-    margin-top: 200px;
-  }
   .home-left, .home-right {
     min-width: 100% !important;
   }
@@ -251,7 +248,6 @@ $big-margin-right-mb: px;*/
   .toggle-buttons {
     position: fixed;
     z-index: 10000000;
-    margin-top: 100px;
   }
   .home-left, .home-right {
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;

@@ -24,8 +24,7 @@
 <div class="page-content">
     <div class="wrapper">
         <div class="toggle-buttons">
-            <button id="showLeft">Show Left</button>
-            <button id="showRight">Show Right</button>
+            <button class="button_switcher" id="toggleView"><img class="fleche" src="{{ url_for('static', filename='pictures/fleche.png') }}"></img></button>
         </div>
         <div class="home-left">
             <div class="searchinput-container">
@@ -88,8 +87,7 @@
     document.addEventListener('DOMContentLoaded', (event) => {
         const homeLeft = document.querySelector('.home-left');
         const homeRight = document.querySelector('.home-right');
-        const showLeftButton = document.getElementById('showLeft');
-        const showRightButton = document.getElementById('showRight');
+        const toggleViewButton = document.getElementById('toggleView');
 
         localStorage.removeItem('selectedLevel');
 
@@ -141,18 +139,18 @@
             localStorage.setItem('scrollPosition', homeLeft.scrollTop);
         });
 
-        showLeftButton.addEventListener('click', () => {
-            homeLeft.classList.add('show');
-            homeRight.classList.remove('show');
-            homeLeft.classList.remove('hide');
-            homeRight.classList.add('hide');
-        });
-
-        showRightButton.addEventListener('click', () => {
-            homeRight.classList.add('show');
-            homeLeft.classList.remove('show');
-            homeRight.classList.remove('hide');
-            homeLeft.classList.add('hide');
+        toggleViewButton.addEventListener('click', () => {
+            if (homeLeft.classList.contains('show')) {
+                homeLeft.classList.remove('show');
+                homeLeft.classList.add('hide');
+                homeRight.classList.add('show');
+                homeRight.classList.remove('hide');
+            } else {
+                homeRight.classList.remove('show');
+                homeRight.classList.add('hide');
+                homeLeft.classList.add('show');
+                homeLeft.classList.remove('hide');
+            }
         });
 
         homeRight.classList.add('show');
@@ -263,5 +261,14 @@
     });
 
     document.getElementById('searchInput').addEventListener('input', filterLevels);
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const toggleViewButton = document.getElementById('toggleView');
+        const fleche = document.querySelector('.fleche');
+
+        toggleViewButton.addEventListener('click', () => {
+            fleche.classList.toggle('rotated');
+        });
+    });
 </script>
 {% endblock %}
