@@ -410,3 +410,30 @@ h1 {
 #bold {
     font-family: $RobotoBold;
 }
+
+.button_switcher {
+    width: 35px;
+    height: 35px;
+    background-color: $secondary-color-grey;
+    border-radius: 300px;
+    transition: all 300ms ease-in-out;
+    border: solid 1px white;
+    position: fixed;
+    top: 55%;
+    left: 92%;
+    transform: translate(-50%, -50%);
+
+    &:hover {
+        background-color: #494b4d;
+        cursor: pointer;
+    }
+
+    .fleche {
+        max-width: 18px;
+        transition: all 300ms ease-in-out;
+    }
+}
+
+.rotated {
+    transform: rotate(180deg);
+}

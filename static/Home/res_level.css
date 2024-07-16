@@ -282,6 +282,7 @@ $big-margin-right-mb: px;*/
   }
   .home-left-container {
     margin-left: 0px !important;
+    min-width: 310px;
   }
   .searchInput {
     margin-left: 20px !important;
@@ -396,6 +397,7 @@ $big-margin-right-mb: px;*/
   }
   .home-left-container {
     margin-left: -25px !important;
+    min-width: 315px;
   }
   .searchinput-container {
     margin-left: 25px !important;
@@ -408,9 +410,6 @@ $big-margin-right-mb: px;*/
   }
   .home-left, .home-right {
     min-width: 100% !important;
-  }
-  .home-left-container {
-    margin-left: 0px !important;
   }
   .searchInput {
     margin-left: 20px !important;
@@ -531,6 +530,7 @@ $big-margin-right-mb: px;*/
   }
   .home-left-container {
     margin-left: -25px !important;
+    min-width: 315px;
   }
   .searchinput-container {
     margin-left: 25px !important;
@@ -543,9 +543,6 @@ $big-margin-right-mb: px;*/
   }
   .home-left, .home-right {
     min-width: 100% !important;
-  }
-  .home-left-container {
-    margin-left: 0px !important;
   }
   .searchInput {
     margin-left: 20px !important;
@@ -666,6 +663,7 @@ $big-margin-right-mb: px;*/
   }
   .home-left-container {
     margin-left: -25px !important;
+    min-width: 320px;
   }
   .searchinput-container {
     margin-left: 25px !important;
@@ -678,9 +676,6 @@ $big-margin-right-mb: px;*/
   }
   .home-left, .home-right {
     min-width: 100% !important;
-  }
-  .home-left-container {
-    margin-left: 0px !important;
   }
   .searchInput {
     margin-left: 20px !important;
@@ -801,6 +796,7 @@ $big-margin-right-mb: px;*/
   }
   .home-left-container {
     margin-left: -25px !important;
+    min-width: 315px;
   }
   .searchinput-container {
     margin-left: 25px !important;
@@ -813,9 +809,6 @@ $big-margin-right-mb: px;*/
   }
   .home-left, .home-right {
     min-width: 100% !important;
-  }
-  .home-left-container {
-    margin-left: 0px !important;
   }
   .searchInput {
     margin-left: 20px !important;
@@ -936,6 +929,7 @@ $big-margin-right-mb: px;*/
   }
   .home-left-container {
     margin-left: -25px !important;
+    min-width: 300px;
   }
   .searchinput-container {
     margin-left: 25px !important;

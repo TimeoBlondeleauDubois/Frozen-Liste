@@ -4,6 +4,8 @@
 <meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/classement">
 <link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/classement">
 <link href="../static/classement/classement.css" rel="stylesheet">
+<link href="../static/classement/res_classement.css" rel="stylesheet">
+<link href="../static/classement/res_classement_joueur.css" rel="stylesheet">
 <script type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -22,7 +24,12 @@
 {% block content %}
 <div class="page-content">
     <div class="wrapper">
-        <div class="home-left">
+        <div class="toggle-buttons">
+            <button class="button_switcher" id="toggleView">
+                <img class="fleche" src="{{ url_for('static', filename='pictures/fleche.png') }}"></img>
+            </button>
+        </div>
+        <div class="home-left show">
             <div class="searchinput-container">
                 <div class="inputbackground">
                     <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off" spellcheck="false">
@@ -42,11 +49,10 @@
                 </ul>
             </div>
         </div>
-        <div class="home-right2">
+        <div class="home-right2 hide">
             <h1>Derniers niveaux réussis par les joueurs de la team:</h1>
             <div class="carousel-container">
-                <div class="carousel" id="imageCarousel">
-                </div>
+                <div class="carousel" id="imageCarousel"></div>
             </div>
         </div>
     </div>
@@ -57,7 +63,14 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
+        const homeLeft = document.querySelector('.home-left');
+        const homeRight = document.querySelector('.home-right2');
+        const toggleViewButton = document.getElementById('toggleView');
+        const fleche = document.querySelector('.fleche');
+
         const selectedLevel = localStorage.getItem('selectedLevel');
+        const scrollPosition = localStorage.getItem('scrollPosition');
+        const searchInputValue = localStorage.getItem('searchInputValue');
 
         if (selectedLevel) {
             document.querySelectorAll('.classement_nom_du_joueur_nom').forEach((element) => {
@@ -66,10 +79,48 @@
                 }
             });
         }
+
+        if (scrollPosition) {
+            homeLeft.scrollTop = scrollPosition;
+        }
+
+        if (searchInputValue) {
+            document.getElementById('searchInput').value = searchInputValue;
+            filterLevels();
+        }
+
+        toggleViewButton.addEventListener('click', () => {
+            fleche.classList.toggle('rotated');
+            if (homeLeft.classList.contains('show')) {
+                homeLeft.classList.remove('show');
+                homeLeft.classList.add('hide');
+                homeRight.classList.add('show');
+                homeRight.classList.remove('hide');
+            } else {
+                homeRight.classList.remove('show');
+                homeRight.classList.add('hide');
+                homeLeft.classList.add('show');
+                homeLeft.classList.remove('hide');
+            }
+        });
+
+        function adjustVisibility() {
+            if (window.innerWidth < 700) {
+                homeLeft.classList.add('hide');
+                homeRight.classList.remove('hide');
+            } else {
+                homeLeft.classList.remove('hide');
+                homeRight.classList.remove('hide');
+            }
+        }
+        
+        window.addEventListener('resize', adjustVisibility);
+        adjustVisibility();
     });
 
     function setSelectedLevel(levelName) {
         localStorage.setItem('selectedLevel', levelName);
+        localStorage.setItem('scrollPosition', document.querySelector('.home-left').scrollTop);
     }
 
     function filterLevels() {
