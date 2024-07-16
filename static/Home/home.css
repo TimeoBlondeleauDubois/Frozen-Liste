@@ -437,17 +437,17 @@ $big-margin-right-mb: px;*/
 .button_switcher {
   width: 35px;
   height: 35px;
-  background-color: #A000C7;
+  background-color: #36383B;
   border-radius: 300px;
   transition: all 300ms ease-in-out;
-  border: none;
+  border: solid 1px white;
   position: fixed;
   top: 55%;
   left: 92%;
   transform: translate(-50%, -50%);
 }
 .button_switcher:hover {
-  background-color: #9000b4;
+  background-color: #494b4d;
   cursor: pointer;
 }
 .button_switcher .fleche {
