@@ -247,7 +247,7 @@ $big-margin-right-mb: px;*/
   }
   .toggle-buttons {
     position: fixed;
-    z-index: 10000000;
+    z-index: 1;
   }
   .home-left, .home-right {
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
