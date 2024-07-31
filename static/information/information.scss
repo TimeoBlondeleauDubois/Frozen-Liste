@@ -1,0 +1,193 @@
+@import '../Global/Global.scss';
+
+.glow {
+    position: absolute;
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(255, 255, 255, 0.1);
+    filter: blur(125px);
+    transition: top 3s, left 3s;
+    pointer-events: none;
+    border-radius: 100%;
+}
+
+.page-content {
+    background-color: $primary-color-black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100vh;
+
+    #bold {
+        font-weight: bold;
+    }
+
+    .wrapper {
+        background-color: #4747477e;
+        z-index: 1;
+        backdrop-filter: blur(30px);
+        margin-left: $border-margin-left-pc;
+        margin-right: $border-margin-right-pc;
+        margin-top: 150px;
+        margin-bottom: 40px;
+        border-radius: 40px;
+
+        .information, .contacter, .Lien {
+            max-width: 800px;
+        }
+
+        .h1 {
+            margin-top: 40px;
+        }
+
+        a {
+            .img_logo_tipeee {
+                max-width: 100px;
+                max-height: auto;
+                margin-top: -20px;
+                margin-bottom: 30px;
+            }
+        }
+
+        .section {
+            display: flex;
+        }
+
+        .TimeoBlondeleau {
+            margin-top: 6px;
+        }
+
+        .saoshirax {
+            margin-top: 6px;
+        }
+
+        .contacter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    } 
+}
+
+@media screen and (max-width: 700px) {
+    p {
+        font-family: $RobotoRegular;
+        font-size: $p-size-mb;
+        color: white;
+        margin-left: $big-margin-left-pc;
+        margin-right: $big-margin-right-pc;
+        margin-bottom: 20px;
+    }
+
+    .h2 {
+        font-family: $RobotoBold;
+        font-size: 30px;
+        color: white;
+        margin-left: $big-margin-left-pc;
+        margin-right: $big-margin-right-pc;
+        margin-bottom: 25px;
+    }
+
+    .img_logo_mail {
+        max-width: 25px;
+        max-height: 20px;
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .img_logo_yt {
+        max-width: 35px;
+        max-height: 30px;
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .img_logo_instagram {
+        max-width: 30px;
+        max-height: 30px;
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .img_logo_linkedin {
+        max-width: 30px;
+        max-height: 30px;
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .img_logo_github {
+        max-width: 30px;
+        max-height: 30px;
+        margin-right: -5px;
+        margin-top: -15px;
+        margin-left: 5px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    p {
+        font-family: $RobotoRegular;
+        font-size: $p-size-pc;
+        color: white;
+        margin-left: $big-margin-left-pc;
+        margin-right: $big-margin-right-pc;
+        margin-bottom: 20px;
+    }
+
+    .h2 {
+        font-family: $RobotoBold;
+        font-size: $h2-size-pc;
+        color: white;
+        margin-left: $big-margin-left-pc;
+        margin-right: $big-margin-right-pc;
+        margin-bottom: 25px;
+    }
+
+    .img_logo_mail {
+        max-width: 35px;
+        max-height: 30px;
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .img_logo_yt {
+        max-width: 45px;
+        max-height: 40px;
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .img_logo_instagram {
+        max-width: 40px;
+        max-height: 40px;
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .img_logo_linkedin {
+        max-width: 40px;
+        max-height: 40px;
+        margin-right: -5px;        
+        margin-left: 5px;
+    }
+
+    .img_logo_github {
+        max-width: 40px;
+        max-height: 40px;
+        margin-right: -5px;
+        margin-top: -15px;
+        margin-left: 5px;
+    }
+}
+
+.link-logo-yt, .link_logo_github {
+    margin-bottom: 30px;
+}

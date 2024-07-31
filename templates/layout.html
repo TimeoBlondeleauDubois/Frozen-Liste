@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Frozen Liste</title>
+    <meta name="keywords" content="Frozen Team, Geometry Dash, Extreme Demon, Insane Demon, Jeux vidéo, Classement, Joueurs">
+    <meta name="author" content="Saoshirax">
+    <meta name="description" content="Découvrez le classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
+    <meta property="og:title" content="La Frozen Liste">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
+    <meta property="og:site_name" content="Frozen Liste">
+    <meta property="og:image" content="{{ url_for('static', filename='pictures/logo.png') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Frozen Liste">
+    <meta name="twitter:description" content="Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='pictures/logo.png') }}">
     <link href="../static/reset.css" rel="stylesheet">
     {% block styles %}{% endblock %}
     <link href="../static/layout/layout.css" rel="stylesheet" />
@@ -18,7 +30,7 @@
             </a>
             <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
             <label for="menu-icon"></label>
-            <nav class="nav"> 		
+            <nav class="nav">
                 <ul class="pt-5">
                     <li><a {% if active_page == 'home' %}class="class-home"{% endif %} href="/home">Liste</a></li>
                     <li><a {% if active_page == 'classement' %}class="class-classement"{% endif %} href="/classement">Classement</a></li>
@@ -42,7 +54,7 @@
                         <a class="lien-logo-discord-pc" href="https://discord.gg/X5H7XFTtmA" target="_blank">
                             <img id="discord-logo" class="logo-discord" src="{{ url_for('static', filename='pictures/discord_static.png') }}" alt="Logo discord">
                         </a>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,51 +69,51 @@
         document.addEventListener('DOMContentLoaded', () => {
             const circle = document.querySelector('.glow');
             const pageContent = document.querySelector('.page-content');
-    
+
             setTimeout(() => {
                 circle.classList.add('visible');
             }, 2000);
-    
+
             function getRandomPosition() {
                 const x = Math.random() * (pageContent.clientWidth - circle.clientWidth);
                 const y = Math.random() * (pageContent.clientHeight - circle.clientHeight);
                 return { x, y };
             }
-    
+
             function moveCircle() {
                 const { x, y } = getRandomPosition();
                 circle.style.top = `${y}px`;
                 circle.style.left = `${x}px`;
             }
-    
+
             function continuousMove() {
                 moveCircle();
                 setTimeout(continuousMove, 3000);
             }
-    
+
             moveCircle();
             continuousMove();
         });
     </script>
     <script>
         var discordLogo = document.getElementById('discord-logo');
-    
+
         var staticSrc = "{{ url_for('static', filename='pictures/discord_static.png') }}";
         var animatedSrc = "{{ url_for('static', filename='pictures/discordgif.gif') }}";
-    
+
         var gifDuration = 1300;
         var startTime;
-    
+
         discordLogo.addEventListener('mouseover', function() {
             this.src = animatedSrc;
             startTime = Date.now();
             clearTimeout(timer);
         });
-    
+
         discordLogo.addEventListener('mouseout', function() {
             var elapsedTime = Date.now() - startTime;
             var remainingTime = gifDuration - elapsedTime;
-    
+
             if (remainingTime > 0) {
                 timer = setTimeout(function() {
                     discordLogo.src = staticSrc;
@@ -111,9 +123,6 @@
             }
         });
     </script>
-    
-    
-    
     {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -6,6 +6,21 @@
     height: 100vh;
 }
 
+h1 {
+    z-index: 1;
+    font-family: $RobotoBold;
+    font-size: $h1-size-mb;
+    color: white;
+    height: fit-content;
+    background-color: #23252b2b;
+    backdrop-filter: blur(5px);
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
 .carousel-container {
     position: relative;
     width: 100%;
@@ -14,18 +29,14 @@
     display: flex;
     justify-content: center;
 
-    h1 {
+    &::before {
+        background: linear-gradient(to top, #23252b00 92%, #23252b 100%);
+        content: "";
+        height: 100%;
+        position: absolute;
+        width: 120%;
         z-index: 1;
-        font-family: $RobotoBold;
-        font-size: $h1-size-mb;
-        color: white;
-        height: fit-content;
-        background-color: #23252b2b;
-        backdrop-filter: blur(5px);
-        text-align: center;
-        margin-top: 20px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        pointer-events: none;
     }
 
     .carousel {
@@ -66,7 +77,6 @@
     100% { transform: translateY(-50%); }
 }
 
-
 .wrapper {
     display: flex;
     height: calc(100vh - 110px);
@@ -95,10 +105,11 @@
     transition: top 3s, left 3s;
     pointer-events: none;
     border-radius: 100%;
+    z-index: 1;
 }
 
 .searchInput {
-    width: 60%;
+    width: 250px;
     height: 40px;
     border-radius: 300px;
     border: none;
@@ -214,10 +225,44 @@
     }
 }
 
+.home-right2 {
+    height: 100%;
+    width: 70%;
+    overflow-y: none;
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+    background-color: $primary-color-black;
+    font-family: $RobotoRegular;
+    font-size: $p-size-pc-mid;
+    color: white;
+    flex-direction: column;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 12px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #aaaaaa;
+        transition: all 300ms ease-in-out;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: #5c5c5c;
+        border-radius: 300px;
+        transition: all 300ms ease-in-out;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: #6e6e6e;
+    }
+}
+
 .home-right {
     height: 100%;
     width: 70%;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-top: 110px;
     display: flex;
     justify-content: center;
@@ -267,12 +312,17 @@
                 h1 {
                     margin-left: 12px;
                 }
+
+                p {
+                    margin-top: 8px;
+                }
             }
 
             .home-right-points-joueurs {
                 font-family: $RobotoBold;
                 font-size: $p-size-pc-mid;
                 margin-bottom: 30px;
+                margin-top: -20px;
             }
 
             .h2 {
@@ -359,4 +409,31 @@
 
 #bold {
     font-family: $RobotoBold;
+}
+
+.button_switcher {
+    width: 35px;
+    height: 35px;
+    background-color: $secondary-color-grey;
+    border-radius: 300px;
+    transition: all 300ms ease-in-out;
+    border: solid 1px white;
+    position: fixed;
+    top: 55%;
+    left: 92%;
+    transform: translate(-50%, -50%);
+
+    &:hover {
+        background-color: #494b4d;
+        cursor: pointer;
+    }
+
+    .fleche {
+        max-width: 18px;
+        transition: all 300ms ease-in-out;
+    }
+}
+
+.rotated {
+    transform: rotate(180deg);
 }

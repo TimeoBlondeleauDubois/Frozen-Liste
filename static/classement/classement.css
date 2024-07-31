@@ -23,15 +23,7 @@ $big-margin-right-mb: px;*/
   height: 100vh;
 }
 
-.carousel-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-}
-.carousel-container h1 {
+h1 {
   z-index: 1;
   font-family: RobotoBold;
   font-size: 40px;
@@ -45,6 +37,25 @@ $big-margin-right-mb: px;*/
   margin-top: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.carousel-container::before {
+  background: linear-gradient(to top, rgba(35, 37, 43, 0) 92%, #23252b 100%);
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 120%;
+  z-index: 1;
+  pointer-events: none;
 }
 .carousel-container .carousel {
   display: flex;
@@ -110,10 +121,11 @@ $big-margin-right-mb: px;*/
   transition: top 3s, left 3s;
   pointer-events: none;
   border-radius: 100%;
+  z-index: 1;
 }
 
 .searchInput {
-  width: 60%;
+  width: 250px;
   height: 40px;
   border-radius: 300px;
   border: none;
@@ -219,10 +231,42 @@ $big-margin-right-mb: px;*/
   background-color: #A000C7 !important;
 }
 
+.home-right2 {
+  height: 100%;
+  width: 70%;
+  overflow-y: none;
+  margin-top: 110px;
+  display: flex;
+  justify-content: center;
+  background-color: #23252B;
+  font-family: RobotoRegular;
+  font-size: 25px;
+  color: white;
+  flex-direction: column;
+}
+.home-right2::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+.home-right2::-webkit-scrollbar-track {
+  background: #aaaaaa;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-right2::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+  border-radius: 300px;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-right2::-webkit-scrollbar-thumb:hover {
+  background: #6e6e6e;
+}
+
 .home-right {
   height: 100%;
   width: 70%;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-top: 110px;
   display: flex;
   justify-content: center;
@@ -271,10 +315,14 @@ $big-margin-right-mb: px;*/
 .home-right .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur h1 {
   margin-left: 12px;
 }
+.home-right .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur p {
+  margin-top: 8px;
+}
 .home-right .home-right-container .home-right-wrapper .home-right-points-joueurs {
   font-family: RobotoBold;
   font-size: 25px;
   margin-bottom: 30px;
+  margin-top: -20px;
 }
 .home-right .home-right-container .home-right-wrapper .h2 {
   font-size: 40px;
@@ -350,4 +398,29 @@ $big-margin-right-mb: px;*/
 
 #bold {
   font-family: RobotoBold;
+}
+
+.button_switcher {
+  width: 35px;
+  height: 35px;
+  background-color: #36383B;
+  border-radius: 300px;
+  transition: all 300ms ease-in-out;
+  border: solid 1px white;
+  position: fixed;
+  top: 55%;
+  left: 92%;
+  transform: translate(-50%, -50%);
+}
+.button_switcher:hover {
+  background-color: #494b4d;
+  cursor: pointer;
+}
+.button_switcher .fleche {
+  max-width: 18px;
+  transition: all 300ms ease-in-out;
+}
+
+.rotated {
+  transform: rotate(180deg);
 }/*# sourceMappingURL=classement.css.map */

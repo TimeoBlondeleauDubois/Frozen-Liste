@@ -1,7 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
+<meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/classement">
+<link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/classement">
 <link href="../static/classement/classement.css" rel="stylesheet">
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "name": "Classement des joueurs - Frozen Liste",
+        "url": "https://lafrozenliste.eu.pythonanywhere.com/classement",
+        "description": "Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.",
+        "author": {
+            "@type": "Organization",
+            "name": "Saoshirax"
+        }
+    }
+</script>
 {% endblock %}
 
 {% block content %}
@@ -10,7 +25,7 @@
         <div class="home-left">
             <div class="searchinput-container">
                 <div class="inputbackground">
-                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off">
+                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off" spellcheck="false">
                 </div>
             </div>
             <div class="home-left-container">
@@ -18,7 +33,7 @@
                     {% for joueur_item in joueurs %}
                         <div class="classement_nom_du_joueur">
                             <p class="classement_nom_du_joueur_position">#{{ loop.index }}</p>
-                            <a class="home-right-container-wrapper {% if joueur_item[1] == selected_joueur %}selected{% endif %}" href="{{ url_for('joueur', nom=joueur_item[1]) }}">
+                            <a class="home-right-container-wrapper {% if joueur_item[1] == selected_joueur %}selected{% endif %}" href="{{ url_for('joueur', nom=joueur_item[1]) }}" onclick="setSelectedLevel('{{ joueur_item[1] }}')">
                                 <span class="classement_nom_du_joueur_nom">{{ joueur_item[1] }}</span>
                             </a>
                             <p class="home-right-container-paragraph">{{ joueur_item[2] }} points</p>
@@ -50,7 +65,7 @@
                             {% for reussite in reussites|reverse %}
                                 <li class="reussite2">
                                     <div>                                     
-                                        <a href="{{ url_for('niveau', nom_niveau=reussite[0]) }}">
+                                        <a href="{{ url_for('niveau', nom_niveau=reussite[0]) }}" onclick="setSelectedLevel('{{ reussite[0] }}')">
                                             <p>{{ reussite[0] }}</p>
                                         </a>
                                     </div>
@@ -86,6 +101,22 @@
 
 {% block scripts %}
 <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const selectedLevel = localStorage.getItem('selectedLevel');
+
+        if (selectedLevel) {
+            document.querySelectorAll('.classement_nom_du_joueur_nom').forEach((element) => {
+                if (element.textContent.trim() === selectedLevel) {
+                    element.classList.add('selected-level');
+                }
+            });
+        }
+    });
+
+    function setSelectedLevel(levelName) {
+        localStorage.setItem('selectedLevel', levelName);
+    }
+
     function filterLevels() {
         var input = document.getElementById('searchInput');
         var filter = input.value.toUpperCase();

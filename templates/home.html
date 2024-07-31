@@ -1,16 +1,49 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
-    <link href="../static/Home/home.css" rel="stylesheet">
+<meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/submit_record">
+<link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/submit_record">
+<link href="../static/Home/home.css" rel="stylesheet">
+<link href="../static/Home/res_home.css" rel="stylesheet">
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "name": "Home - Frozen Liste",
+        "url": "https://lafrozenliste.eu.pythonanywhere.com/liste",
+        "description": "Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.",
+        "author": {
+            "@type": "Organization",
+            "name": "Saoshirax"
+        }
+    }
+</script>
 {% endblock %}
 
 {% block content %}
 <div class="page-content">
     <div class="wrapper">
+        <div class="toggle-buttons">
+            <button class="button_switcher" id="toggleView"><img class="fleche" src="{{ url_for('static', filename='pictures/fleche.png') }}"></img></button>
+        </div>
         <div class="home-left">
             <div class="searchinput-container">
                 <div class="inputbackground">
-                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off">
+                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off" spellcheck="false">
+                </div>
+                <div class="inputbackground">
+                    <div class="dropdown">
+                        <button class="dropbtn" onclick="toggleDropdown()"><span id="dureeLabel">Durée</span></button>
+                        <ul class="dropdown-content" id="dureeFilter">
+                            <div class="dropdown-container">
+                                <li data-value="" onclick="selectDuration(this)">Tous</li>
+                                <li data-value="Short" onclick="selectDuration(this)">Short</li>
+                                <li data-value="Long" onclick="selectDuration(this)">Long</li>
+                                <li data-value="XL" onclick="selectDuration(this)">XL</li>
+                                <li data-value="XXL" onclick="selectDuration(this)">XXL</li>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="home-left-container">
@@ -30,12 +63,12 @@
             <ul class="home-right-home-container">
                 {% for niveau in niveaux %}
                     <li class="container1" onclick="location.href='/liste/{{ niveau[1] }}'">
-                        <iframe class="iframe_minia" width="560" height="315" src="{{ niveau[4] }}" allowfullscreen></iframe>
+                        <img class="iframe_minia" width="560" height="315" src="{{ niveau[4] }}"></img>
                         <div class="container2">
                             <div class="container3">
                                 <h2>#{{ niveau[3] }}:</h2>
                                 <div class="display">
-                                    <h2>{{ niveau[1] }}</h2>
+                                    <h2 class="titlelevel">{{ niveau[1] }}</h2>
                                     <p>{{ niveau[2] }}</p>
                                 </div>
                             </div>
@@ -43,7 +76,7 @@
                     </li>
                 {% endfor %}
             </ul>
-        </div>             
+        </div>
     </div>
     <div class="glow"></div>
 </div>
@@ -51,21 +84,191 @@
 
 {% block scripts %}
 <script>
-    function filterLevels() {
-        var input = document.getElementById('searchInput');
-        var filter = input.value.toUpperCase();
-        
-        var levelsList = document.getElementById('levelsList');
-        var levels = levelsList.getElementsByClassName('classement_nom_du_niveau');
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const homeLeft = document.querySelector('.home-left');
+        const homeRight = document.querySelector('.home-right');
+        const toggleViewButton = document.getElementById('toggleView');
 
-        for (var i = 0; i < levels.length; i++) {
-            var levelName = levels[i].getElementsByClassName('classement_nom_du_niveau_nom_du_niveau')[0];
-            if (levelName.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                levels[i].style.display = '';
+        localStorage.removeItem('selectedLevel');
+
+        const scrollPosition = localStorage.getItem('scrollPosition');
+        const searchInputValue = localStorage.getItem('searchInputValue');
+        const selectedDuration = localStorage.getItem('selectedDuration');
+
+        if (scrollPosition) {
+            homeLeft.scrollTop = scrollPosition;
+        }
+
+        if (searchInputValue) {
+            document.getElementById('searchInput').value = searchInputValue;
+        }
+
+        if (selectedDuration) {
+            document.querySelectorAll('.dropdown-content li').forEach((element) => {
+                if (element.dataset.value === selectedDuration) {
+                    element.classList.add('selected');
+                    document.getElementById("dureeLabel").innerText = element.innerText;
+                }
+            });
+        }
+
+        filterLevels();
+
+        document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
+            element.addEventListener('click', (event) => {
+                const levelName = element.querySelector('.classement_nom_du_niveau_nom_du_niveau').textContent.trim();
+
+                document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((el) => {
+                    el.classList.remove('selected-level');
+                });
+
+                element.querySelector('.classement_nom_du_niveau_nom_du_niveau').classList.add('selected-level');
+
+                localStorage.setItem('selectedLevel', levelName);
+                localStorage.setItem('scrollPosition', homeLeft.scrollTop);
+
+                window.location.href = `/liste/${levelName}`;
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (event) => {
+            localStorage.setItem('searchInputValue', event.target.value);
+        });
+
+        homeLeft.addEventListener('scroll', (event) => {
+            localStorage.setItem('scrollPosition', homeLeft.scrollTop);
+        });
+
+        toggleViewButton.addEventListener('click', () => {
+            if (homeLeft.classList.contains('show')) {
+                homeLeft.classList.remove('show');
+                homeLeft.classList.add('hide');
+                homeRight.classList.add('show');
+                homeRight.classList.remove('hide');
             } else {
-                levels[i].style.display = 'none';
+                homeRight.classList.remove('show');
+                homeRight.classList.add('hide');
+                homeLeft.classList.add('show');
+                homeLeft.classList.remove('hide');
+            }
+        });
+
+        homeRight.classList.add('show');
+        homeLeft.classList.add('hide');
+
+        function adjustVisibility() {
+            const homeLeft = document.querySelector('.home-left');
+            const homeRight = document.querySelector('.home-right');
+        
+            if (window.innerWidth < 700) {
+                homeLeft.classList.add('hide');
+                homeRight.classList.remove('hide');
+            } else {
+                homeLeft.classList.remove('hide');
+                homeRight.classList.remove('hide');
             }
         }
+        
+        window.addEventListener('resize', adjustVisibility);
+        adjustVisibility();
+    });
+
+    function selectDuration(element) {
+        var selectedValue = element.dataset.value;
+        var label = selectedValue ? element.innerText : "Durée";
+        document.getElementById("dureeLabel").innerText = label;
+        document.getElementById("dureeFilter").classList.remove("show");
+
+        document.querySelectorAll('.dropdown-content li').forEach(function(el) {
+            el.classList.remove('selected');
+        });
+        element.classList.add('selected');
+
+        localStorage.setItem('selectedDuration', selectedValue);
+
+        filterLevels();
     }
+
+    function toggleDropdown() {
+        document.getElementById("dureeFilter").classList.toggle("show");
+    }
+
+    document.addEventListener('click', function(event) {
+        var dropdown = document.getElementById("dureeFilter");
+        if (!event.target.closest('.dropbtn')) {
+            dropdown.classList.remove('show');
+        }
+    });
+
+    function filterLevels() {
+        var nom = document.getElementById('searchInput').value;
+        var duree = localStorage.getItem('selectedDuration') || '';
+
+        fetch(`/api/niveaux?nom=${encodeURIComponent(nom)}&duree=${encodeURIComponent(duree)}`)
+            .then(response => response.json())
+            .then(data => {
+                var levelsList = document.getElementById('levelsList');
+                levelsList.innerHTML = '';
+
+                data.forEach(function(niveau) {
+                    var li = document.createElement('li');
+                    li.className = 'classement_nom_du_niveau';
+                    li.innerHTML = `
+                        <p class="classement_nom_du_niveau_classement">#${niveau.classement}</p>
+                        <div class="lien-vers-niveau" onclick="selectLevel('${niveau.nom}')">
+                            <p class="classement_nom_du_niveau_nom_du_niveau">${niveau.nom}</p>
+                        </div>
+                    `;
+                    levelsList.appendChild(li);
+                });
+
+                document.querySelectorAll('.lien-vers-niveau').forEach((element) => {
+                    element.addEventListener('click', (event) => {
+                        const levelName = element.querySelector('.classement_nom_du_niveau_nom_du_niveau').textContent.trim();
+
+                        document.querySelectorAll('.classement_nom_du_niveau_nom_du_niveau').forEach((el) => {
+                            el.classList.remove('selected-level');
+                        });
+
+                        element.querySelector('.classement_nom_du_niveau_nom_du_niveau').classList.add('selected-level');
+
+                        localStorage.setItem('selectedLevel', levelName);
+
+                        window.location.href = `/liste/${levelName}`;
+                    });
+                });
+            });
+    }
+
+    function selectLevel(levelName) {
+        document.querySelectorAll('.selected-level').forEach((el) => {
+            el.classList.remove('selected-level');
+        });
+
+        document.querySelector(`.classement_nom_du_niveau_nom_du_niveau:contains("${levelName}")`).classList.add('selected-level');
+
+        localStorage.setItem('selectedLevel', levelName);
+    }
+
+    document.querySelectorAll('.dropdown-content li').forEach(function(item) {
+        item.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown-content li').forEach(function(el) {
+                el.classList.remove('selected');
+            });
+            this.classList.add('selected');
+            selectDuration(this); 
+        });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', filterLevels);
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const toggleViewButton = document.getElementById('toggleView');
+        const fleche = document.querySelector('.fleche');
+
+        toggleViewButton.addEventListener('click', () => {
+            fleche.classList.toggle('rotated');
+        });
+    });
 </script>
 {% endblock %}

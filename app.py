@@ -4,7 +4,7 @@ from flask import Flask, redirect, render_template, request, send_from_directory
 import os
 from werkzeug.utils import secure_filename
 import math
-from werkzeug.utils import escape
+from flask import jsonify
 
 app = Flask(__name__)
 app.secret_key = os.urandom(8192)
@@ -29,7 +29,9 @@ def init_db():
         victoires INTEGER DEFAULT 0,
         mot_de_passe TEXT,
         video_url TEXT,
-        image_url TEXT
+        image_url TEXT,
+        duree INTEGER,
+        duree_globale TEXT
     )
     ''')
 
@@ -80,18 +82,85 @@ def init_db():
     connection.close()
 init_db()
 
+@app.route('/api/niveaux', methods=['GET'])
+def api_niveaux():
+    nom_filter = request.args.get('nom', '')
+    duree_filter = request.args.get('duree', '')
+
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    
+    query = 'SELECT id, nom, createurs, classement, image_url, duree FROM Niveau WHERE nom LIKE ?'
+    params = [f'%{nom_filter}%']
+
+    if duree_filter:
+        if duree_filter == 'Short':
+            query += ' AND duree >= 0 AND duree < 60'
+        elif duree_filter == 'Long':
+            query += ' AND duree >= 60 AND duree < 120'
+        elif duree_filter == 'XL':
+            query += ' AND duree >= 120 AND duree < 240'
+        elif duree_filter == 'XXL':
+            query += ' AND duree >= 240'
+    
+    query += ' ORDER BY classement'
+    cursor.execute(query, params)
+    niveaux = cursor.fetchall()
+    connection.close()
+    
+    niveaux_formattes = []
+    for niveau in niveaux:
+        duree = niveau[5]
+        minutes = duree // 60
+        seconds = duree % 60
+        niveaux_formattes.append({
+            'id': niveau[0],
+            'nom': niveau[1],
+            'createurs': niveau[2],
+            'classement': niveau[3],
+            'image_url': niveau[4],
+            'minutes': minutes,
+            'seconds': seconds
+        })
+    
+    return jsonify(niveaux_formattes)
 
 
 #Liste
 @app.route('/liste')
 def liste():
     active_page = 'home'
+    nom_filter = request.args.get('nom', '')
+    duree_filter = request.args.get('duree', '')
+
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT id, nom, createurs, classement, video_url FROM Niveau ORDER BY classement')
+    
+    query = 'SELECT id, nom, createurs, classement, image_url, duree FROM Niveau WHERE 1=1'
+    params = []
+
+    if nom_filter:
+        query += ' AND nom LIKE ?'
+        params.append(f'%{nom_filter}%')
+
+    if duree_filter:
+        query += ' AND duree_globale = ?'
+        params.append(duree_filter)
+    
+    query += ' ORDER BY classement'
+
+    cursor.execute(query, params)
     niveaux = cursor.fetchall()
     connection.close()
-    return render_template('home.html', active_page=active_page, niveaux=niveaux)
+
+    niveaux_formattes = []
+    for niveau in niveaux:
+        duree = niveau[5] 
+        minutes = duree // 60
+        seconds = duree % 60
+        niveaux_formattes.append(niveau[:5] + (minutes, seconds) + niveau[6:])
+    
+    return render_template('home.html', active_page=active_page, niveaux=niveaux_formattes)
 
 @app.route('/liste/<string:nom_niveau>')
 def niveau(nom_niveau):
@@ -105,7 +174,7 @@ def niveau(nom_niveau):
         connection.close()
         return redirect(url_for('error404'))
     
-    cursor.execute('SELECT nom, createurs, verifier, publisher, classement, id_niveau, points, mot_de_passe, video_url, victoires FROM Niveau WHERE nom = ?', (nom_niveau,))
+    cursor.execute('SELECT nom, createurs, verifier, publisher, classement, id_niveau, points, mot_de_passe, video_url, victoires, duree FROM Niveau WHERE nom = ?', (nom_niveau,))
     niveau = cursor.fetchone()
 
     cursor.execute('SELECT id, nom, createurs, classement, video_url, victoires FROM Niveau ORDER BY classement')
@@ -122,7 +191,13 @@ def niveau(nom_niveau):
 
     connection.close()
 
+    duree = niveau[10] 
+    minutes = duree // 60
+    seconds = duree % 60
+    niveau = niveau[:10] + (minutes, seconds)
+
     return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux, active_page=active_page)
+
 
 
 #Carousel
@@ -246,8 +321,9 @@ def submit_record():
 def submit_record_correctement_envoyer():
     return render_template('submit_record_correctement_envoyer.html')
 
+
 #Accéder à la page Admin
-@app.route('/creer_compte', methods=['GET', 'POST'])
+"""@app.route('/creer_compte', methods=['GET', 'POST'])
 def creer_compte():
     if request.method == 'POST':
         username = request.form['username']
@@ -264,7 +340,7 @@ def creer_compte():
         except sqlite3.IntegrityError:
             return 'Erreur : Nom d\'utilisateur déjà utilisé.'
     else:
-        return render_template('creer_compte.html')
+        return render_template('creer_compte.html')"""
 
 @app.route('/connexion', methods=['GET', 'POST'])
 def connexion():
@@ -277,7 +353,7 @@ def connexion():
 
         connection = sqlite3.connect('DataBase.db')
         cursor = connection.cursor()
-        cursor.execute('SELECT password FROM Utilisateur WHERE username = ?', (escape(username),))
+        cursor.execute('SELECT password FROM Utilisateur WHERE username = ?', (username,))
         result = cursor.fetchone()
         connection.close()
 
@@ -292,7 +368,7 @@ def connexion():
         return render_template('connexion.html')
 
 def validate_user_input(username, password):
-    return bool(username and password)
+    return username and password
 
 
 
@@ -325,10 +401,14 @@ def ajouter_niveau():
         mot_de_passe = request.form['mot_de_passe']
         video_url = request.form['video_url']
         image_file = request.files['image_file']
+        minutes = int(request.form['minutes'])
+        seconds = int(request.form['seconds'])
         
         if classement <= 0:
             return f'Erreur : Le classement doit être un entier positif'
-
+        
+        duree = minutes * 60 + seconds
+        
         if image_file and allowed_file(image_file.filename):
             filename = secure_filename(image_file.filename)
             image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -351,14 +431,15 @@ def ajouter_niveau():
         points = calculer_points(classement)
 
         cursor.execute('''
-        INSERT INTO Niveau (id_niveau, nom, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (id_niveau, nom_niveau, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url))
+        INSERT INTO Niveau (id_niveau, nom, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url, duree) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (id_niveau, nom_niveau, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url, duree))
 
         connection.commit()
         connection.close()
         mettre_a_jour_points()
         mettre_a_jour_points_utilisateurs()
+        mettre_a_jour_duree_globale()
 
         return f'Niveau {nom_niveau} ajouté avec succès !'
     
@@ -413,6 +494,7 @@ def modifier_ordre_niveaux():
         mettre_a_jour_points()
         connection.close()
         mettre_a_jour_points_utilisateurs()
+        mettre_a_jour_duree_globale()
 
         return redirect(url_for('admin'))
     except sqlite3.Error as e:
@@ -441,6 +523,7 @@ def supprimer_niveau():
     
     mettre_a_jour_points()
     mettre_a_jour_points_utilisateurs()
+    mettre_a_jour_duree_globale()
 
     return f'Niveau {nom_niveau} supprimé avec succès !'
 
@@ -473,6 +556,7 @@ def supprimer_reussite():
     connection.close()
     mettre_a_jour_points_utilisateurs()
     mettre_a_jour_points()
+    mettre_a_jour_duree_globale()
 
     return f'Réussite du joueur {nom_joueur} pour le niveau {nom_niveau} supprimée avec succès !'
 
@@ -518,6 +602,28 @@ def mettre_a_jour_points_utilisateurs():
     connection.commit()
     connection.close()
 
+def mettre_a_jour_duree_globale():
+    connection = sqlite3.connect('DataBase.db')
+    cursor = connection.cursor()
+    
+    cursor.execute('SELECT id, duree FROM Niveau')
+    niveaux = cursor.fetchall()
+    
+    for niveau in niveaux:
+        niveau_id, duree = niveau
+        if 0 <= duree < 60:
+            duree_globale = 'short'
+        elif 60 <= duree < 120:
+            duree_globale = 'long'
+        elif 120 <= duree < 240:
+            duree_globale = 'xl'
+        else:
+            duree_globale = 'xxl'
+        
+        cursor.execute('UPDATE Niveau SET duree_globale = ? WHERE id = ?', (duree_globale, niveau_id))
+    
+    connection.commit()
+    connection.close()
 
     
 # Valider ou refuser un record soumis et pouvoir modifier le nom du joueur et du niveau en cas d'erreur

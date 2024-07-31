@@ -1,7 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
+    <meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/admin">
+    <link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/admin">
     <link href="../static/admin/admin.css" rel="stylesheet">
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebPage",
+            "name": "Admin - Frozen Liste",
+            "url": "https://lafrozenliste.eu.pythonanywhere.com/admin",
+            "description": "Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.",
+            "author": {
+                "@type": "Organization",
+                "name": "Saoshirax"
+            }
+        }
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -27,6 +42,10 @@
         <label for="image_file">Image du niveau:</label>
         <td><a href="https://ytshorts.savetube.me/fr/10" target="_blank">Récuperer la miniature</a></td><br>
         <input type="file" id="image_file" name="image_file" accept="image/*" required><br>
+        <label for="minutes">Durée (minutes):</label><br>
+        <input type="number" id="minutes" name="minutes" min="0" required><br>
+        <label for="seconds">Durée (secondes):</label><br>
+        <input type="number" id="seconds" name="seconds" min="0" max="59" required><br>
         <input type="submit" value="Créer Niveau">
     </form>
     <br>
@@ -67,7 +86,7 @@
     <h1>Liste des Niveaux</h1>
     <ul>
         {% for niveau in niveaux %}
-            <li>{{ niveau[1] }} - Classement actuel : {{ niveau[5] }} - nombre points : {{ niveau[4] }}</li>
+            <li>{{ niveau[1] }} - Classement actuel : {{ niveau[7] }} - nombre points : {{ niveau[6] }}</li>
         {% endfor %}
     </ul>
     <br>

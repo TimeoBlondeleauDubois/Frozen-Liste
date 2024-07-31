@@ -1,16 +1,38 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
-    <link href="../static/classement/classement.css" rel="stylesheet">
+<meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/classement">
+<link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/classement">
+<link href="../static/classement/classement.css" rel="stylesheet">
+<link href="../static/classement/res_classement.css" rel="stylesheet">
+<link href="../static/classement/res_classement_joueur.css" rel="stylesheet">
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "name": "Classement des joueurs - Frozen Liste",
+        "url": "https://lafrozenliste.eu.pythonanywhere.com/classement",
+        "description": "Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.",
+        "author": {
+            "@type": "Organization",
+            "name": "Saoshirax"
+        }
+    }
+</script>
 {% endblock %}
 
 {% block content %}
 <div class="page-content">
     <div class="wrapper">
-        <div class="home-left">
+        <div class="toggle-buttons">
+            <button class="button_switcher" id="toggleView">
+                <img class="fleche" src="{{ url_for('static', filename='pictures/fleche.png') }}"></img>
+            </button>
+        </div>
+        <div class="home-left show">
             <div class="searchinput-container">
                 <div class="inputbackground">
-                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off">
+                    <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off" spellcheck="false">
                 </div>
             </div>
             <div class="home-left-container">
@@ -18,20 +40,19 @@
                     {% for joueur in joueurs %}
                         <div class="classement_nom_du_joueur">
                             <p class="classement_nom_du_joueur_position">#{{ loop.index }}</p>
-                            <a class="home-right-container-wrapper {% if joueur[1] == selected_joueur %}selected{% endif %}" href="{{ url_for('joueur', nom=joueur[1]) }}">
+                            <a class="home-right-container-wrapper {% if joueur[1] == selected_joueur %}selected{% endif %}" href="{{ url_for('joueur', nom=joueur[1]) }}" onclick="setSelectedLevel('{{ joueur[1] }}')">
                                 <span class="classement_nom_du_joueur_nom">{{ joueur[1] }}</span>
-                            </a>                            
+                            </a>
                             <p class="home-right-container-paragraph">{{ joueur[2] }} points</p>
                         </div>
                     {% endfor %}
                 </ul>
             </div>
         </div>
-        <div class="home-right">
+        <div class="home-right2 hide">
+            <h1>Derniers niveaux réussis par les joueurs de la team:</h1>
             <div class="carousel-container">
-                <h1>Derniers niveaux réussis par les joueurs de la team:</h1>
-                <div class="carousel" id="imageCarousel">
-                </div>
+                <div class="carousel" id="imageCarousel"></div>
             </div>
         </div>
     </div>
@@ -41,6 +62,67 @@
 
 {% block scripts %}
 <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const homeLeft = document.querySelector('.home-left');
+        const homeRight = document.querySelector('.home-right2');
+        const toggleViewButton = document.getElementById('toggleView');
+        const fleche = document.querySelector('.fleche');
+
+        const selectedLevel = localStorage.getItem('selectedLevel');
+        const scrollPosition = localStorage.getItem('scrollPosition');
+        const searchInputValue = localStorage.getItem('searchInputValue');
+
+        if (selectedLevel) {
+            document.querySelectorAll('.classement_nom_du_joueur_nom').forEach((element) => {
+                if (element.textContent.trim() === selectedLevel) {
+                    element.closest('.classement_nom_du_joueur').classList.add('selected-level');
+                }
+            });
+        }
+
+        if (scrollPosition) {
+            homeLeft.scrollTop = scrollPosition;
+        }
+
+        if (searchInputValue) {
+            document.getElementById('searchInput').value = searchInputValue;
+            filterLevels();
+        }
+
+        toggleViewButton.addEventListener('click', () => {
+            fleche.classList.toggle('rotated');
+            if (homeLeft.classList.contains('show')) {
+                homeLeft.classList.remove('show');
+                homeLeft.classList.add('hide');
+                homeRight.classList.add('show');
+                homeRight.classList.remove('hide');
+            } else {
+                homeRight.classList.remove('show');
+                homeRight.classList.add('hide');
+                homeLeft.classList.add('show');
+                homeLeft.classList.remove('hide');
+            }
+        });
+
+        function adjustVisibility() {
+            if (window.innerWidth < 700) {
+                homeLeft.classList.add('hide');
+                homeRight.classList.remove('hide');
+            } else {
+                homeLeft.classList.remove('hide');
+                homeRight.classList.remove('hide');
+            }
+        }
+        
+        window.addEventListener('resize', adjustVisibility);
+        adjustVisibility();
+    });
+
+    function setSelectedLevel(levelName) {
+        localStorage.setItem('selectedLevel', levelName);
+        localStorage.setItem('scrollPosition', document.querySelector('.home-left').scrollTop);
+    }
+
     function filterLevels() {
         var input = document.getElementById('searchInput');
         var filter = input.value.toUpperCase();
@@ -57,7 +139,7 @@
         }
     }
 
-      fetch('/image_urls')
+    fetch('/image_urls')
         .then(response => response.json())
         .then(data => {
             const carousel = document.getElementById('imageCarousel');
@@ -65,17 +147,7 @@
             data.niveaux.forEach(niveau => {
                 const a = document.createElement('a');
                 a.href = `/liste/${encodeURIComponent(niveau.nom)}`;
-
-                const img = document.createElement('img');
-                img.src = niveau.image_url;
-                a.appendChild(img);
-
-                carousel.appendChild(a);
-            });
-
-            data.niveaux.forEach(niveau => {
-                const a = document.createElement('a');
-                a.href = `/liste/${encodeURIComponent(niveau.nom)}`;
+                a.onclick = () => setSelectedLevel(niveau.nom);
 
                 const img = document.createElement('img');
                 img.src = niveau.image_url;

@@ -1,7 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
+    <meta property="og:url" content="https://lafrozenliste.eu.pythonanywhere.com/submit_record">
+    <link rel="canonical" href="https://lafrozenliste.eu.pythonanywhere.com/submit_record">
     <link href="../static/submit_record/submit_record.css" rel="stylesheet">
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebPage",
+            "name": "Soumettre un record - Frozen Liste",
+            "url": "https://lafrozenliste.eu.pythonanywhere.com/submit_record",
+            "description": "Soumettez vos records des niveaux Extreme et Insane Demon sur la Frozen Liste.",
+            "author": {
+                "@type": "Organization",
+                "name": "Saoshirax"
+            }
+        }
+    </script>
 {% endblock %}
 
 {% block content %}

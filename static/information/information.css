@@ -1,1 +1,186 @@
-/*# sourceMappingURL=information.css.map */
+@font-face {
+  font-family: RobotoRegular;
+  src: url(/static/Font/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url(/static/Font/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: Beligerent;
+  src: url(/static/Font/belligerent.ttf);
+}
+/*
+$big-margin-top-mb: px;
+$big-margin-bottom-mb: px;
+*/
+/*
+$big-margin-left-mb: px;
+$big-margin-right-mb: px;*/
+.glow {
+  position: absolute;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1/1;
+  background-color: rgba(255, 255, 255, 0.1);
+  filter: blur(125px);
+  transition: top 3s, left 3s;
+  pointer-events: none;
+  border-radius: 100%;
+}
+
+.page-content {
+  background-color: #23252B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100vh;
+}
+.page-content #bold {
+  font-weight: bold;
+}
+.page-content .wrapper {
+  background-color: rgba(71, 71, 71, 0.4941176471);
+  z-index: 1;
+  -webkit-backdrop-filter: blur(30px);
+          backdrop-filter: blur(30px);
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 150px;
+  margin-bottom: 40px;
+  border-radius: 40px;
+}
+.page-content .wrapper .information, .page-content .wrapper .contacter, .page-content .wrapper .Lien {
+  max-width: 800px;
+}
+.page-content .wrapper .h1 {
+  margin-top: 40px;
+}
+.page-content .wrapper a .img_logo_tipeee {
+  max-width: 100px;
+  max-height: auto;
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+.page-content .wrapper .section {
+  display: flex;
+}
+.page-content .wrapper .TimeoBlondeleau {
+  margin-top: 6px;
+}
+.page-content .wrapper .saoshirax {
+  margin-top: 6px;
+}
+.page-content .wrapper .contacter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  p {
+    font-family: RobotoRegular;
+    font-size: 20px;
+    color: white;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 20px;
+  }
+  .h2 {
+    font-family: RobotoBold;
+    font-size: 30px;
+    color: white;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 25px;
+  }
+  .img_logo_mail {
+    max-width: 25px;
+    max-height: 20px;
+    margin-right: -5px;
+    margin-left: 5px;
+  }
+  .img_logo_yt {
+    max-width: 35px;
+    max-height: 30px;
+    margin-right: -5px;
+    margin-left: 5px;
+  }
+  .img_logo_instagram {
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: -5px;
+    margin-left: 5px;
+  }
+  .img_logo_linkedin {
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: -5px;
+    margin-left: 5px;
+  }
+  .img_logo_github {
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: -5px;
+    margin-top: -15px;
+    margin-left: 5px;
+  }
+}
+@media screen and (min-width: 700px) {
+  p {
+    font-family: RobotoRegular;
+    font-size: 27px;
+    color: white;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 20px;
+  }
+  .h2 {
+    font-family: RobotoBold;
+    font-size: 40px;
+    color: white;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 25px;
+  }
+  .img_logo_mail {
+    max-width: 35px;
+    max-height: 30px;
+    margin-right: -5px;
+    margin-left: 5px;
+  }
+  .img_logo_yt {
+    max-width: 45px;
+    max-height: 40px;
+    margin-right: -5px;
+    margin-left: 5px;
+  }
+  .img_logo_instagram {
+    max-width: 40px;
+    max-height: 40px;
+    margin-right: -5px;
+    margin-left: 5px;
+  }
+  .img_logo_linkedin {
+    max-width: 40px;
+    max-height: 40px;
+    margin-right: -5px;
+    margin-left: 5px;
+  }
+  .img_logo_github {
+    max-width: 40px;
+    max-height: 40px;
+    margin-right: -5px;
+    margin-top: -15px;
+    margin-left: 5px;
+  }
+}
+.link-logo-yt, .link_logo_github {
+  margin-bottom: 30px;
+}/*# sourceMappingURL=information.css.map */
