@@ -46,6 +46,15 @@
         <input type="submit" value="Supprimer Réussite"><br>
     </form>
     <br>
+    <h1>Modifier l'image d'un Niveau</h1>
+    <form action="/modifier_image_niveau" method="post" enctype="multipart/form-data">
+        <label for="nom_niveau">Nom du niveau:</label><br>
+        <input type="text" id="nom_niveau" name="nom_niveau" required><br>
+        <label for="image_file">Nouvelle image du niveau:</label><br>
+        <input type="file" id="image_file" name="image_file" accept="image/*" required><br>
+        <input type="submit" value="Mettre à jour l'image"><br>
+    </form>
+    <br>
     <h1>Modifier l'ordre des Niveaux</h1>
     <form action="/modifier_ordre_niveaux" method="post">
         <label for="nom_niveau">Nom du niveau:</label><br>

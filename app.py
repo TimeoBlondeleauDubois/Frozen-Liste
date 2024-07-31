@@ -78,7 +78,6 @@ def init_db():
     ''')
     connection.commit()
     connection.close()
-
 init_db()
 
 
@@ -313,6 +312,7 @@ def admin():
         return render_template('admin.html', niveaux=niveaux, submissions=submissions)
     else:
         return redirect(url_for('connexion'))
+    
 @app.route('/ajouter_niveau', methods=['POST'])
 def ajouter_niveau():
     try:
@@ -614,6 +614,38 @@ def mettre_a_jour_victoires():
 
     connection.commit()
     connection.close()
+
+@app.route('/modifier_image_niveau', methods=['POST'])
+def modifier_image_niveau():
+    try:
+        nom_niveau = request.form['nom_niveau']
+        image_file = request.files['image_file']
+
+        if image_file and allowed_file(image_file.filename):
+            filename = secure_filename(image_file.filename)
+            image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            image_file.save(image_path)
+            image_url = url_for('uploaded_file', filename=filename)
+        else:
+            return f'Erreur : Fichier image non valide'
+
+        connection = sqlite3.connect('DataBase.db')
+        cursor = connection.cursor()
+
+        cursor.execute('SELECT id FROM Niveau WHERE nom = ?', (nom_niveau,))
+        result = cursor.fetchone()
+        if result is None:
+            return f'Erreur : Aucun niveau trouvé avec le nom {nom_niveau}'
+
+        niveau_id = result[0]
+        cursor.execute('UPDATE Niveau SET image_url = ? WHERE id = ?', (image_url, niveau_id))
+
+        connection.commit()
+        connection.close()
+
+        return f'Image du niveau {nom_niveau} mise à jour avec succès !'
+    except Exception as e:
+        return f'Erreur : {str(e)}'
 
 
 if __name__ == '__main__':
