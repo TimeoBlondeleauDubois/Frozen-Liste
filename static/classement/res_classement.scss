@@ -15,22 +15,6 @@
         margin-left: 0px !important;
     }
 
-    .searchInput {
-        margin-left: 20px !important;
-    }
-
-    h2 {
-        font-size: 28px !important;
-    }
-
-    p {
-        font-size: 20px !important;
-    }
-
-    .searchInput {
-        width: 160px !important;
-    }
-
     .toggle-buttons {
         position: fixed;
         z-index: 1;
@@ -90,7 +74,6 @@
 
     .searchinput-container {
        width: fit-content;
-       margin-left: 37px;
     }
 
     body {
@@ -103,29 +86,19 @@
         height: 100vh;
         position: relative;
     }
-}
-
-
-@media screen and (max-width: 424px) {
-    .searchInput {
-        width: 130px !important;
-    }
-
-    .home-left-container {
-        margin-left: -25px !important;
-    }
-
-    .searchinput-container {
-        margin-left: 25px !important;
-    }
-
-    .home-left-container {
-        p {
-            font-size: 17px !important;
-        }
-    }
-
+    
     .home-left {
         overflow-x: hidden;
+    }
+
+    .inputbackground {
+        background-color: blue !important;
+    }
+
+    .searchinput-container, .inputbackground {
+        margin: 0 !important;
+        justify-content: center !important;
+        align-items: center !important;
+        display: flex !important;
     }
 }
