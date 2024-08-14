@@ -24,7 +24,12 @@
 {% block content %}
 <div class="page-content">
     <div class="wrapper">
-        <div class="home-left">
+        <div class="toggle-buttons">
+            <button class="button_switcher" id="toggleView">
+                <img class="fleche" src="{{ url_for('static', filename='pictures/fleche.png') }}"></img>
+            </button>
+        </div>
+        <div class="home-left hide">
             <div class="searchinput-container">
                 <div class="inputbackground">
                     <input class="searchInput" type="text" id="searchInput" onkeyup="filterLevels()" placeholder="Rechercher" autocomplete="off" spellcheck="false">
@@ -44,7 +49,7 @@
                 </ul>
             </div>
         </div>
-        <div class="home-right">
+        <div class="home-right2 show">
             <div class="home-right-container">
                 <div class="home-right-wrapper">
                     <div class="home-right-wrapper-classement-joueur">
@@ -101,18 +106,53 @@
 </div>
 {% endblock %}
 
+
+
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
+        const homeLeft = document.querySelector('.home-left');
+        const homeRight = document.querySelector('.home-right2');
+        const toggleViewButton = document.getElementById('toggleView');
+        const fleche = document.querySelector('.fleche');
+
         const selectedLevel = localStorage.getItem('selectedLevel');
 
         if (selectedLevel) {
             document.querySelectorAll('.classement_nom_du_joueur_nom').forEach((element) => {
                 if (element.textContent.trim() === selectedLevel) {
-                    element.classList.add('selected-level');
+                    element.closest('.classement_nom_du_joueur').classList.add('selected-level');
                 }
             });
         }
+
+        toggleViewButton.addEventListener('click', () => {
+            fleche.classList.toggle('rotated');
+            if (homeLeft.classList.contains('show')) {
+                homeLeft.classList.remove('show');
+                homeLeft.classList.add('hide');
+                homeRight.classList.add('show');
+                homeRight.classList.remove('hide');
+            } else {
+                homeRight.classList.remove('show');
+                homeRight.classList.add('hide');
+                homeLeft.classList.add('show');
+                homeLeft.classList.remove('hide');
+            }
+        });
+
+        function adjustVisibility() {
+            if (window.innerWidth < 700) {
+                homeLeft.classList.add('hide');
+                homeRight.classList.remove('hide');
+            } else {
+                homeLeft.classList.remove('hide');
+                homeRight.classList.remove('hide');
+            }
+        }
+        
+        window.addEventListener('resize', adjustVisibility);
+        adjustVisibility();
     });
 
     function setSelectedLevel(levelName) {

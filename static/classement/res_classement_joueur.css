@@ -1,1 +1,231 @@
-/*# sourceMappingURL=res_classement_joueur.css.map */
+@font-face {
+  font-family: RobotoRegular;
+  src: url(/static/Font/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url(/static/Font/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: Beligerent;
+  src: url(/static/Font/belligerent.ttf);
+}
+/*
+$big-margin-top-mb: px;
+$big-margin-bottom-mb: px;
+*/
+/*
+$big-margin-left-mb: px;
+$big-margin-right-mb: px;*/
+@media screen and (min-width: 700px) {
+  .toggle-buttons {
+    display: none;
+  }
+}
+@media screen and (max-width: 700px) {
+  .home-left, .home-right2 {
+    min-width: 100% !important;
+  }
+  .home-left-container {
+    margin-left: 0px !important;
+  }
+  .toggle-buttons {
+    position: fixed;
+    z-index: 1;
+  }
+  .home-left, .home-right2 {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateX(100%);
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 110px) !important;
+  }
+  .home-left,
+  .home-right2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    transition: transform 0.5s ease-in-out;
+  }
+  .home-left.show, .home-right2.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .home-left.hide {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  .home-right2.hide {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  .home-left.show {
+    transform: translateX(0);
+  }
+  .home-right2.show {
+    transform: translateX(0);
+  }
+  .home-left.hide, .home-right2.hide {
+    pointer-events: none;
+  }
+  .home-left {
+    display: flex;
+    align-items: center;
+  }
+  .searchinput-container {
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  body {
+    overflow: hidden;
+  }
+  .wrapper {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+  .home-left {
+    overflow-x: hidden;
+  }
+  .searchInput {
+    max-width: -moz-fit-content !important;
+    max-width: fit-content !important;
+  }
+}
+.home-right2 {
+  height: 100%;
+  width: 70%;
+  overflow-y: auto;
+  margin-top: 110px;
+  display: flex;
+  justify-content: center;
+  background-color: #23252B;
+  font-family: RobotoRegular;
+  font-size: 25px;
+  color: white;
+}
+.home-right2::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+.home-right2::-webkit-scrollbar-track {
+  background: #aaaaaa;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-right2::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+  border-radius: 300px;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.home-right2::-webkit-scrollbar-thumb:hover {
+  background: #6e6e6e;
+}
+.home-right2 .home-right-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+  font-family: RobotoRegular;
+  color: white;
+  align-items: center;
+}
+.home-right2 .home-right-container .home-right-wrapper {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.home-right2 .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur {
+  display: flex;
+  font-family: RobotoBold;
+  font-size: 60px;
+  margin-bottom: 5px;
+}
+.home-right2 .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur h1 {
+  margin-left: 12px;
+}
+.home-right2 .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur p {
+  margin-top: 8px;
+}
+.home-right2 .home-right-container .home-right-wrapper .home-right-points-joueurs {
+  font-family: RobotoBold;
+  font-size: 25px;
+  margin-bottom: 30px;
+  margin-top: -20px;
+}
+.home-right2 .home-right-container .home-right-wrapper .h2 {
+  font-size: 40px;
+  font-family: RobotoBold;
+  margin-bottom: 20px;
+}
+.home-right2 .home-right-container .home-right-wrapper .reussites {
+  display: flex;
+}
+.home-right2 .home-right-container .home-right-wrapper .reussites .reussite-classement {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logoyt-container {
+  margin-top: 3.25px;
+}
+.logoyt-container .victoires-joueur-vid-link {
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  border-radius: 8px;
+}
+.logoyt-container .victoires-joueur-vid-link:hover {
+  background-color: #36383B;
+}
+.logoyt-container .victoires-joueur-vid-link .logoyt {
+  transition: all 300ms ease-in-out;
+  width: 35px;
+  height: auto;
+  margin-top: -4px;
+  margin-bottom: -7px;
+}
+
+.logo-yt {
+  margin-bottom: 10px;
+}
+
+.reussite-classement, .reussite, .reussite2 {
+  margin-bottom: 5.3px;
+}
+
+.reussite {
+  padding: 4px;
+}
+
+.reussite-classement {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.reussite-classement, .reussite, .logoyt-container, .reussite2 {
+  margin-right: 14px;
+}
+
+.reussite2 p {
+  border-radius: 8px;
+  padding: 4px;
+  color: white;
+}
+.reussite2 p:hover {
+  background-color: #36383B;
+  cursor: pointer;
+}
+
+.reussite2 a {
+  text-decoration: none;
+}
+
+.home-left, .home-right {
+  scrollbar-width: thin;
+  scrollbar-color: #5c5c5c #aaaaaa;
+}/*# sourceMappingURL=res_classement_joueur.css.map */
