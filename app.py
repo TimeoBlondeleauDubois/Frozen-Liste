@@ -428,7 +428,7 @@ def ajouter_niveau():
 
         cursor.execute('UPDATE Niveau SET classement = classement + 1 WHERE classement >= ?', (classement,))
 
-        points = calculer_points(classement)
+        points = calculer_points(classement, total_niveaux + 1)
 
         cursor.execute('''
         INSERT INTO Niveau (id_niveau, nom, createurs, verifier, publisher, points, classement, mot_de_passe, video_url, image_url, duree) 
@@ -562,8 +562,12 @@ def supprimer_reussite():
 
 
 
-def calculer_points(classement, base=2):
-    return max(1, int(5000 / math.log(classement + base, base)))
+def calculer_points(classement, total_niveaux):
+    ratio = (total_niveaux - classement) / (total_niveaux - 1)
+    print(ratio)
+    points = 1 + (1000 - 1) * (ratio ** 2)
+    print(points)
+    return int(points)
 
 def mettre_a_jour_points():
     connection = sqlite3.connect('DataBase.db')
@@ -572,9 +576,11 @@ def mettre_a_jour_points():
     cursor.execute('SELECT id, classement FROM Niveau')
     niveaux = cursor.fetchall()
 
+    total_niveaux = len(niveaux)
+
     for niveau in niveaux:
         niveau_id, classement = niveau
-        points = calculer_points(classement)
+        points = calculer_points(classement, total_niveaux)
         cursor.execute('UPDATE Niveau SET points = ? WHERE id = ?', (points, niveau_id))
 
     connection.commit()
