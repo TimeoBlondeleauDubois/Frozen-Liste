@@ -83,15 +83,26 @@ h1 {
 }
 
 .searchinput-container {
-    width: 30%;
     position: fixed;
 
     .inputbackground {
         background-color: #23252b65;
-        margin-right: 11px;
         -webkit-backdrop-filter: blur(1px);
         backdrop-filter: blur(3px);
         z-index: 1;
+    }
+
+    @media screen and (min-width: 700px) {
+        .inputbackground {
+            margin-right: 11px;
+        }
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .searchinput-container {
+        width: 30%;
+        position: fixed;
     }
 }
 
@@ -119,12 +130,17 @@ h1 {
     font-family: $RobotoRegular;
     font-size: $p-size-pc-mid;
     transition: all 300ms ease-in-out;
-    margin-left: 60px;
     margin-top: 30px;
 
     &:focus {
         outline: none;
         background-color: $secondary-color-grey-secondary;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .searchInput {
+        margin-left: 60px;
     }
 }
 

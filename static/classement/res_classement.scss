@@ -91,14 +91,7 @@
         overflow-x: hidden;
     }
 
-    .inputbackground {
-        background-color: blue !important;
-    }
-
-    .searchinput-container, .inputbackground {
-        margin: 0 !important;
-        justify-content: center !important;
-        align-items: center !important;
-        display: flex !important;
+    .searchInput {
+        max-width: fit-content !important;
     }
 }

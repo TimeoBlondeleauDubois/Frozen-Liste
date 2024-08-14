@@ -92,13 +92,8 @@ $big-margin-right-mb: px;*/
   .home-left {
     overflow-x: hidden;
   }
-  .inputbackground {
-    background-color: blue !important;
-  }
-  .searchinput-container, .inputbackground {
-    margin: 0 !important;
-    justify-content: center !important;
-    align-items: center !important;
-    display: flex !important;
+  .searchInput {
+    max-width: -moz-fit-content !important;
+    max-width: fit-content !important;
   }
 }/*# sourceMappingURL=res_classement.css.map */

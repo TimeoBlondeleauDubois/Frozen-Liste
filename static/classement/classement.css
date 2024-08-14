@@ -100,17 +100,26 @@ h1 {
 }
 
 .searchinput-container {
-  width: 30%;
   position: fixed;
 }
 .searchinput-container .inputbackground {
   background-color: rgba(35, 37, 43, 0.3960784314);
-  margin-right: 11px;
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(3px);
   z-index: 1;
 }
+@media screen and (min-width: 700px) {
+  .searchinput-container .inputbackground {
+    margin-right: 11px;
+  }
+}
 
+@media screen and (min-width: 700px) {
+  .searchinput-container {
+    width: 30%;
+    position: fixed;
+  }
+}
 .glow {
   position: absolute;
   width: 100%;
@@ -135,7 +144,6 @@ h1 {
   font-family: RobotoRegular;
   font-size: 25px;
   transition: all 300ms ease-in-out;
-  margin-left: 60px;
   margin-top: 30px;
 }
 .searchInput:focus {
@@ -143,6 +151,11 @@ h1 {
   background-color: #3a3a3a;
 }
 
+@media screen and (min-width: 700px) {
+  .searchInput {
+    margin-left: 60px;
+  }
+}
 .searchInput::-webkit-input-placeholder {
   color: #9A9A9A;
   font-family: RobotoBold;
