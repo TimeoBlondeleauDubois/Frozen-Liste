@@ -245,12 +245,6 @@ $big-margin-right-mb: px;*/
   .home-right-points-joueurs {
     font-size: 25px !important;
   }
-  .reussites {
-    background-color: red;
-  }
-  .reussite-classement {
-    background-color: blue;
-  }
 }
 @media screen and (max-width: 433px) {
   .reussites, .home-right-points-joueurs2, .points {
