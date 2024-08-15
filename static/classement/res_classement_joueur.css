@@ -21,8 +21,14 @@ $big-margin-right-mb: px;*/
   .toggle-buttons {
     display: none;
   }
+  .home-right2 {
+    display: none !important;
+  }
 }
 @media screen and (max-width: 700px) {
+  .home-right {
+    display: none !important;
+  }
   .home-left, .home-right2 {
     min-width: 100% !important;
   }
@@ -139,76 +145,75 @@ $big-margin-right-mb: px;*/
 .home-right2 .home-right-container .home-right-wrapper {
   width: -moz-fit-content;
   width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .home-right2 .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur {
   display: flex;
   font-family: RobotoBold;
   font-size: 60px;
   margin-bottom: 5px;
+  justify-content: center;
+  flex-direction: column;
+}
+.home-right2 .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur .home-right-wrapper-classement-joueur2 {
+  display: flex;
 }
 .home-right2 .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur h1 {
   margin-left: 12px;
+  margin-bottom: 0px !important;
 }
 .home-right2 .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur p {
   margin-top: 8px;
 }
 .home-right2 .home-right-container .home-right-wrapper .home-right-points-joueurs {
-  font-family: RobotoBold;
-  font-size: 25px;
-  margin-bottom: 30px;
-  margin-top: -20px;
+  margin-top: 0px !important;
 }
-.home-right2 .home-right-container .home-right-wrapper .h2 {
+.home-right2 .home-right-container .home-right-wrapper .home-right-points-joueurs, .home-right2 .home-right-container .home-right-wrapper .home-right-points-joueurs2 {
+  font-family: RobotoRegular;
+  font-size: 25px;
+  text-decoration: none;
+  color: white;
+}
+.home-right2 .home-right-container .home-right-wrapper .h2, .home-right2 .home-right-container .home-right-wrapper .niveaux_reussis {
   font-size: 40px;
   font-family: RobotoBold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 .home-right2 .home-right-container .home-right-wrapper .reussites {
   display: flex;
 }
 .home-right2 .home-right-container .home-right-wrapper .reussites .reussite-classement {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
-.logoyt-container {
-  margin-top: 3.25px;
-}
-.logoyt-container .victoires-joueur-vid-link {
+.victoires-joueur-vid-link {
   cursor: pointer;
   transition: all 300ms ease-in-out;
   border-radius: 8px;
 }
-.logoyt-container .victoires-joueur-vid-link:hover {
+.victoires-joueur-vid-link:hover {
   background-color: #36383B;
 }
-.logoyt-container .victoires-joueur-vid-link .logoyt {
+.victoires-joueur-vid-link .logoyt {
   transition: all 300ms ease-in-out;
   width: 35px;
   height: auto;
   margin-top: -4px;
   margin-bottom: -7px;
+  margin-left: 7px;
+  margin-right: 7px;
 }
 
 .logo-yt {
   margin-bottom: 10px;
 }
 
-.reussite-classement, .reussite, .reussite2 {
-  margin-bottom: 5.3px;
-}
-
 .reussite {
   padding: 4px;
-}
-
-.reussite-classement {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.reussite-classement, .reussite, .logoyt-container, .reussite2 {
-  margin-right: 14px;
 }
 
 .reussite2 p {
@@ -221,11 +226,45 @@ $big-margin-right-mb: px;*/
   cursor: pointer;
 }
 
-.reussite2 a {
-  text-decoration: none;
-}
-
 .home-left, .home-right {
   scrollbar-width: thin;
   scrollbar-color: #5c5c5c #aaaaaa;
+}
+
+.reussite-classement div {
+  margin-left: 2px;
+  margin-right: 2px;
+  align-items: center;
+  display: flex;
+}
+
+@media screen and (max-width: 530px) {
+  .reussites, .home-right-points-joueurs2, .points {
+    font-size: 20px !important;
+  }
+  .home-right-points-joueurs {
+    font-size: 25px !important;
+  }
+  .reussites {
+    background-color: red;
+  }
+  .reussite-classement {
+    background-color: blue;
+  }
+}
+@media screen and (max-width: 433px) {
+  .reussites, .home-right-points-joueurs2, .points {
+    font-size: 17px !important;
+  }
+  .home-right-points-joueurs {
+    font-size: 25px !important;
+  }
+}
+@media screen and (max-width: 353px) {
+  .reussites, .home-right-points-joueurs2, .points {
+    font-size: 15px !important;
+  }
+  .home-right-points-joueurs {
+    font-size: 25px !important;
+  }
 }/*# sourceMappingURL=res_classement_joueur.css.map */

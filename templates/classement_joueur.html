@@ -49,7 +49,7 @@
                 </ul>
             </div>
         </div>
-        <div class="home-right2 show">
+        <div class="home-right">
             <div class="home-right-container">
                 <div class="home-right-wrapper">
                     <div class="home-right-wrapper-classement-joueur">
@@ -93,6 +93,42 @@
                                 <li class="reussite">
                                     <div>
                                         <p><span id="bold">+{{ reussite[1] }}</span> points</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-right2 show">
+            <div class="home-right-container">
+                <div class="home-right-wrapper">
+                    <div class="home-right-wrapper-classement-joueur">
+                        <div class="home-right-wrapper-classement-joueur2">
+                            <p><span id="bold">#{{ joueur_classement }}</span></p>
+                            <h1 class="title"><span id="bold">{{ joueur[1] }}</span></h1>
+                        </div>
+                        <p class="home-right-points-joueurs">Points: <span id="bold">{{ joueur[2] }}</span></p>
+                    </div>
+                    <h2 class="niveaux_reussis">Niveaux réussis:</h2>
+                    <div class="reussites">
+                        <ul>
+                            {% for reussite in reussites|reverse %}
+                                <li class="reussite-classement">
+                                    <div>
+                                        <p>#{{ reussite[3] }}</p>
+                                    </div>
+                                    <div>                                     
+                                        <a class="home-right-points-joueurs2" href="{{ url_for('niveau', nom_niveau=reussite[0]) }}" onclick="setSelectedLevel('{{ reussite[0] }}')">
+                                            <p>{{ reussite[0] }}</p>
+                                        </a>
+                                    </div>
+                                    <a class="victoires-joueur-vid-link" target="_blank" href="{{ reussite[2] }}">
+                                        <img class="logoyt" src="{{ url_for('static', filename='pictures/logo_youtube.svg') }}" alt="YouTube Video">
+                                    </a>
+                                    <div>
+                                        <p class="points"><span id="bold">+{{ reussite[1] }}</span> points</p>
                                     </div>
                                 </li>
                             {% endfor %}
