@@ -146,7 +146,17 @@
             data.niveaux.forEach(niveau => {
                 const a = document.createElement('a');
                 a.href = `/liste/${encodeURIComponent(niveau.nom)}`;
-                a.onclick = () => setSelectedLevel(niveau.nom);
+
+                const img = document.createElement('img');
+                img.src = niveau.image_url;
+                a.appendChild(img);
+
+                carousel.appendChild(a);
+            });
+
+            data.niveaux.forEach(niveau => {
+                const a = document.createElement('a');
+                a.href = `/liste/${encodeURIComponent(niveau.nom)}`;
 
                 const img = document.createElement('img');
                 img.src = niveau.image_url;
