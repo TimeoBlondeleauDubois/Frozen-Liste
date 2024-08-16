@@ -259,8 +259,10 @@ def joueur(nom):
     cursor.execute('SELECT id, nom, points FROM Joueur ORDER BY points DESC')
     joueurs = cursor.fetchall()
 
+    reussites_count = len(reussites)
+
     connection.close()
-    return render_template('classement_joueur.html', joueur=joueur, reussites=reussites, joueurs=joueurs, selected_joueur=nom, joueur_classement=joueur_classement, active_page=active_page)
+    return render_template('classement_joueur.html', joueur=joueur, reussites=reussites, joueurs=joueurs, selected_joueur=nom, joueur_classement=joueur_classement, reussites_count=reussites_count, active_page=active_page)
 
 
 
