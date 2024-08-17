@@ -202,7 +202,7 @@ def niveau(nom_niveau):
 def image_urls():
     connection = sqlite3.connect('DataBase.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT nom, image_url FROM Niveau ORDER BY id DESC LIMIT 10')
+    cursor.execute('SELECT nom, image_url FROM Niveau ORDER BY id DESC LIMIT 15')
     niveaux = cursor.fetchall()
     connection.close()
     return {
