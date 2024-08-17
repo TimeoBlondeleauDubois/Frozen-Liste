@@ -50,14 +50,14 @@
     </form>
     <br>
     <h1>Supprimer un Niveau</h1>
-    <form action="/supprimer_niveau" method="post">
+    <form action="/supprimer_niveau" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce niveau ?')">
         <label for="nom_niveau">Nom du niveau:</label><br>
         <input type="text" id="nom_niveau" name="nom_niveau" required><br>
         <input type="submit" value="Supprimer Niveau"><br>
     </form>
     <br>
     <h1>Supprimer une Réussite de Niveau</h1>
-    <form action="/supprimer_reussite" method="post">
+    <form action="/supprimer_reussite" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réussite ?')">
         <label for="nom_joueur">Nom du joueur:</label><br>
         <input type="text" id="nom_joueur" name="nom_joueur" required><br>
         <label for="nom_niveau">Nom du niveau:</label><br>
@@ -66,7 +66,7 @@
     </form>
     <br>
     <h1>Modifier l'image d'un Niveau</h1>
-    <form action="/modifier_image_niveau" method="post" enctype="multipart/form-data">
+    <form action="/modifier_image_niveau" method="post" enctype="multipart/form-data" onsubmit="return confirm('Êtes-vous sûr de vouloir modifier l\'image de ce niveau ?')">
         <label for="nom_niveau">Nom du niveau:</label><br>
         <input type="text" id="nom_niveau" name="nom_niveau" required><br>
         <label for="image_file">Nouvelle image du niveau:</label><br>
@@ -75,7 +75,7 @@
     </form>
     <br>
     <h1>Modifier l'ordre des Niveaux</h1>
-    <form action="/modifier_ordre_niveaux" method="post">
+    <form action="/modifier_ordre_niveaux" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir modifier l\'ordre de ce niveau ?')">
         <label for="nom_niveau">Nom du niveau:</label><br>
         <input type="text" id="nom_niveau" name="nom_niveau" required><br>
         <label for="new_classement">Nouveau classement:</label><br>
@@ -106,7 +106,7 @@
         <tbody>
             {% for submission in submissions %}
             <tr>
-                <form method="POST" action="{{ url_for('valider_record') }}">
+                <form method="POST" action="{{ url_for('valider_record') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir valider cette soumission ?')">
                     <td>{{ submission[0] }}</td>
                     <td><input type="text" name="joueur_nom" value="{{ submission[1] }}" required></td>
                     <td><input type="text" name="niveau_nom" value="{{ submission[2] }}" required></td>
@@ -118,7 +118,7 @@
                     </td>
                 </form>
                 <td>
-                    <form method="POST" action="{{ url_for('refuser_record') }}">
+                    <form method="POST" action="{{ url_for('refuser_record') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir refuser cette soumission ?')">
                         <input type="hidden" name="submission_id" value="{{ submission[0] }}">
                         <button type="submit">Refuser</button>
                     </form>
