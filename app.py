@@ -549,9 +549,7 @@ def supprimer_reussite():
 
 def calculer_points(classement, total_niveaux):
     ratio = (total_niveaux - classement) / (total_niveaux - 1)
-    print(ratio)
     points = 1 + (1000 - 1) * (ratio ** 2)
-    print(points)
     return int(points)
 
 def mettre_a_jour_points():
