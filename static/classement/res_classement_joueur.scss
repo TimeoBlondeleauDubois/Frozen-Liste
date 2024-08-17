@@ -216,10 +216,24 @@
         transition: all 300ms ease-in-out;
         width: 35px;
         height: auto;
-        margin-top: -4px;
-        margin-bottom: -7px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .victoires-joueur-vid-link {
         margin-left: 7px;
         margin-right: 7px;
+        margin-top: 4px;
+        height: fit-content !important;
+
+        &:hover {
+            background-color: $primary-color-black;
+        }
+
+        .logoyt {
+            margin: 0px !important;
+            padding: 0px !important;    
+        }
     }
 }
 
