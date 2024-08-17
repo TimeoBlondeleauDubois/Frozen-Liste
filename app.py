@@ -125,7 +125,6 @@ def api_niveaux():
     
     return jsonify(niveaux_formattes)
 
-
 #Liste
 @app.route('/liste')
 def liste():
@@ -198,8 +197,6 @@ def niveau(nom_niveau):
 
     return render_template('level.html', niveau=niveau, victoires=victoires, classementniveaux=classementniveaux, active_page=active_page)
 
-
-
 #Carousel
 @app.route('/image_urls')
 def image_urls():
@@ -255,7 +252,6 @@ def joueur(nom):
     ''', (joueur_id,))
     reussites = cursor.fetchall()
 
-
     cursor.execute('SELECT id, nom, points FROM Joueur ORDER BY points DESC')
     joueurs = cursor.fetchall()
 
@@ -264,22 +260,16 @@ def joueur(nom):
     connection.close()
     return render_template('classement_joueur.html', joueur=joueur, reussites=reussites, joueurs=joueurs, selected_joueur=nom, joueur_classement=joueur_classement, reussites_count=reussites_count, active_page=active_page)
 
-
-
 #Information
 @app.route('/information')
 def information():
     active_page = 'information'
     return render_template('information.html', active_page=active_page)
 
-
-
 #Erreur404
 @app.route('/error404')
 def error404():
     return render_template('404.html')
-
-
 
 #Redirect
 @app.errorhandler(404)
@@ -293,8 +283,6 @@ def noroute():
 @app.route('/home')
 def home():
     return redirect('/liste')
-
-
 
 #SubmitRecord
 @app.route('/submit_record', methods=['GET', 'POST'])
@@ -322,7 +310,6 @@ def submit_record():
 @app.route('/merci')
 def submit_record_correctement_envoyer():
     return render_template('submit_record_correctement_envoyer.html')
-
 
 #Accéder à la page Admin
 """@app.route('/creer_compte', methods=['GET', 'POST'])
@@ -371,8 +358,6 @@ def connexion():
 
 def validate_user_input(username, password):
     return username and password
-
-
 
 # Page d'administration : Ajouter un joueur, ajouter un niveau, modifier l'ordre des niveaux, ajouter une victoire à un joueur
 @app.route('/admin')
@@ -562,8 +547,6 @@ def supprimer_reussite():
 
     return f'Réussite du joueur {nom_joueur} pour le niveau {nom_niveau} supprimée avec succès !'
 
-
-
 def calculer_points(classement, total_niveaux):
     ratio = (total_niveaux - classement) / (total_niveaux - 1)
     print(ratio)
@@ -633,7 +616,6 @@ def mettre_a_jour_duree_globale():
     connection.commit()
     connection.close()
 
-    
 # Valider ou refuser un record soumis et pouvoir modifier le nom du joueur et du niveau en cas d'erreur
 @app.route('/valider_record', methods=['POST'])
 def valider_record():
@@ -760,7 +742,6 @@ def modifier_image_niveau():
         return f'Image du niveau {nom_niveau} mise à jour avec succès !'
     except Exception as e:
         return f'Erreur : {str(e)}'
-
 
 if __name__ == '__main__':
     app.run(debug=True)
