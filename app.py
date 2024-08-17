@@ -302,6 +302,8 @@ def submit_record():
         ''', (joueur_nom, niveau_nom, createur, video_url))
         connection.commit()
         connection.close()
+
+        session['submission_successful'] = True
         
         return redirect('/merci')
 
@@ -309,7 +311,11 @@ def submit_record():
 
 @app.route('/merci')
 def submit_record_correctement_envoyer():
-    return render_template('submit_record_correctement_envoyer.html')
+    if 'submission_successful' in session:
+        session.pop('submission_successful', None)
+        return render_template('submit_record_correctement_envoyer.html')
+    else:
+        return redirect('/submit_record')
 
 #Accéder à la page Admin
 """@app.route('/creer_compte', methods=['GET', 'POST'])
