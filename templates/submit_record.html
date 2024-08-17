@@ -24,6 +24,9 @@
         <div class="wrapper">
             <form class="form" method="POST">
                 <h1 class="h1-submit" >Soumettre un record</h1>
+                {% if wait_time > 0 %}
+                    <p class="wait-message" id="wait-message" class="warning">Veuillez attendre <span id="bold">{{ wait_time|int }}</span> secondes avant de pouvoir de nouveau soumettre un record.</p>
+                {% endif %}
                 <div class="question">
                     <input class="input-nom-joueur-submit" type="text" id="joueur_nom" name="joueur_nom" required><br><br>
                     <label class="p-nom-joueur-submit" for="joueur_nom">Nom du Joueur:</label>
@@ -40,7 +43,7 @@
                     <input class="input-url-submit" type="url" id="video_url" name="video_url" required><br><br>
                     <label class="p-url-submit" for="video_url">URL de la Vidéo:</label>
                 </div>
-                <button class="input-submit-submit" type="submit">Soumettre</button>
+                <button id="submit-button" class="input-submit-submit" type="submit" {% if wait_time > 0 %}disabled{% endif %}>Soumettre</button>
             </form>
         </div>
         <div class="glow"></div>
@@ -48,4 +51,33 @@
 {% endblock %}
 
 {% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var waitTime = {{ wait_time|int }};
+        var waitMessage = document.getElementById('wait-message');
+        var submitButton = document.getElementById('submit-button');
+
+        if (waitTime > 0) {
+            var endTime = Date.now() + waitTime * 1000;
+
+            function updateCountdown() {
+                var remainingTime = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+
+                if (remainingTime > 0) {
+                    waitMessage.textContent = 'Veuillez attendre ' + remainingTime + ' secondes avant de pouvoir de nouveau soumettre un record.';
+                    setTimeout(updateCountdown, 1000);
+                    waitMessage.classList.add('warning');
+                    waitMessage.classList.remove('success');
+                } else {
+                    waitMessage.textContent = 'Vous pouvez maintenant soumettre votre record.';
+                    waitMessage.classList.remove('warning');
+                    waitMessage.classList.add('success');
+                    submitButton.disabled = false;
+                }
+            }
+
+            updateCountdown();
+        }
+    });
+</script>
 {% endblock %}

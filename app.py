@@ -1,4 +1,5 @@
 import sqlite3
+import time
 import bcrypt
 from flask import Flask, redirect, render_template, request, send_from_directory, session, url_for
 import os
@@ -288,6 +289,13 @@ def home():
 @app.route('/submit_record', methods=['GET', 'POST'])
 def submit_record():
     active_page = 'envoyerunevideo'
+    wait_time = 0
+
+    if 'last_submission_time' in session:
+        elapsed_time = time.time() - session['last_submission_time']
+        if elapsed_time < 15:
+            wait_time = 15 - elapsed_time
+
     if request.method == 'POST':
         joueur_nom = request.form['joueur_nom']
         niveau_nom = request.form['niveau_nom']
@@ -303,11 +311,12 @@ def submit_record():
         connection.commit()
         connection.close()
 
+        session['last_submission_time'] = time.time()
         session['submission_successful'] = True
         
         return redirect('/merci')
 
-    return render_template('submit_record.html', active_page=active_page)
+    return render_template('submit_record.html', active_page=active_page, wait_time=wait_time)
 
 @app.route('/merci')
 def submit_record_correctement_envoyer():
