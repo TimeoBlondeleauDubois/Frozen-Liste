@@ -115,55 +115,70 @@
         
         window.addEventListener('resize', adjustVisibility);
         adjustVisibility();
-    });
 
-    function setSelectedLevel(levelName) {
-        localStorage.setItem('selectedLevel', levelName);
-        localStorage.setItem('scrollPosition', document.querySelector('.home-left').scrollTop);
-    }
+        function setSelectedLevel(levelName) {
+            document.querySelectorAll('.selected-level').forEach((element) => {
+                element.classList.remove('selected-level');
+            });
 
-    function filterLevels() {
-        var input = document.getElementById('searchInput');
-        var filter = input.value.toUpperCase();
-        var levelsList = document.getElementById('levelsList');
-        var levels = levelsList.getElementsByClassName('classement_nom_du_joueur');
+            document.querySelectorAll('.classement_nom_du_joueur_nom').forEach((element) => {
+                if (element.textContent.trim() === levelName) {
+                    element.closest('.classement_nom_du_joueur').classList.add('selected-level');
+                }
+            });
 
-        for (var i = 0; i < levels.length; i++) {
-            var joueurName = levels[i].getElementsByClassName('classement_nom_du_joueur_nom')[0];
-            if (joueurName.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                levels[i].style.display = '';
-            } else {
-                levels[i].style.display = 'none';
+            localStorage.setItem('selectedLevel', levelName);
+            localStorage.setItem('scrollPosition', document.querySelector('.home-left').scrollTop);
+        }
+
+        function filterLevels() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toUpperCase();
+            var levelsList = document.getElementById('levelsList');
+            var levels = levelsList.getElementsByClassName('classement_nom_du_joueur');
+
+            for (var i = 0; i < levels.length; i++) {
+                var joueurName = levels[i].getElementsByClassName('classement_nom_du_joueur_nom')[0];
+                if (joueurName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    levels[i].style.display = '';
+                } else {
+                    levels[i].style.display = 'none';
+                }
             }
         }
-    }
 
-    fetch('/image_urls')
-        .then(response => response.json())
-        .then(data => {
-            const carousel = document.getElementById('imageCarousel');
+        fetch('/image_urls')
+            .then(response => response.json())
+            .then(data => {
+                const carousel = document.getElementById('imageCarousel');
 
-            data.niveaux.forEach(niveau => {
-                const a = document.createElement('a');
-                a.href = `/liste/${encodeURIComponent(niveau.nom)}`;
+                data.niveaux.forEach(niveau => {
+                    const a = document.createElement('a');
+                    a.href = `/liste/${encodeURIComponent(niveau.nom)}`;
 
-                const img = document.createElement('img');
-                img.src = niveau.image_url;
-                a.appendChild(img);
+                    const img = document.createElement('img');
+                    img.src = niveau.image_url;
 
-                carousel.appendChild(a);
+                    img.addEventListener('click', () => {
+                        setSelectedLevel(niveau.nom);
+                    });
+
+                    a.appendChild(img);
+                    carousel.appendChild(a);
+                });
+
+                data.niveaux.forEach(niveau => {
+                    const a = document.createElement('a');
+                    a.href = `/liste/${encodeURIComponent(niveau.nom)}`;
+
+                    const img = document.createElement('img');
+                    img.src = niveau.image_url;
+                    a.appendChild(img);
+
+                    carousel.appendChild(a);
+                });
             });
-
-            data.niveaux.forEach(niveau => {
-                const a = document.createElement('a');
-                a.href = `/liste/${encodeURIComponent(niveau.nom)}`;
-
-                const img = document.createElement('img');
-                img.src = niveau.image_url;
-                a.appendChild(img);
-
-                carousel.appendChild(a);
-            });
-        });
+    });
 </script>
 {% endblock %}
+
