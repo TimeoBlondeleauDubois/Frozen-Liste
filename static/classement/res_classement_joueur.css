@@ -156,6 +156,7 @@ $big-margin-right-mb: px;*/
   margin-bottom: 5px;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 .home-right2 .home-right-container .home-right-wrapper .home-right-wrapper-classement-joueur .home-right-wrapper-classement-joueur2 {
   display: flex;
