@@ -1,5 +1,3 @@
-# Projet en cours de création❗
-
 # Lien du site : [Frozen Liste](https://lafrozenliste.eu.pythonanywhere.com), Pour se connecter: IDENTIFIANT: "a" MOT DE PASSE: "a"
 
 # Projet: Classement des niveaux réussis de la Team Frozen
