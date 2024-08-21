@@ -129,3 +129,57 @@
         background: #6e6e6e;
     }
 }
+
+@media screen and (max-width: 1357px) and (min-width: 1130px) {
+    .home-left {
+        width: 40% !important;
+        max-width: 40% !important;
+    }
+
+    .home-right {
+        width: 60% !important;
+        max-width: 60% !important;
+    }
+}
+
+@media screen and (max-width: 1130px) and (min-width: 885px) {
+    .home-left {
+        width: 50% !important;
+        max-width: 50% !important;
+        
+    }
+
+    .home-left-container {
+        margin-left: 20px !important;
+    }
+
+    .searchInput {
+        margin-left: 20px !important;
+    }
+
+    .home-right {
+        width: 50% !important;
+        max-width: 50% !important;
+    }
+}
+
+@media screen and (max-width: 885px) and (min-width: 700px) {
+    .home-left {
+        width: 70% !important;
+        max-width: 70% !important;
+        
+    }
+
+    .home-left-container {
+        margin-left: 20px !important;
+    }
+
+    .searchInput {
+        margin-left: 20px !important;
+    }
+
+    .home-right {
+        width: 30% !important;
+        max-width: 30% !important;
+    }
+}
