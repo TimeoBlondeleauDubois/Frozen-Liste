@@ -16,7 +16,7 @@ Ce projet est une application web qui permet de voir tous les niveaux Extreme et
 - Backend : Python avec le framework Flask 🐍
 - Frontend : HTML, SCSS
 - Base de Données : SQLite
-- Maquette: Figma: [Lien vers la maquette](https://www.figma.com/design/cseyRjhPMFU0BGbJ8WOYV8/Projet-perso?node-id=0-1&t=gBsQClwTqmNX6tgH-1)
+- Maquette: Figma
 
 ## Fonctionnalités Admin
 
