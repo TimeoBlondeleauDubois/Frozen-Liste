@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Frozen Liste</title>
-    <meta name="keywords" content="Frozen Team, Geometry Dash, Extreme Demon, Insane Demon, Jeux vidéo, Classement, Joueurs">
+    <title>The Band List</title>
+    <meta name="keywords" content="The Band Team, Geometry Dash, Extreme Demon, Insane Demon, Jeux vidéo, Classement, Joueurs">
     <meta name="author" content="Saoshirax">
-    <meta name="description" content="Découvrez le classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
-    <meta property="og:title" content="La Frozen Liste">
+    <meta name="description" content="Découvrez le classement des niveaux Extreme et Insane Demon complétés par les joueurs francophones.">
+    <meta property="og:title" content="The Band List">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
-    <meta property="og:site_name" content="Frozen Liste">
+    <meta property="og:description" content="Classement des niveaux Extreme et Insane Demon complétés par les joueurs francophones.">
+    <meta property="og:site_name" content="The Band List">
     <meta property="og:image" content="{{ url_for('static', filename='pictures/logo.png') }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Frozen Liste">
-    <meta name="twitter:description" content="Classement des niveaux Extreme et Insane Demon réussis par les joueurs de la Frozen Team.">
+    <meta name="twitter:title" content="The Band List">
+    <meta name="twitter:description" content="Classement des niveaux Extreme et Insane Demon complétés par les joueurs francophones.">
     <meta name="twitter:image" content="{{ url_for('static', filename='pictures/logo.png') }}">
     <link href="../static/reset.css" rel="stylesheet">
     {% block styles %}{% endblock %}
@@ -26,7 +26,7 @@
         <div class="mobile">
             <div class="nav-background"></div>
             <a href="/home" class="logo">
-                <img src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de la Frozen Liste">
+                <img src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de The Band Liste">
             </a>
             <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
             <label for="menu-icon"></label>
@@ -43,7 +43,7 @@
         <div class="pc">
             <div class="nav-pc">
                 <div class="nav-bar-pc-wrapper">
-                    <a href="/home" class="link-logo-pc"><img class="logo-pc" src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de la Frozen Liste"></a>
+                    <a href="/home" class="link-logo-pc"><img class="logo-pc" src="{{ url_for('static', filename='pictures/logo.png') }}" alt="Logo de The Band Liste"></a>
                     <div class="nav-pc-container1">
                         <a class="home-pc {% if active_page == 'home' %}class-home-pc{% endif %}" href="/home">Liste</a>
                         <a class="classement-pc {% if active_page == 'classement' %}class-classement-pc{% endif %}" href="/classement">Classement</a>
